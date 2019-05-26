@@ -58,13 +58,20 @@ Resources:
             Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
     Type: "AWS::S3::BucketPolicy"
 
-  WebsiteContent:
-    Properties:
-      ServiceToken: !GetAtt CopyS3ObjectsFunction.Arn
-      SourceBucket: !Ref CodeBucket
-      SourcePrefix: !Sub "${CodeKeyPrefix}/website/"
-      Bucket: !Ref WebsiteBucket
-    Type: "Custom::S3Objects"
+  #################################
+  #Custom resource object
+  #Learn more about it here:
+  #https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html
+  #Allows you to run a lambda function on create, update or delete
+  #of cloudformation stack
+  #################################
+  # WebsiteContent:
+  #   Properties:
+  #     ServiceToken: !GetAtt CopyS3ObjectsFunction.Arn
+  #     SourceBucket: !Ref CodeBucket
+  #     SourcePrefix: !Sub "${CodeKeyPrefix}/website/"
+  #     Bucket: !Ref WebsiteBucket
+  #   Type: "Custom::S3Objects"
 
   S3CopyRole:
     Type: AWS::IAM::Role
