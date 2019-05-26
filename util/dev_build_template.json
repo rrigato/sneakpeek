@@ -13,5 +13,6 @@
     "image": "aws/codebuild/standard:2.0",
     "computeType": "BUILD_GENERAL1_SMALL"
   },
-  "serviceRole": "CodeBuild-sneakpeek-role"
+  "serviceRole": "arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild",
+  "badgeEnabled":true
 }

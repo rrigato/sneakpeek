@@ -22,5 +22,4 @@ aws s3 mb s3://codebuild-dev-sneakpeek
 
 aws s3 mb s3://codebuild-prod-sneakpeek
 
-aws codebuild create-project --name sneak_peek_build \
---description "Builds resources for sneakpeek project"
+aws codebuild create-project --cli-input-json file://util/dev_build_template.json
