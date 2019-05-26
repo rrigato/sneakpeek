@@ -23,6 +23,7 @@ phases:
       - echo Entered the install phase...
       - pip list
       - pip install sphinx
+      - pwd
     finally:
       - echo This always runs even if the update or install command fails
   # pre_build:

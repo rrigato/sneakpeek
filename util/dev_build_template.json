@@ -14,5 +14,6 @@
     "computeType": "BUILD_GENERAL1_SMALL"
   },
   "serviceRole": "arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild",
-  "badgeEnabled":true
+  "badgeEnabled":true,
+  "timeoutInMinutes":5
 }
