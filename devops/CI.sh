@@ -8,3 +8,19 @@
 #note that the cli user needs to have https for username/password setup
 #or ssh public key uploaded to codecommit
 aws codecommit create-repository --repository-name sneakpeek
+
+#get the arn for the repository
+aws codecommit get-repository --repository-name sneakpeek \
+--query 'repositoryMetadata.Arn'
+
+#get the https for the repository
+aws codecommit get-repository --repository-name sneakpeek \
+--query 'repositoryMetadata.cloneUrlHttp'
+
+#makes an output bucket for dev and prod Builds
+aws s3 mb s3://codebuild-dev-sneakpeek
+
+aws s3 mb s3://codebuild-prod-sneakpeek
+
+aws codebuild create-project --name sneak_peek_build \
+--description "Builds resources for sneakpeek project"

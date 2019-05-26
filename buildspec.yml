@@ -14,7 +14,7 @@ aws s3 cp ./static s3://dev-sneekpeek --recursive
 #
 aws cloudformation create-stack --stack-name dev-sneekpeek \
 --template-body file://templates/static_webpage.yml \
---parameters  file://util/qa_config.json \
+--parameters  file://util/dev_config.json \
 --capabilities CAPABILITY_NAMED_IAM
 
 
