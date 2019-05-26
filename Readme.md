@@ -1,8 +1,15 @@
 Serverless project used to build a web application to
 detect trailer numbers on a trailer
 
+####Project Directory Overview
+######devops
+- CI.sh = Establishes CodeCommit Repo and CodeBuild Project
 
-###Setup Continuous Integration
+######static
+- css = static stylesheet files for web application
+- fonts = static fonts to use for web application
+
+####Setup Continuous Integration
 Run the devops/CI.sh shell script to create CodeCommit
 Repo and CodeBuild Continuous Integration/Build client once
 
@@ -28,12 +35,8 @@ has any references you do not
 
 
 
-###Setup Infrastructure
-Create an S3 bucket
-
-```
-aws s3 mb s3://dev-sneekpeek
-```
+####Setup Infrastructure
+Run the
 
 
 ```
