@@ -1,0 +1,17 @@
+{
+  "name": "dev-sneekpeek",
+  "source": {
+    "type": "CODECOMMIT",
+    "location": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek"
+  },
+  "artifacts": {
+    "type": "S3",
+    "location": "codebuild-dev-sneakpeek"
+  },
+  "environment": {
+    "type": "LINUX_CONTAINER",
+    "image": "aws/codebuild/standard:2.0",
+    "computeType": "BUILD_GENERAL1_SMALL"
+  },
+  "serviceRole": "CodeBuild-sneakpeek-role"
+}
