@@ -1,0 +1,23 @@
+############################
+#Accomplishes the following build tasks
+#
+#1) Runs the cloudformation template to create the necessary resources
+#2) Runs python coverage function to generate Auto HTML documentation
+##) Runs unit tests of lambda functions, checks aws resources created
+#
+#
+############################
+
+#copies static files to newly created S3 resources
+aws s3 cp file://static s3://dev-sneekpeek --recursive
+
+#
+aws cloudformation create-stack --stack-name dev-sneekpeek \
+--template-body file://templates/static_webpage.yml \
+--parameters  file://util/qa_config.json
+
+
+#Gets stack output value
+aws cloudformation describe-stacks --query \
+'Stacks[0].[Outputs[].[OutputKey,OutputValue]]|[]'  \
+--stack-name TrailerUtilizationWebApp
