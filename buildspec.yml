@@ -8,14 +8,16 @@
 #
 ############################
 
-#copies static files to newly created S3 resources
-aws s3 cp ./static s3://dev-sneekpeek --recursive
 
-#
+
+#Creates the cloudformation stack
 aws cloudformation create-stack --stack-name dev-sneekpeek \
 --template-body file://templates/static_webpage.yml \
 --parameters  file://util/dev_config.json \
 --capabilities CAPABILITY_NAMED_IAM
+
+#copies static files to newly created S3 resources
+aws s3 cp ./static s3://dev-sneekpeek --recursive
 
 
 #Gets stack output value
