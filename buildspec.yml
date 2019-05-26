@@ -18,43 +18,43 @@ env:
 phases:
   install:
     runtime-versions:
-      runtime: python: 3.7      
+      runtime: python: 3.7
     commands:
       - echo Entered the install phase...
-      - apt-get update -y
-      - apt-get install -y maven
+      - pip list
+      - pip install sphinx
     finally:
       - echo This always runs even if the update or install command fails
-  pre_build:
-    commands:
-      - echo Entered the pre_build phase...
-      - docker login –u User –p $LOGIN_PASSWORD
-    finally:
-      - echo This always runs even if the login command fails
+  # pre_build:
+  #   commands:
+  #     - echo Entered the pre_build phase...
+  #     - docker login –u User –p $LOGIN_PASSWORD
+  #   finally:
+  #     - echo This always runs even if the login command fails
   build:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - mvn install
+      - pip install coverage
     finally:
       - echo This always runs even if the install command fails
-  post_build:
-    commands:
-      - echo Entered the post_build phase...
-      - echo Build completed on `date`
+  # post_build:
+  #   commands:
+  #     - echo Entered the post_build phase...
+  #     - echo Build completed on `date`
 artifacts:
   files:
     - target/messageUtil-1.0.jar
-  discard-paths: yes
-  secondary-artifacts:
-    artifact1:
-      files:
-        - target/messageUtil-1.0.jar
-      discard-paths: yes
-    artifact2:
-      files:
-        - target/messageUtil-1.0.jar
-      discard-paths: yes
+  # discard-paths: yes
+  # secondary-artifacts:
+  #   artifact1:
+  #     files:
+  #       - target/messageUtil-1.0.jar
+  #     discard-paths: yes
+  #   artifact2:
+  #     files:
+  #       - target/messageUtil-1.0.jar
+  #     discard-paths: yes
 
 
 #Creates the cloudformation stack
