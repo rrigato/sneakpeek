@@ -9,7 +9,7 @@
 ############################
 version: 0.2
 
-env:
+# env:
   # variables:
   #   JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
   # parameter-store:
@@ -17,8 +17,8 @@ env:
 
 phases:
   install:
-    runtime-versions:
-      runtime: python: 3.7
+   runtime-versions:
+      python: 3.7
     commands:
       - echo Entered the install phase...
       - pip list
