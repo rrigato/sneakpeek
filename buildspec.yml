@@ -21,9 +21,8 @@ phases:
        python: 3.7
     commands:
       - echo Entered the install phase...
-      - pip list
-      - pip install sphinx
-      - pwd
+      - pip install -r requirements.txt
+      - ls -l
     finally:
       - echo This always runs even if the update or install command fails
   # pre_build:
@@ -36,7 +35,6 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - pip install coverage
     finally:
       - echo This always runs even if the install command fails
   # post_build:
@@ -45,7 +43,7 @@ phases:
   #     - echo Build completed on `date`
 artifacts:
   files:
-    - target/messageUtil-1.0.jar
+    - tests/requirements.txt
   # discard-paths: yes
   # secondary-artifacts:
   #   artifact1:

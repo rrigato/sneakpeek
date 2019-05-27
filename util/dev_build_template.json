@@ -6,7 +6,8 @@
   },
   "artifacts": {
     "type": "S3",
-    "location": "codebuild-dev-sneakpeek"
+    "location": "codebuild-dev-sneakpeek",
+    "packaging": "NONE"
   },
   "environment": {
     "type": "LINUX_CONTAINER",
