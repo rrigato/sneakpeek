@@ -6,7 +6,8 @@ detect trailer numbers on a trailer
 Provides information on each directory/ source file
 #### devops
 - CI.sh = Establishes CodeCommit Repo and CodeBuild Project
-
+    - For debugging errors go to the Phase details section of the console
+    - Or use the batch-get-builds command in the aws cli
 #### static
 - css = static stylesheet files for web application
 - fonts = static fonts to use for web application
@@ -16,6 +17,10 @@ Provides information on each directory/ source file
 
 #### templates
 - static_webpage.yml = builds the S3 bucket enabled for web hosting
+
+#### tests
+- test_aws_resources.py = tests that the underlying aws resources were successfully created
+
 
 #### static
 - dev_config.json = Name of the bucket to pass to templates/static_webpage.yml

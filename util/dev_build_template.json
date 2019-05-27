@@ -2,7 +2,7 @@
   "name": "dev-sneekpeek",
   "source": {
     "type": "CODECOMMIT",
-    "location": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek"
+    "location": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek.git"
   },
   "artifacts": {
     "type": "S3",
