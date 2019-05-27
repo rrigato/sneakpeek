@@ -1,8 +1,15 @@
-import unittest
+import logging
+import os
 import pandas as pd
 import requests
+import unittest
 
-
+WORKING_DIRECTORY = os.getcwd()
+logging.basicConfig(
+filename=os.path.join(WORKING_DIRECTORY, 'tests/runlog.txt'),
+format='%(asctime)s %(message)s',
+ datefmt='%m/%d/%Y %I:%M:%S %p')
+logging.info('\n')
 class WebappLive(unittest.TestCase):
     '''Tests that the aws resources necessary for the webpage are running
 
@@ -30,7 +37,6 @@ class WebappLive(unittest.TestCase):
         )
         self.assertEqual(r.status_code, 200)
         logging.info("The website is live")
-        import pdb; pdb.set_trace()
 print("Hello World - First Unit Test")
 if __name__ == '__main__':
     unittest.main(exit=False)
