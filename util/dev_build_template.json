@@ -16,10 +16,14 @@
   "serviceRole": "arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild",
   "badgeEnabled":true,
   "timeoutInMinutes":5,
-  "logsConfig:"{
+  "logsConfig":{
+      "cloudWatchLogs": {
+        "status": "ENABLED",
+        "groupName": "codebuild-dev-sneakpeek"
+      },
     "s3Logs": {
         "status": "ENABLED",
-        "location": "codebuild-dev-sneakpeek"
+        "location": "codebuild-dev-sneakpeek/buildlogs"
       }
   }
 
