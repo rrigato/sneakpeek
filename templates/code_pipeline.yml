@@ -1,0 +1,98 @@
+# aws cloudformation create-stack --stack-name dev-sneekpeek-ci \
+# --template-body file://templates/code_pipeline.yml \
+# --parameters  file://util/dev_config.json \
+# --capabilities CAPABILITY_NAMED_IAM
+
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Automate provisioning of CodeBuild with CodePipeline CodeCommit and CodeDeploy. **WARNING** This template creates one or more Amazon EC2 instances. You will be billed for the AWS resources used if you create a stack from this template.
+Parameters:
+  RepositoryBranch:
+    Type: String
+    Default: master
+  TagKey:
+    Type: String
+    Default: Name
+  TagValue:
+    Type: String
+    Default: CodeDeployEC2Tag
+
+Resources:
+  ArtifactStoreBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      AccessControl: BucketOwnerFullControl
+
+  CodeCommitJavaRepo:
+   Type: AWS::CodeCommit::Repository
+   Properties:
+     RepositoryName:
+       Ref: AWS::StackName
+     RepositoryDescription: CodeCommit Repository
+
+
+  CodeBuildJavaProject:
+    Type: AWS::CodeBuild::Project
+    DependsOn: CodeBuildRole
+    Properties:
+      Artifacts:
+        Type: no_artifacts
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/java:openjdk-8
+        Type: LINUX_CONTAINER
+      Name: !Sub ${AWS::StackName}CodeBuildJavaProject
+      ServiceRole: !Ref CodeBuildRole
+      Source:
+        Type: CODECOMMIT
+        Location:
+          Fn::Join:
+            - ""
+            - - "https://git-codecommit."
+              - Ref: AWS::Region
+              - ".amazonaws.com/v1/repos/"
+              - Ref: AWS::StackName
+
+  CodeBuildRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: codebuild.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+
+Outputs:
+  CodeBuildURL:
+    Description: CodeBuild URL
+    Value:
+      Fn::Join:
+        - ""
+        - - "https://console.aws.amazon.com/codebuild/home?region="
+          - Ref: AWS::Region
+          - "#/projects/"
+          - Ref: CodeBuildJavaProject
+          - "/view"
+  CodeCommitURL:
+    Description: CodeCommit URL
+    Value:
+      Fn::Join:
+        - ""
+        - - "https://console.aws.amazon.com/codepipeline/home?region="
+          - Ref: AWS::Region
+          - "#/repository/"
+          - Ref: AWS::StackName
+          - "/browse/HEAD/--/"
+  CloneUrlSsh:
+    Description: SSH command for connecting to the CodeCommit repo
+    Value:
+      Fn::Join:
+        - ""
+        - - "git clone "
+          - !GetAtt [CodeCommitJavaRepo, CloneUrlSsh]
+          - ""
