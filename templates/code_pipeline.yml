@@ -68,7 +68,7 @@ Resources:
       #CodeCommit Git repo used for CodeBuild
       Source:
         Type: CODECOMMIT
-        Location: https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek.git
+        Location: https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek
       TimeoutInMinutes: 5
 
   CodeBuildRole:
