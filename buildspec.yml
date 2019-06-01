@@ -31,13 +31,20 @@ phases:
   #     - docker login –u User –p $LOGIN_PASSWORD
   #   finally:
   #     - echo This always runs even if the login command fails
+  #
+  #Builds the cloudformation stack that contains the
+  #static webpage
   build:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
+      - aws cloudformation create-stack --stack-name dev-sneakpeek \
+       --template-body file://templates/static_webpage.yml \
+       --parameters  file://util/dev_config.json \
+       --capabilities CAPABILITY_NAMED_IAM
+
       - python tests/test_aws_resources.py
     finally:
-      - echo This always runs even if the install command fails
   # post_build:
   #   commands:
   #     - echo Entered the post_build phase...
@@ -58,18 +65,19 @@ artifacts:
 
 
 #Creates the cloudformation stack
-# aws cloudformation create-stack --stack-name dev-sneekpeek \
-# --template-body file://templates/static_webpage.yml \
-# --parameters  file://util/dev_config.json \
-# --capabilities CAPABILITY_NAMED_IAM
+
 #
-# aws cloudformation create-change-set --stack-name dev-sneekpeek \
+# aws cloudformation create-change-set --stack-name dev-sneekpeek-ci \
+# --change-set-name sneakpeak-changeset \
 # --template-body file://templates/static_webpage.yml \
 # --parameters  file://util/dev_config.json \
 # --capabilities CAPABILITY_NAMED_IAM
 
 #aws cloudformation execute-change-set --change-set-name
-#
+#<change_set_arn>
+
+# aws cloudformation describe-change-set --change-set-name \
+# arn:aws:cloudformation:us-east-1:350255258796:changeSet/sneakpeak-changeset/e8577b66-49c2-4ebd-ad5e-fc9503b75793
 
 # #copies static files to newly created S3 resources
 # aws s3 cp ./static s3://dev-sneekpeek --recursive
