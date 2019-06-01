@@ -60,9 +60,9 @@ phases:
       - echo Build completed on `date`
     finally:
       #deleting bucket and stack after testing
-    #   - aws s3 rm s3://dev-sneekpeek --recursive
-    #   - aws cloudformation delete-stack
-    #     --stack-name sneakpeek-webpage
+      - aws s3 rm s3://dev-sneekpeek --recursive
+      - aws cloudformation delete-stack
+        --stack-name sneakpeek-webpage
 artifacts:
   files:
     - ./tests/runlog.txt
