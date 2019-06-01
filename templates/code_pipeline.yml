@@ -54,6 +54,9 @@ Resources:
           CloudWatchLogs:
               Status: ENABLED
               GroupName: codebuild-dev-sneakpeek
+          S3Logs:
+              Status: ENABLED
+              Location: codebuild-dev-sneakpeek/buildlogs              
       #Standard Linux Image environment
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
