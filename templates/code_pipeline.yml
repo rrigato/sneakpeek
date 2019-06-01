@@ -47,6 +47,9 @@ Resources:
         Type: S3
         Location: codebuild-dev-sneakpeek
         Packaging: NONE
+      #Allows for git badge at top of git repo
+      BadgeEnabled: true
+
       CloudWatchLogsConfig:
           Status: ENABLED
           GroupName: codebuild-dev-sneakpeek
@@ -157,7 +160,7 @@ Outputs:
         - - "https://console.aws.amazon.com/codebuild/home?region="
           - Ref: AWS::Region
           - "#/projects/"
-          - Ref: CodeBuildJavaProject
+          - Ref: SneakPeekPythonTests
           - "/view"
   CodeCommitURL:
     Description: CodeCommit URL
