@@ -44,7 +44,7 @@ phases:
   #     - echo Build completed on `date`
 artifacts:
   files:
-    - tests/requirements.txt
+    - tests/runlog.txt
   # discard-paths: yes
   # secondary-artifacts:
   #   artifact1:
@@ -63,6 +63,14 @@ artifacts:
 # --parameters  file://util/dev_config.json \
 # --capabilities CAPABILITY_NAMED_IAM
 #
+# aws cloudformation create-change-set --stack-name dev-sneekpeek \
+# --template-body file://templates/static_webpage.yml \
+# --parameters  file://util/dev_config.json \
+# --capabilities CAPABILITY_NAMED_IAM
+
+#aws cloudformation execute-change-set --change-set-name
+#
+
 # #copies static files to newly created S3 resources
 # aws s3 cp ./static s3://dev-sneekpeek --recursive
 #
