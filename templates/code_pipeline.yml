@@ -7,10 +7,11 @@ Description: Automate provisioning of CodeBuild with CodePipeline CodeCommit and
 Parameters:
   RepositoryBranch:
     Type: String
-    Default: master
+    Default: dev
+  #Default git repository used
   GitRepo:
     Type: String
-    Default: sneakpeek_pipeline
+    Default: https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek
   TagKey:
     Type: String
     Default: Name
@@ -26,11 +27,6 @@ Resources:
         Status: Enabled
       AccessControl: BucketOwnerFullControl
 
-  CodeCommitJavaRepo:
-   Type: AWS::CodeCommit::Repository
-   Properties:
-     RepositoryName: !Ref GitRepo
-     RepositoryDescription: CodeCommit Repository
 
 
   #################################
@@ -67,64 +63,64 @@ Resources:
       #CodeCommit Git repo used for CodeBuild
       Source:
         Type: CODECOMMIT
-        Location: https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek
+        Location: !Ref GitRepo
       TimeoutInMinutes: 5
 
 
-  CodePipelineStack:
-    Type: AWS::CodePipeline::Pipeline
-    Properties:
-      RoleArn: !GetAtt [CodePipelineRole, Arn]
-      ArtifactStore:
-        Location:
-          Ref:
-            ArtifactStoreBucket
-        Type: S3
-      Stages:
-        - Name: Source
-          Actions:
-            - InputArtifacts: []
-              Name: Source
-              ActionTypeId:
-                Category: Source
-                Owner: AWS
-                Version: 1
-                Provider: CodeCommit
-              OutputArtifacts:
-                - Name: MyApp
-              Configuration:
-                BranchName: !Ref RepositoryBranch
-                RepositoryName: !Ref AWS::StackName
-              RunOrder: 1
-        - Name: Build
-          Actions:
-          - Name: Build
-            ActionTypeId:
-                Category: Build
-                Owner: AWS
-                Version: 1
-                Provider: CodeBuild
-            OutputArtifacts:
-              - Name: MyAppBuild
-            InputArtifacts:
-              - Name: MyApp
-            Configuration:
-                ProjectName: !Ref CodeBuildJavaProject
-            RunOrder: 1
-        - Name: Deploy
-          Actions:
-          - Name: DeployApp
-            ActionTypeId:
-                Category: Deploy
-                Owner: AWS
-                Version: 1
-                Provider: CodeDeploy
-            InputArtifacts:
-              - Name: MyAppBuild
-            Configuration:
-                ApplicationName: !Ref MyApplication
-                DeploymentGroupName: !Ref MyDeploymentGroup
-            RunOrder: 1
+  # CodePipelineStack:
+  #   Type: AWS::CodePipeline::Pipeline
+  #   Properties:
+  #     RoleArn: !GetAtt [CodePipelineRole, Arn]
+  #     ArtifactStore:
+  #       Location:
+  #         Ref:
+  #           ArtifactStoreBucket
+  #       Type: S3
+  #     Stages:
+  #       - Name: Source
+  #         Actions:
+  #           - InputArtifacts: []
+  #             Name: Source
+  #             ActionTypeId:
+  #               Category: Source
+  #               Owner: AWS
+  #               Version: 1
+  #               Provider: CodeCommit
+  #             OutputArtifacts:
+  #               - Name: SneakPeekPythonTests
+  #             Configuration:
+  #               BranchName: !Ref RepositoryBranch
+  #               RepositoryName: !Ref AWS::StackName
+  #             RunOrder: 1
+  #       - Name: Build
+  #         Actions:
+  #         - Name: Build
+  #           ActionTypeId:
+  #               Category: Build
+  #               Owner: AWS
+  #               Version: 1
+  #               Provider: CodeBuild
+  #           OutputArtifacts:
+  #             - Name: MyAppBuild
+  #           InputArtifacts:
+  #             - Name: MyApp
+  #           Configuration:
+  #               ProjectName: !Ref CodeBuildJavaProject
+  #           RunOrder: 1
+  #       - Name: Deploy
+  #         Actions:
+  #         - Name: DeployApp
+  #           ActionTypeId:
+  #               Category: Deploy
+  #               Owner: AWS
+  #               Version: 1
+  #               Provider: CodeDeploy
+  #           InputArtifacts:
+  #             - Name: MyAppBuild
+  #           Configuration:
+  #               ApplicationName: !Ref MyApplication
+  #               DeploymentGroupName: !Ref MyDeploymentGroup
+  #           RunOrder: 1
   CodePipelineRole:
     Type: AWS::IAM::Role
     Properties:
