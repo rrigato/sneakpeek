@@ -39,5 +39,28 @@ class WebappLive(unittest.TestCase):
         )
         self.assertEqual(r.status_code, 200)
         logging.info("The website is live")
+    def test_login(self):
+        '''Tests that we are able to login to the webpage
+
+            Parameters
+            ----------
+
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        """
+            Starting a request session for the
+            user login
+        """
+        logging.info("Started a requests session")
+        with requests.Session() as s:
+            login_homepage = s.get(
+                "http://dev-sneekpeek.s3-website-us-east-1.amazonaws.com/register.html"
+                )
+            import pdb; pdb.set_trace()
+
 if __name__ == '__main__':
     unittest.main()
