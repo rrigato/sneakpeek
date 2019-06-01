@@ -84,74 +84,74 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
 
-  #
-  # CodePipelineStack:
-  #   Type: AWS::CodePipeline::Pipeline
-  #   Properties:
-  #     RoleArn: !GetAtt [CodePipelineRole, Arn]
-  #     ArtifactStore:
-  #       Location:
-  #         Ref:
-  #           ArtifactStoreBucket
-  #       Type: S3
-  #     Stages:
-  #       - Name: Source
-  #         Actions:
-  #           - InputArtifacts: []
-  #             Name: Source
-  #             ActionTypeId:
-  #               Category: Source
-  #               Owner: AWS
-  #               Version: 1
-  #               Provider: CodeCommit
-  #             OutputArtifacts:
-  #               - Name: MyApp
-  #             Configuration:
-  #               BranchName: !Ref RepositoryBranch
-  #               RepositoryName: !Ref AWS::StackName
-  #             RunOrder: 1
-  #       - Name: Build
-  #         Actions:
-  #         - Name: Build
-  #           ActionTypeId:
-  #               Category: Build
-  #               Owner: AWS
-  #               Version: 1
-  #               Provider: CodeBuild
-  #           OutputArtifacts:
-  #             - Name: MyAppBuild
-  #           InputArtifacts:
-  #             - Name: MyApp
-  #           Configuration:
-  #               ProjectName: !Ref CodeBuildJavaProject
-  #           RunOrder: 1
-  #       - Name: Deploy
-  #         Actions:
-  #         - Name: DeployApp
-  #           ActionTypeId:
-  #               Category: Deploy
-  #               Owner: AWS
-  #               Version: 1
-  #               Provider: CodeDeploy
-  #           InputArtifacts:
-  #             - Name: MyAppBuild
-  #           Configuration:
-  #               ApplicationName: !Ref MyApplication
-  #               DeploymentGroupName: !Ref MyDeploymentGroup
-  #           RunOrder: 1
-  # CodePipelineRole:
-  #   Type: AWS::IAM::Role
-  #   Properties:
-  #     AssumeRolePolicyDocument:
-  #       Version: "2012-10-17"
-  #       Statement:
-  #         Effect: Allow
-  #         Principal:
-  #           Service: codepipeline.amazonaws.com
-  #         Action: sts:AssumeRole
-  #     Path: /
-  #     ManagedPolicyArns:
-  #       - arn:aws:iam::aws:policy/AdministratorAccess
+
+  CodePipelineStack:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: !GetAtt [CodePipelineRole, Arn]
+      ArtifactStore:
+        Location:
+          Ref:
+            ArtifactStoreBucket
+        Type: S3
+      Stages:
+        - Name: Source
+          Actions:
+            - InputArtifacts: []
+              Name: Source
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Version: 1
+                Provider: CodeCommit
+              OutputArtifacts:
+                - Name: MyApp
+              Configuration:
+                BranchName: !Ref RepositoryBranch
+                RepositoryName: !Ref AWS::StackName
+              RunOrder: 1
+        - Name: Build
+          Actions:
+          - Name: Build
+            ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+            OutputArtifacts:
+              - Name: MyAppBuild
+            InputArtifacts:
+              - Name: MyApp
+            Configuration:
+                ProjectName: !Ref CodeBuildJavaProject
+            RunOrder: 1
+        - Name: Deploy
+          Actions:
+          - Name: DeployApp
+            ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: 1
+                Provider: CodeDeploy
+            InputArtifacts:
+              - Name: MyAppBuild
+            Configuration:
+                ApplicationName: !Ref MyApplication
+                DeploymentGroupName: !Ref MyDeploymentGroup
+            RunOrder: 1
+  CodePipelineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: codepipeline.amazonaws.com
+          Action: sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
 
 
 
