@@ -33,10 +33,16 @@ Resources:
      RepositoryDescription: CodeCommit Repository
 
 
-  CodeBuildJavaProject:
+  #################################
+  #Code Build Project that runs python
+  #unit/integration tests
+  #
+  ###################################
+  SneakPeekPythonTests:
     Type: AWS::CodeBuild::Project
     DependsOn: CodeBuildRole
     Properties:
+      #Output location for the CodeBuild Project
       Artifacts:
         Type: S3
         Location: codebuild-dev-sneakpeek
@@ -44,6 +50,7 @@ Resources:
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Type: LINUX_CONTAINER
+        Image: aws/codebuild/standard:2.0
       Name: dev-sneekpeek-tests
       ServiceRole: !Ref CodeBuildRole
       Source:
