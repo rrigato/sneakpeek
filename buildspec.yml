@@ -39,11 +39,12 @@ phases:
       - echo Entered the build phase...
       - echo Build started on `date`
       #Will not return until the stack create is complete
-      - aws cloudformation create-stack-complete --stack-name sneakpeek-webpage \
+      - aws cloudformation create-stack --stack-name sneakpeek-webpage \
        --template-body file://templates/static_webpage.yml \
        --parameters  file://util/dev_config.json \
        --capabilities CAPABILITY_NAMED_IAM
-
+      #copies static files to newly created S3 resources
+      - aws s3 cp ./static s3://dev-sneekpeek --recursive
   post_build:
     commands:
       - echo Entered the post_build phase...
@@ -79,8 +80,7 @@ artifacts:
 # aws cloudformation describe-change-set --change-set-name \
 # arn:aws:cloudformation:us-east-1:350255258796:changeSet/sneakpeak-changeset/e8577b66-49c2-4ebd-ad5e-fc9503b75793
 
-# #copies static files to newly created S3 resources
-# aws s3 cp ./static s3://dev-sneekpeek --recursive
+
 #
 #
 # #Gets stack output value
