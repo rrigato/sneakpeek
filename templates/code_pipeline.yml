@@ -40,7 +40,6 @@ Resources:
   ###################################
   SneakPeekPythonTests:
     Type: AWS::CodeBuild::Project
-    DependsOn: CodeBuildRole
     Properties:
       #Output location for the CodeBuild Project
       Artifacts:
@@ -70,19 +69,6 @@ Resources:
         Type: CODECOMMIT
         Location: https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek
       TimeoutInMinutes: 5
-
-  CodeBuildRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          Effect: Allow
-          Principal:
-            Service: codebuild.amazonaws.com
-          Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AdministratorAccess
 
 
   CodePipelineStack:
