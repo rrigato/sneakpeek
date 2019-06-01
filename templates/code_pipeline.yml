@@ -38,12 +38,13 @@ Resources:
     DependsOn: CodeBuildRole
     Properties:
       Artifacts:
-        Type: no_artifacts
+        Type: S3
+        Location: codebuild-dev-sneakpeek
+        Packaging: NONE
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/java:openjdk-8
         Type: LINUX_CONTAINER
-      Name: !Sub ${AWS::StackName}CodeBuildJavaProject
+      Name: dev-sneekpeek-tests
       ServiceRole: !Ref CodeBuildRole
       Source:
         Type: CODECOMMIT
