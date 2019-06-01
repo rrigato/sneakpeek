@@ -47,21 +47,22 @@ Resources:
         Type: S3
         Location: codebuild-dev-sneakpeek
         Packaging: NONE
+      CloudWatchLogsConfig:
+          Status: ENABLED
+          GroupName: codebuild-dev-sneakpeek
+      #Standard Linux Image environment
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Type: LINUX_CONTAINER
         Image: aws/codebuild/standard:2.0
       Name: dev-sneekpeek-tests
-      ServiceRole: !Ref CodeBuildRole
+      ServiceRole: arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild
+
+      #CodeCommit Git repo used for CodeBuild
       Source:
         Type: CODECOMMIT
-        Location:
-          Fn::Join:
-            - ""
-            - - "https://git-codecommit."
-              - Ref: AWS::Region
-              - ".amazonaws.com/v1/repos/"
-              - Ref: AWS::StackName
+        Location: https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek.git
+
 
   CodeBuildRole:
     Type: AWS::IAM::Role
