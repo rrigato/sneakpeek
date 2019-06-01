@@ -8,7 +8,8 @@ WORKING_DIRECTORY = os.getcwd()
 logging.basicConfig(
 filename=os.path.join(WORKING_DIRECTORY, 'tests/runlog.txt'),
 format='%(asctime)s %(message)s',
- datefmt='%m/%d/%Y %I:%M:%S %p')
+ datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
+
 logging.info('\n')
 class WebappLive(unittest.TestCase):
     '''Tests that the aws resources necessary for the webpage are running
@@ -32,6 +33,7 @@ class WebappLive(unittest.TestCase):
             Raises
             ------
         '''
+        logging.info("Testing if the website is alive")
         r = requests.get(
             'http://dev-sneekpeek.s3-website-us-east-1.amazonaws.com/'
         )
