@@ -49,10 +49,11 @@ Resources:
         Packaging: NONE
       #Allows for git badge at top of git repo
       BadgeEnabled: true
-
-      CloudWatchLogsConfig:
-          Status: ENABLED
-          GroupName: codebuild-dev-sneakpeek
+      #Where logs are written to in code build
+      LogsConfig:
+          CloudWatchLogs:
+              Status: ENABLED
+              GroupName: codebuild-dev-sneakpeek
       #Standard Linux Image environment
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
