@@ -38,9 +38,9 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - aws cloudformation create-stack --stack-name dev-sneakpeek \
-       --template-body file://templates/static_webpage.yml \
-       --parameters  file://util/dev_config.json \
+      - aws cloudformation create-stack --stack-name sneakpeek-webpage 
+       --template-body file://templates/static_webpage.yml
+       --parameters  file://util/dev_config.json
        --capabilities CAPABILITY_NAMED_IAM
 
       - python tests/test_aws_resources.py

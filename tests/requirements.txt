@@ -1,4 +1,5 @@
-pandas
+awscli
 coverage
-sphinx
+pandas
 requests
+sphinx
