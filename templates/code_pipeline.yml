@@ -49,14 +49,14 @@ Resources:
         Packaging: NONE
       #Allows for git badge at top of git repo
       BadgeEnabled: true
-      #Where logs are written to in code build
+      #Where logs are written to from code build
       LogsConfig:
           CloudWatchLogs:
               Status: ENABLED
               GroupName: codebuild-dev-sneakpeek
           S3Logs:
               Status: ENABLED
-              Location: codebuild-dev-sneakpeek/buildlogs              
+              Location: codebuild-dev-sneakpeek/buildlogs
       #Standard Linux Image environment
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
@@ -69,7 +69,7 @@ Resources:
       Source:
         Type: CODECOMMIT
         Location: https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek.git
-
+      TimeoutInMinutes: 5
 
   CodeBuildRole:
     Type: AWS::IAM::Role
