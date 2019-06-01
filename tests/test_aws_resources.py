@@ -39,7 +39,5 @@ class WebappLive(unittest.TestCase):
         )
         self.assertEqual(r.status_code, 200)
         logging.info("The website is live")
-print("Hello World - First Unit Test")
 if __name__ == '__main__':
-    unittest.main(exit=False)
-    print ("Hello World 2")
+    unittest.main()
