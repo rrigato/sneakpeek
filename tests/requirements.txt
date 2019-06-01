@@ -1,4 +1,5 @@
 awscli
+bs4
 coverage
 pandas
 requests

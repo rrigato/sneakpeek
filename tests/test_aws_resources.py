@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 import logging
 import os
 import pandas as pd
@@ -60,7 +61,7 @@ class WebappLive(unittest.TestCase):
             login_homepage = s.get(
                 "http://dev-sneekpeek.s3-website-us-east-1.amazonaws.com/register.html"
                 )
-            import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
 
 if __name__ == '__main__':
     unittest.main()
