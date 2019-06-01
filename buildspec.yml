@@ -55,7 +55,7 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - tests/runlog.txt
+    - ./tests/runlog.txt
   # discard-paths: yes
   # secondary-artifacts:
   #   artifact1:
