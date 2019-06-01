@@ -38,17 +38,17 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - aws cloudformation create-stack --stack-name sneakpeek-webpage 
-       --template-body file://templates/static_webpage.yml
-       --parameters  file://util/dev_config.json
+      #Will not return until the stack create is complete
+      - aws cloudformation create-stack-complete --stack-name sneakpeek-webpage \
+       --template-body file://templates/static_webpage.yml \
+       --parameters  file://util/dev_config.json \
        --capabilities CAPABILITY_NAMED_IAM
 
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
       - python tests/test_aws_resources.py
-    finally:
-  # post_build:
-  #   commands:
-  #     - echo Entered the post_build phase...
-  #     - echo Build completed on `date`
+      - echo Build completed on `date`
 artifacts:
   files:
     - tests/runlog.txt
