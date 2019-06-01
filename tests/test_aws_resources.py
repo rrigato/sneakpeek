@@ -61,6 +61,15 @@ class WebappLive(unittest.TestCase):
             login_homepage = s.get(
                 "http://dev-sneekpeek.s3-website-us-east-1.amazonaws.com/register.html"
                 )
+            # bsObj = BeautifulSoup(login_homepage.text, "lxml")
+            links =( bsObj.find("div", {"id":"noCognitoMessage"})
+					.find("div", {"class":"panel"})
+					.find("h3", {"class":"panel-title"}))
+        """
+        This should be None once the cognito user pool is
+        added for login
+        """
+        self.assetIsNone(links)
         import pdb; pdb.set_trace()
 
 if __name__ == '__main__':
