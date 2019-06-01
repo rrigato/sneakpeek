@@ -39,12 +39,12 @@ phases:
       - echo Entered the build phase...
       - echo Build started on `date`
       #Will not return until the stack create is complete
-      - aws cloudformation create-stack --stack-name sneakpeek-webpage \
-       --template-body file://templates/static_webpage.yml \
-       --parameters  file://util/dev_config.json \
+      - aws cloudformation create-stack --stack-name sneakpeek-webpage 
+       --template-body file://templates/static_webpage.yml
+       --parameters  file://util/dev_config.json
        --capabilities CAPABILITY_NAMED_IAM
       #Waits until the stack has been successfully created
-      - aws cloudformation wait stack-create-complete \
+      - aws cloudformation wait stack-create-complete
         --stack-name sneakpeek-webpage
       #copies static files to newly created S3 resources
       #- aws s3 cp ./static s3://dev-sneekpeek --recursive
