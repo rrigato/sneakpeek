@@ -182,20 +182,26 @@ Resources:
                 ProjectName: !Ref DevBuildName
             RunOrder: 1
 
-
+          ###################################
+          #Stage 3) Deploys to production
+          #by updating or creating a stack as
+          #necessary
+          ###################################
         - Name: DeployProd
-          ActionTypeId:
-            Category: Deploy
-            Owner: AWS
-            Provider: CloudFormation
-            Version: '1'
-          InputArtifacts:
-            - Name: BuildDev
-          Configuration:
-            #If the
-            ActionMode: CREATE_UPDATE
-            RoleArn: !GetAtt [CodePipelineRole, Arn]
-            StackName: !Ref ProdStackName
+          Actions:
+          - Name: Deploy
+            ActionTypeId:
+              Category: Deploy
+              Owner: AWS
+              Provider: CloudFormation
+              Version: '1'
+            InputArtifacts:
+              - Name: BuildDev
+            Configuration:
+              #If the
+              ActionMode: CREATE_UPDATE
+              RoleArn: !GetAtt [CodePipelineRole, Arn]
+              StackName: !Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
               #Artifact::template_file_name
               #is what the deploy stage is expecting as input for the
