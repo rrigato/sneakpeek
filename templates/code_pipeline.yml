@@ -1,4 +1,4 @@
-# aws cloudformation create-stack --stack-name dev-sneekpeek-ci \
+BuildDev# aws cloudformation create-stack --stack-name dev-sneekpeek-ci \
 # --template-body file://templates/code_pipeline.yml \
 # --capabilities CAPABILITY_NAMED_IAM
 
@@ -170,7 +170,7 @@ Resources:
                 Version: 1
                 Provider: CodeBuild
             OutputArtifacts:
-              - Name: SneakPeekPythonTests
+              - Name: BuildDev
             InputArtifacts:
               - Name: !Ref GitRepoName
             #########################################
@@ -212,16 +212,6 @@ Resources:
 
 
 Outputs:
-  CodeBuildURL:
-    Description: CodeBuild URL
-    Value:
-      Fn::Join:
-        - ""
-        - - "https://console.aws.amazon.com/codebuild/home?region="
-          - Ref: AWS::Region
-          - "#/projects/"
-          - Ref: SneakPeekPythonTests
-          - "/view"
   CodeCommitURL:
     Description: CodeCommit URL
     Value:
