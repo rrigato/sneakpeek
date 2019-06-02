@@ -203,7 +203,7 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
-              RoleArn: !GetAtt [CodePipelineRole, Arn]
+              RoleArn: !GetAtt [CFNRole, Arn]
               StackName: !Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
               #Artifact::template_file_name
@@ -211,6 +211,19 @@ Resources:
               #cloudformation template location
               TemplatePath: sneakpeek::templates/dev_static_webpage.yml
             RunOrder: '1'
+  CFNRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action: ['sts:AssumeRole']
+          Effect: Allow
+          Principal:
+            Service: [cloudformation.amazonaws.com]
+        Version: '2012-10-17'
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
 
   CodePipelineRole:
     Type: AWS::IAM::Role
