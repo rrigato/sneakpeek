@@ -289,33 +289,34 @@ Resources:
             RunOrder: '1'
         ###############################
         #Stage 4 Builds the prod
-        # environment
-        #
+        # environment by populating resources created
+        # in stage 3
         ###############################
         - Name: BuildProdEnvironment
           Actions:
-          - Name: Build
+          - Name: Test
               ######################################
               #List of valid action type providers
               #by action can be found here:
               #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers
               ######################################
             ActionTypeId:
-                Category: Build
+                Category: Test
                 Owner: AWS
                 Version: 1
                 Provider: CodeBuild
-            OutputArtifacts:
-              - Name: BuildDev
             InputArtifacts:
               - Name: !Ref GitRepoName
+            OutputArtifacts:
+              - Name: BuildProd
+
             #########################################
             #Configuration Details by provider can be found here:
             #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#structure-configuration-examples
             #
             #########################################
             Configuration:
-                ProjectName: !Ref DevBuildName
+                ProjectName: !Ref ProdBuildName
             RunOrder: 1
 
   CFNRole:
