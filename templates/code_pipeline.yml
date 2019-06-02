@@ -268,7 +268,11 @@ Resources:
               #Fn:GetParam pass it the Artifact name,
               #json file name and the parameter in that file
               #And it will retrieve it for parameter overrides
-              ParameterOverrides: '{"BucketName": "prod-sneekpeek"}'
+              ParameterOverrides: !Sub |
+                {
+                   "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "BucketName" ] }
+                }
+                  #'{"BucketName": "prod-sneekpeek"}'
               RoleArn: !GetAtt [CFNRole, Arn]
               StackName: !Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
