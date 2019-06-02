@@ -1,4 +1,4 @@
-![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiSFo5RnV1c3FEUHJtSzJJbGFwQlBTWTNweDRCNzd3bXdnU0pIdlh3SFF6cUlNeUs5RGdOMUk0Y1l1UGdocFA3S1ZMQmNFMU9PV3l6dHEvWVIrbDI0NG80PSIsIml2UGFyYW1ldGVyU3BlYyI6ImM1NTRURGc2NnhpSlVVcW4iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=dev)
+![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoidkVnSCs4SHNIdmNMREQ4NW9VNk8xaC9zeWNLQkpYaGVqZnM1K0kyQXZpWlE5Z0ZpclRSSElWa29hTFRQVm45NHNkUlFpcTcwbkFNUlc5WDI0d1N5VXNrPSIsIml2UGFyYW1ldGVyU3BlYyI6IjJnY3pJRjVnNkZ2UVJyM2wiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=dev)
 
 Serverless project used to build a web application to
 detect trailer numbers on a trailer
