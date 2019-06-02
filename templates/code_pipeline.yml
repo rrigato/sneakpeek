@@ -102,6 +102,9 @@ Resources:
   # Approval
   # Invoke
   #
+  #Actions for this environment:
+  #Stage 1) Source = Get source code repository
+  #Stage 2) Build = Build and test a dev environment
   ###########################################
   CodePipelineStack:
     Type: AWS::CodePipeline::Pipeline
@@ -149,8 +152,8 @@ Resources:
               #Run order within stage not between stages
               RunOrder: 1
         ###############################
-        #Stage 1, gets the source control git repo
-        #
+        #Stage 2 Builds the code in the
+        #Dev environment
         #
         ###############################
         - Name: BuildDevEnvironment
