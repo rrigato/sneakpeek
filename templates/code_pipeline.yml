@@ -22,6 +22,9 @@ Parameters:
     Type: String
     Default: CodeDeployEC2Tag
 
+  DevBuildName:
+    Type: String
+    Default: dev-sneekpeek-tests
 Resources:
   ArtifactStoreBucket:
     Type: AWS::S3::Bucket
@@ -79,7 +82,7 @@ Resources:
         ComputeType: BUILD_GENERAL1_SMALL
         Type: LINUX_CONTAINER
         Image: aws/codebuild/standard:2.0
-      Name: dev-sneekpeek-tests
+      Name: !Ref DevBuildName
       ServiceRole: arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild
 
       #CodeCommit Git repo used for CodeBuild
@@ -173,7 +176,7 @@ Resources:
             #
             #########################################
             Configuration:
-                ProjectName: SneakPeekPythonTests
+                ProjectName: !Ref DevBuildName
             RunOrder: 1
         # - Name: Deploy
         #   Actions:
