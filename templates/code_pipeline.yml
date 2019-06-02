@@ -192,13 +192,16 @@ Resources:
           InputArtifacts:
             - Name: BuildDev
           Configuration:
+            #If the
             ActionMode: CREATE_UPDATE
             RoleArn: !GetAtt [CodePipelineRole, Arn]
             StackName: !Ref ProdStackName
-            ChangeSetName: !Ref ChangeSetName
-            TemplateConfiguration: !Sub "TemplateSource::${ProdStackConfig}"
-            TemplatePath: !Sub "TemplateSource::${TemplateFileName}"
-          RunOrder: '1'
+              #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
+              #Artifact::template_file_name
+              #is what the deploy stage is expecting as input for the
+              #cloudformation template location
+              TemplatePath: sneakpeek::templates/dev_static_webpage.yml
+            RunOrder: '1'
 
   CodePipelineRole:
     Type: AWS::IAM::Role
