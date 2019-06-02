@@ -12,6 +12,9 @@ Parameters:
   GitRepo:
     Type: String
     Default: https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek
+  GitRepoName:
+    Type: String
+    Default: sneakpeek
   TagKey:
     Type: String
     Default: Name
@@ -107,13 +110,18 @@ Resources:
             ArtifactStoreBucket
         Type: S3
       Stages:
-        - Name: Source
+        ###############################
+        #Stage 1, gets the source control git repo
+        #
+        #
+        ###############################
+        - Name: SourceCodeRepo
           Actions:
             #The input artifact of an action must exactly
             # match the output artifact declared
             #in a preceding action
             - InputArtifacts: []
-              Name: SourceCode
+              Name: Source
               ######################################
               #List of valid action type providers
               #by action can be found here:
@@ -126,13 +134,25 @@ Resources:
                 Provider: CodeCommit
               OutputArtifacts:
                 - Name: SneakPeekPythonTests
+              #Git repo for first stage
               Configuration:
                 BranchName: !Ref RepositoryBranch
-                RepositoryName: !Ref AWS::StackName
+                RepositoryName: !Ref GitRepoName
+              #Run order within stage not between stages
               RunOrder: 1
-        - Name: Build
+        ###############################
+        #Stage 1, gets the source control git repo
+        #
+        #
+        ###############################
+        - Name: BuildDevEnvironment
           Actions:
           - Name: Build
+              ######################################
+              #List of valid action type providers
+              #by action can be found here:
+              #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers
+              ######################################
             ActionTypeId:
                 Category: Build
                 Owner: AWS
