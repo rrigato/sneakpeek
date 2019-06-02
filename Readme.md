@@ -24,6 +24,8 @@ Provides information on each directory/ source file
 - index.html = homepage for web applciation
 
 #### templates
+- code_pipeline.yml = Creates CodeBuild/Code Pipeline resources
+    necessary for Dev/Prod
 - static_webpage.yml = builds the S3 bucket enabled for web hosting
 
 #### tests
@@ -31,7 +33,9 @@ Provides information on each directory/ source file
 
 
 #### static
-- dev_config.json = Name of the bucket to pass to templates/static_webpage.yml
+- dev_config.json = Name of the bucket to pass to templates/static_webpage.yml must be array
+
+- dev_prod.json = Provides production configuration variables
 
 - dev_build_template.json = codeBuild project definition for devops/CI.sh
 
