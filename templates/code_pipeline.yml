@@ -287,6 +287,37 @@ Resources:
               #cloudformation template location
               TemplatePath: sneakpeek::templates/dev_static_webpage.yml
             RunOrder: '1'
+        ###############################
+        #Stage 4 Builds the prod
+        # environment
+        #
+        ###############################
+        - Name: BuildProdEnvironment
+          Actions:
+          - Name: Build
+              ######################################
+              #List of valid action type providers
+              #by action can be found here:
+              #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers
+              ######################################
+            ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+            OutputArtifacts:
+              - Name: BuildDev
+            InputArtifacts:
+              - Name: !Ref GitRepoName
+            #########################################
+            #Configuration Details by provider can be found here:
+            #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#structure-configuration-examples
+            #
+            #########################################
+            Configuration:
+                ProjectName: !Ref DevBuildName
+            RunOrder: 1
+
   CFNRole:
     Type: AWS::IAM::Role
     Properties:
