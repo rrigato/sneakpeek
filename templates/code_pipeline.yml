@@ -21,6 +21,10 @@ Parameters:
   DevBuildName:
     Type: String
     Default: dev-sneekpeek-tests
+
+  ProdBuildName:
+    Type: String
+    Default: prod-sneekpeek-deploy
   ProdStackName:
     Type: String
     Default: prod-sneekpeek
@@ -116,7 +120,7 @@ Resources:
       #Output location for the CodeBuild Project
       Artifacts:
         Type: S3
-        Location: codebuild-dev-sneakpeek
+        Location: codebuild-prod-sneakpeek
         Packaging: NONE
       #Allows for git badge at top of git repo
       BadgeEnabled: true
@@ -124,16 +128,16 @@ Resources:
       LogsConfig:
           CloudWatchLogs:
               Status: ENABLED
-              GroupName: codebuild-dev-sneakpeek
+              GroupName: codebuild-prod-sneakpeek
           S3Logs:
               Status: ENABLED
-              Location: codebuild-dev-sneakpeek/buildlogs
+              Location: codebuild-prod-sneakpeek/buildlogs
       #Standard Linux Image environment
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Type: LINUX_CONTAINER
         Image: aws/codebuild/standard:2.0
-      Name: prod-sneakpeek #!Ref DevBuildName
+      Name: !Ref ProdBuildName
       ServiceRole: arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild
 
       #CodeCommit Git repo used for CodeBuild
