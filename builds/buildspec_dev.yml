@@ -1,0 +1,82 @@
+############################
+#Accomplishes the following build tasks
+#
+#1) Runs the cloudformation template to create the necessary resources
+#2) Runs python coverage function to generate Auto HTML documentation
+##) Runs unit tests of lambda functions, checks aws resources created
+#
+#
+############################
+version: 0.2
+
+# env:
+  # variables:
+  #   JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
+  # parameter-store:
+  #   LOGIN_PASSWORD: /CodeBuild/dockerLoginPassword
+
+phases:
+  ###########################################
+  #Uses a python runtime
+  #Note that you do not need the \ to escape
+  #aws cli commands
+  ###########################################
+  install:
+    runtime-versions:
+       python: 3.7
+    commands:
+      - echo Entered the install phase...
+      - pip install -r tests/requirements.txt
+      - ls -l
+    finally:
+      - echo This always runs even if the update or install command fails
+  # pre_build:
+  #   commands:
+  #     - echo Entered the pre_build phase...
+  #     - docker login –u User –p $LOGIN_PASSWORD
+  #   finally:
+  #     - echo This always runs even if the login command fails
+  #
+  #Builds the cloudformation stack that contains the
+  #static webpage
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo Build started on `date`
+      #Will not return until the stack create is complete
+      - aws cloudformation create-stack --stack-name sneakpeek-webpage
+       --template-body file://templates/dev_static_webpage.yml
+       --parameters  file://util/dev_config.json
+       --capabilities CAPABILITY_NAMED_IAM
+      #Waits until the stack has been successfully created
+      - aws cloudformation wait stack-create-complete
+        --stack-name sneakpeek-webpage
+      #copies static files to newly created S3 resources
+      - aws s3 cp ./static s3://dev-sneekpeek --recursive
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - python tests/test_aws_resources.py
+      - echo Build completed on `date`
+    finally:
+      #deleting bucket and stack after testing
+      - aws s3 rm s3://dev-sneekpeek --recursive
+      - aws cloudformation delete-stack
+        --stack-name sneakpeek-webpage
+artifacts:
+  files:
+    - ./tests/runlog.txt
+
+
+
+
+# aws cloudformation describe-change-set --change-set-name \
+# arn:aws:cloudformation:us-east-1:350255258796:changeSet/sneakpeak-changeset/e8577b66-49c2-4ebd-ad5e-fc9503b75793
+
+
+#
+#
+# #Gets stack output value
+# aws cloudformation describe-stacks --query \
+# 'Stacks[0].[Outputs[].[OutputKey,OutputValue]]|[]'  \
+# --stack-name TrailerUtilizationWebApp
