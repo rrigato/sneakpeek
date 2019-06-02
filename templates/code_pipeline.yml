@@ -160,9 +160,4 @@ Outputs:
           - "/browse/HEAD/--/"
   CloneUrlSsh:
     Description: SSH command for connecting to the CodeCommit repo
-    Value:
-      Fn::Join:
-        - ""
-        - - "git clone "
-          - !GetAtt [CodeCommitJavaRepo, CloneUrlSsh]
-          - ""
+    Value: !Ref GitRepo
