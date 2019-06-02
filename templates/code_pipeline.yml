@@ -177,20 +177,25 @@ Resources:
             Configuration:
                 ProjectName: !Ref DevBuildName
             RunOrder: 1
-        # - Name: Deploy
-        #   Actions:
-        #   - Name: DeployApp
-        #     ActionTypeId:
-        #         Category: Deploy
-        #         Owner: AWS
-        #         Version: 1
-        #         Provider: CodeDeploy
-        #     InputArtifacts:
-        #       - Name: MyAppBuild
-        #     Configuration:
-        #         ApplicationName: !Ref MyApplication
-        #         DeploymentGroupName: !Ref MyDeploymentGroup
-        #     RunOrder: 1
+
+
+        - Name: DeployProd
+          ActionTypeId:
+            Category: Deploy
+            Owner: AWS
+            Provider: CloudFormation
+            Version: '1'
+          InputArtifacts:
+            - Name: BuildDev
+          Configuration:
+            ActionMode: CHANGE_SET_REPLACE
+            RoleArn: !GetAtt [CFNRole, Arn]
+            StackName: !Ref ProdStackName
+            ChangeSetName: !Ref ChangeSetName
+            TemplateConfiguration: !Sub "TemplateSource::${ProdStackConfig}"
+            TemplatePath: !Sub "TemplateSource::${TemplateFileName}"
+          RunOrder: '1'
+
   CodePipelineRole:
     Type: AWS::IAM::Role
     Properties:
@@ -200,7 +205,7 @@ Resources:
           Effect: Allow
           Principal:
             Service: codepipeline.amazonaws.com
-          Action: sts:AssumeRole 
+          Action: sts:AssumeRole
       Path: /
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
