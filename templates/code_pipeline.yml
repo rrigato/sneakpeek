@@ -197,8 +197,11 @@ Resources:
               Version: '1'
             InputArtifacts:
               - Name: BuildDev
+              - Name: sneakpeek
             Configuration:
-              #If the
+              #If the cloudformation stack does not exist
+              #it will be created, otherwise the stack will be updated
+              #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
               RoleArn: !GetAtt [CodePipelineRole, Arn]
               StackName: !Ref ProdStackName
