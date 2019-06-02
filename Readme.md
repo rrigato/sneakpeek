@@ -5,6 +5,13 @@ detect trailer numbers on a trailer
 
 ### Project Directory Overview
 Provides information on each directory/ source file
+
+#### builds
+- buildspec_dev.yml = Buildspec to use for the development (QA)
+    CodeBuild project
+
+- buildspec_prod.yml = Buildspec to use for the prod deployment CodeBuild project
+
 #### devops
 - CI.sh = Establishes CodeCommit Repo and CodeBuild Project
     - For debugging errors go to the Phase details section of the console
