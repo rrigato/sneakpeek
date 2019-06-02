@@ -51,6 +51,17 @@ Resources:
         -
           Key: retain
           Value: false
+  ProdArtifactsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: codebuild-prod-sneakpeek
+      Tags:
+        -
+          Key: stage
+          Value: dev
+        -
+          Key: retain
+          Value: false
   #################################
   #Code Build Project that runs python
   #unit/integration tests
@@ -97,9 +108,9 @@ Resources:
   #
   ###################################
   ProdSneakPeekDeploy:
-    #Need the DevArtifactsBucket Created first before This
+    #Need the ProdArtifactsBucket Created first before This
     #CodeBuild Project can start
-    DependsOn: DevArtifactsBucket
+    DependsOn: ProdArtifactsBucket
     Type: AWS::CodeBuild::Project
     Properties:
       #Output location for the CodeBuild Project
