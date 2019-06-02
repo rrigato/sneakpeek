@@ -55,7 +55,7 @@ phases:
   post_build:
     commands:
       - echo Entered the post_build phase...
-      - python tests/test_aws_resources.py
+      - python tests/test_prod_aws_resources.py
       - echo Build completed on `date`
 
 artifacts:
