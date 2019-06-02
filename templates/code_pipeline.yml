@@ -27,14 +27,24 @@ Resources:
         Status: Enabled
       AccessControl: BucketOwnerFullControl
 
-
-
+  DevArtifactsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: codebuild-dev-sneakpeek
+      Tags:
+          Key: stage
+          Value: dev
+          Key: retain
+          Value: false
   #################################
   #Code Build Project that runs python
   #unit/integration tests
   #
   ###################################
   SneakPeekPythonTests:
+    #Need the DevArtifactsBucket Created first before This
+    #CodeBuild Project can start
+    DependsOn: DevArtifactsBucket
     Type: AWS::CodeBuild::Project
     Properties:
       #Output location for the CodeBuild Project
