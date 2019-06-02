@@ -175,20 +175,20 @@ Resources:
             Configuration:
                 ProjectName: SneakPeekPythonTests
             RunOrder: 1
-        - Name: Deploy
-          Actions:
-          - Name: DeployApp
-            ActionTypeId:
-                Category: Deploy
-                Owner: AWS
-                Version: 1
-                Provider: CodeDeploy
-            InputArtifacts:
-              - Name: MyAppBuild
-            Configuration:
-                ApplicationName: !Ref MyApplication
-                DeploymentGroupName: !Ref MyDeploymentGroup
-            RunOrder: 1
+        # - Name: Deploy
+        #   Actions:
+        #   - Name: DeployApp
+        #     ActionTypeId:
+        #         Category: Deploy
+        #         Owner: AWS
+        #         Version: 1
+        #         Provider: CodeDeploy
+        #     InputArtifacts:
+        #       - Name: MyAppBuild
+        #     Configuration:
+        #         ApplicationName: !Ref MyApplication
+        #         DeploymentGroupName: !Ref MyDeploymentGroup
+        #     RunOrder: 1
   CodePipelineRole:
     Type: AWS::IAM::Role
     Properties:
