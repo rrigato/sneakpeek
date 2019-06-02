@@ -100,14 +100,12 @@ Resources:
         Image: aws/codebuild/standard:2.0
       Name: !Ref DevBuildName
       ServiceRole: arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild
-
       #CodeCommit Git repo used for CodeBuild
       Source:
         #Buildspec file to use for the dev build
         BuildSpec: builds/buildspec_dev.yml
         Location: !Ref GitRepo
         Type: CODECOMMIT
-
       TimeoutInMinutes: 5
 
   #################################
@@ -143,7 +141,6 @@ Resources:
         Image: aws/codebuild/standard:2.0
       Name: !Ref ProdBuildName
       ServiceRole: arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild
-
       #CodeCommit Git repo used for CodeBuild
       Source:
         #Buildspec file to use for the prod build
@@ -296,14 +293,14 @@ Resources:
         ###############################
         - Name: BuildProdEnvironment
           Actions:
-          - Name: Test
+          - Name: Build
               ######################################
               #List of valid action type providers
               #by action can be found here:
               #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers
               ######################################
             ActionTypeId:
-                Category: Test
+                Category: Build
                 Owner: AWS
                 Version: 1
                 Provider: CodeBuild
@@ -312,7 +309,6 @@ Resources:
               - Name: ProdCf
             OutputArtifacts:
               - Name: BuildProd
-
             #########################################
             #Configuration Details by provider can be found here:
             #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#structure-configuration-examples
