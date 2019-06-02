@@ -85,7 +85,18 @@ Resources:
         Location: !Ref GitRepo
       TimeoutInMinutes: 5
 
-
+  ##########################################
+  #Code Pipeline Is broken down into stages
+  #that occur sequentially These can be
+  #the following ci/cd actions
+  # Source
+  # Build
+  # Test
+  # Deploy
+  # Approval
+  # Invoke
+  #
+  ###########################################
   CodePipelineStack:
     Type: AWS::CodePipeline::Pipeline
     Properties:
@@ -103,6 +114,11 @@ Resources:
             #in a preceding action
             - InputArtifacts: []
               Name: SourceCode
+              ######################################
+              #List of valid action type providers
+              #by action can be found here:
+              #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers
+              ######################################
               ActionTypeId:
                 Category: Source
                 Owner: AWS
