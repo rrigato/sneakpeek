@@ -91,6 +91,48 @@ Resources:
         Location: !Ref GitRepo
       TimeoutInMinutes: 5
 
+  #################################
+  #Production Code Build that runs python
+  #tests and deploys code to prod
+  #
+  ###################################
+  ProdSneakPeekDeploy:
+    #Need the DevArtifactsBucket Created first before This
+    #CodeBuild Project can start
+    DependsOn: DevArtifactsBucket
+    Type: AWS::CodeBuild::Project
+    Properties:
+      #Output location for the CodeBuild Project
+      Artifacts:
+        Type: S3
+        Location: codebuild-dev-sneakpeek
+        Packaging: NONE
+      #Allows for git badge at top of git repo
+      BadgeEnabled: true
+      #Where logs are written to from code build
+      LogsConfig:
+          CloudWatchLogs:
+              Status: ENABLED
+              GroupName: codebuild-dev-sneakpeek
+          S3Logs:
+              Status: ENABLED
+              Location: codebuild-dev-sneakpeek/buildlogs
+      #Standard Linux Image environment
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Type: LINUX_CONTAINER
+        Image: aws/codebuild/standard:2.0
+      Name: prod-sneakpeek #!Ref DevBuildName
+      ServiceRole: arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild
+
+      #CodeCommit Git repo used for CodeBuild
+      Source:
+        Type: CODECOMMIT
+        Location: !Ref GitRepo
+      TimeoutInMinutes: 5
+
+
+
   ##########################################
   #Code Pipeline Is broken down into stages
   #that occur sequentially These can be
