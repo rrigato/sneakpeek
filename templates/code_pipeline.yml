@@ -133,8 +133,13 @@ Resources:
                 Version: 1
                 Provider: CodeCommit
               OutputArtifacts:
-                - Name: SneakPeekPythonTests
-              #Git repo for first stage
+                - Name: !Ref GitRepoName
+            #Git repo for first stage
+            #########################################
+            #Configuration Details by provider can be found here:
+            #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#structure-configuration-examples
+            #
+            #########################################
               Configuration:
                 BranchName: !Ref RepositoryBranch
                 RepositoryName: !Ref GitRepoName
@@ -159,11 +164,16 @@ Resources:
                 Version: 1
                 Provider: CodeBuild
             OutputArtifacts:
-              - Name: MyAppBuild
+              - Name: SneakPeekPythonTests
             InputArtifacts:
-              - Name: MyApp
+              - Name: !Ref GitRepoName
+            #########################################
+            #Configuration Details by provider can be found here:
+            #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#structure-configuration-examples
+            #
+            #########################################
             Configuration:
-                ProjectName: !Ref CodeBuildJavaProject
+                ProjectName: SneakPeekPythonTests
             RunOrder: 1
         - Name: Deploy
           Actions:
