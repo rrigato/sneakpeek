@@ -268,7 +268,7 @@ Resources:
               #Fn:GetParam pass it the Artifact name,
               #json file name and the parameter in that file
               #And it will retrieve it for parameter overrides
-              ParameterOverrides: !Sub |
+              ParameterOverrides: |
                 {
                    "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
                 }
