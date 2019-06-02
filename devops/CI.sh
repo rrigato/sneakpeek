@@ -18,10 +18,14 @@ aws codecommit get-repository --repository-name sneakpeek \
 --query 'repositoryMetadata.cloneUrlHttp'
 
 #Creates the CodeBuild and Code Pipeline Cloudformation stack
-aws cloudformation create-stack --stack-name sneakpeak-pipeline \
+aws cloudformation create-change-set --stack-name sneakpeak-pipeline \
  --template-body file://templates/code_pipeline.yml \
+ --change-set-name CodePipelineAddition \
  --capabilities CAPABILITY_NAMED_IAM
-
+ #aws cloudformation execute-change-set --change-set-name
+ #<change_set_arn>
+aws cloudformation execute-change-set --change-set-name \
+arn:aws:cloudformation:us-east-1:350255258796:changeSet/CodePipelineAddition/2326ac23-8154-49d4-a328-7edc708a2b53
 
 #makes an output bucket for dev and prod Builds
 aws s3 mb s3://codebuild-prod-sneakpeek
