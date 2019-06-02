@@ -245,6 +245,12 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
+              #Used to pass parameters to Cloudformation template
+              #referenced in TemplatePath
+              ParameterOverrides: |
+                {
+                  "BucketName": : { "Fn::GetParam" : ["sneakpeek", "util/config.json", "BucketName"]}
+                }
               RoleArn: !GetAtt [CFNRole, Arn]
               StackName: !Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
