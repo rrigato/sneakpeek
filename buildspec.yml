@@ -66,26 +66,7 @@ phases:
 artifacts:
   files:
     - ./tests/runlog.txt
-  # discard-paths: yes
-  # secondary-artifacts:
-  #   artifact1:
-  #     files:
-  #       - target/messageUtil-1.0.jar
-  #     discard-paths: yes
-  #   artifact2:
-  #     files:
-  #       - target/messageUtil-1.0.jar
-  #     discard-paths: yes
 
-
-#Creates the cloudformation stack
-
-#
-# aws cloudformation create-change-set --stack-name dev-sneekpeek-ci \
-# --change-set-name sneakpeak-changeset \
-# --template-body file://templates/static_webpage.yml \
-# --parameters  file://util/dev_config.json \
-# --capabilities CAPABILITY_NAMED_IAM
 
 
 
