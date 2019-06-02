@@ -305,6 +305,7 @@ Resources:
                 Version: 1
                 Provider: CodeBuild
             InputArtifacts:
+              - Name: !Ref GitRepoName
               - Name: ProdCf
             OutputArtifacts:
               - Name: BuildProd
@@ -314,7 +315,9 @@ Resources:
             #
             #########################################
             Configuration:
+                PrimarySource: !Ref GitRepoName
                 ProjectName: !Ref ProdBuildName
+
             RunOrder: 1
 
   CFNRole:
