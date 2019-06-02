@@ -21,6 +21,10 @@ Parameters:
   DevBuildName:
     Type: String
     Default: dev-sneekpeek-tests
+  ProdStackName:
+    Type: String
+    Default: prod-sneekpeek
+
 Resources:
   ArtifactStoreBucket:
     Type: AWS::S3::Bucket
@@ -188,8 +192,8 @@ Resources:
           InputArtifacts:
             - Name: BuildDev
           Configuration:
-            ActionMode: CHANGE_SET_REPLACE
-            RoleArn: !GetAtt [CFNRole, Arn]
+            ActionMode: CREATE_UPDATE
+            RoleArn: !GetAtt [CodePipelineRole, Arn]
             StackName: !Ref ProdStackName
             ChangeSetName: !Ref ChangeSetName
             TemplateConfiguration: !Sub "TemplateSource::${ProdStackConfig}"
