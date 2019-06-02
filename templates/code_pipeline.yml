@@ -147,6 +147,9 @@ Resources:
   #Actions for this environment:
   #Stage 1) Source = Get source code repository
   #Stage 2) Build = Build and test a dev environment
+  #Stage 3) Deploy = Creates/Updates cloudformation template
+  #stage 4) Build = runs any configuration necessary for the
+  #Deploy stage using a CodeBuild Project
   ###########################################
   CodePipelineStack:
     Type: AWS::CodePipeline::Pipeline
@@ -247,9 +250,12 @@ Resources:
               ActionMode: CREATE_UPDATE
               #Used to pass parameters to Cloudformation template
               #referenced in TemplatePath
+              #Fn:GetParam pass it the Artifact name,
+              #json file name and the parameter in that file
+              #And it will retrieve it for parameter overrides
               ParameterOverrides: |
                 {
-                  "BucketName": : { "Fn::GetParam" : ["sneakpeek", "util/config.json", "BucketName"]}
+                  "BucketName": : { "Fn::GetParam" : ["sneakpeek", "util/prod_config.json", "BucketName"]}
                 }
               RoleArn: !GetAtt [CFNRole, Arn]
               StackName: !Ref ProdStackName
