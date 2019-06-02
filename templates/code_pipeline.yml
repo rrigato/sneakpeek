@@ -1,7 +1,3 @@
-BuildDev# aws cloudformation create-stack --stack-name dev-sneekpeek-ci \
-# --template-body file://templates/code_pipeline.yml \
-# --capabilities CAPABILITY_NAMED_IAM
-
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Automate provisioning of CodeBuild with CodePipeline CodeCommit and CodeDeploy. **WARNING** This template creates one or more Amazon EC2 instances. You will be billed for the AWS resources used if you create a stack from this template.
 Parameters:
@@ -199,8 +195,8 @@ Resources:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
-        Version: "2012-10-17"
         Statement:
+          Version: "2012-10-17"
           Effect: Allow
           Principal:
             Service: codepipeline.amazonaws.com
