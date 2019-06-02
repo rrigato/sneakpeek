@@ -84,8 +84,7 @@ Resources:
         Packaging: NONE
       #Allows for git badge at top of git repo
       BadgeEnabled: true
-      #Buildspec file to use for the prod build
-      BuildSpec: builds/buildspec_dev.yml
+
       #Where logs are written to from code build
       LogsConfig:
           CloudWatchLogs:
@@ -104,8 +103,11 @@ Resources:
 
       #CodeCommit Git repo used for CodeBuild
       Source:
-        Type: CODECOMMIT
+        #Buildspec file to use for the dev build
+        BuildSpec: builds/buildspec_dev.yml
         Location: !Ref GitRepo
+        Type: CODECOMMIT
+
       TimeoutInMinutes: 5
 
   #################################
@@ -126,8 +128,6 @@ Resources:
         Packaging: NONE
       #Allows for git badge at top of git repo
       BadgeEnabled: true
-      #Buildspec file to use for the prod build
-      BuildSpec: builds/buildspec_prod.yml
       #Where logs are written to from code build
       LogsConfig:
           CloudWatchLogs:
@@ -146,8 +146,10 @@ Resources:
 
       #CodeCommit Git repo used for CodeBuild
       Source:
-        Type: CODECOMMIT
+        #Buildspec file to use for the prod build
+        BuildSpec: builds/buildspec_prod.yml
         Location: !Ref GitRepo
+        Type: CODECOMMIT
       TimeoutInMinutes: 5
 
 
