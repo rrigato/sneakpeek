@@ -270,7 +270,7 @@ Resources:
               #And it will retrieve it for parameter overrides
               ParameterOverrides: !Sub |
                 {
-                   "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "BucketName" ] }
+                   "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
                 }
                   #'{"BucketName": "prod-sneekpeek"}'
               RoleArn: !GetAtt [CFNRole, Arn]
