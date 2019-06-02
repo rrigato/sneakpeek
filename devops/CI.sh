@@ -17,13 +17,14 @@ aws codecommit get-repository --repository-name sneakpeek \
 aws codecommit get-repository --repository-name sneakpeek \
 --query 'repositoryMetadata.cloneUrlHttp'
 
+#Creates the CodeBuild and Code Pipeline Cloudformation stack
+aws cloudformation create-stack --stack-name sneakpeak-pipeline \
+ --template-body file://templates/code_pipeline.yml \
+ --capabilities CAPABILITY_NAMED_IAM
+
+
 #makes an output bucket for dev and prod Builds
-aws s3 mb s3://codebuild-dev-sneakpeek
-
 aws s3 mb s3://codebuild-prod-sneakpeek
-
-#create a code build project with the formatted json input
-aws codebuild create-project --cli-input-json file://util/dev_build_template.json
 
 #start a code build project
 aws codebuild start-build --project-name dev-sneekpeek-tests --source-version dev
