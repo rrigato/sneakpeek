@@ -85,7 +85,7 @@ Resources:
       #Allows for git badge at top of git repo
       BadgeEnabled: true
       #Buildspec file to use for the prod build
-      BuildSpec: builds/buildspec_prod.yml
+      BuildSpec: builds/buildspec_dev.yml
       #Where logs are written to from code build
       LogsConfig:
           CloudWatchLogs:
