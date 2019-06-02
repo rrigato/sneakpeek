@@ -304,9 +304,9 @@ Resources:
                 Owner: AWS
                 Version: 1
                 Provider: CodeBuild
-            InputArtifacts:
-              - Name: !Ref GitRepoName
-              - Name: ProdCf
+            # InputArtifacts:
+            #   - Name: !Ref GitRepoName
+            #   - Name: ProdCf
             OutputArtifacts:
               - Name: BuildProd
             #########################################
@@ -315,7 +315,7 @@ Resources:
             #
             #########################################
             Configuration:
-                PrimarySource: !Ref GitRepoName
+                #PrimarySource: !Ref GitRepoName
                 ProjectName: !Ref ProdBuildName
 
             RunOrder: 1
