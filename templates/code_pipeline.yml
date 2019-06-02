@@ -26,14 +26,23 @@ Resources:
       VersioningConfiguration:
         Status: Enabled
       AccessControl: BucketOwnerFullControl
+      Tags:
+        -
+          Key: stage
+          Value: dev
+        -
+          Key: retain
+          Value: false
 
   DevArtifactsBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: codebuild-dev-sneakpeek
       Tags:
+        -
           Key: stage
           Value: dev
+        -
           Key: retain
           Value: false
   #################################
