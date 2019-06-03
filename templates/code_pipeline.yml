@@ -258,47 +258,47 @@ Resources:
         #         ProjectName: !Ref DevBuildName
         #     RunOrder: 1
         #
-        #   ###################################
-        #   #Stage 3) Deploys to production
-        #   #by updating or creating a stack as
-        #   #necessary
-        #   ###################################
-        # - Name: DeployProd
-        #   Actions:
-        #   - Name: Deploy
-        #     ActionTypeId:
-        #       Category: Deploy
-        #       Owner: AWS
-        #       Provider: CloudFormation
-        #       Version: '1'
-        #     InputArtifacts:
-        #       - Name: BuildDev
-        #       - Name: sneakpeek
-        #     OutputArtifacts:
-        #       - Name: ProdCf
-        #     Configuration:
-        #       #If the cloudformation stack does not exist
-        #       #it will be created, otherwise the stack will be updated
-        #       #with the template provided in TemplatePath
-        #       ActionMode: CREATE_UPDATE
-        #       #Used to pass parameters to Cloudformation template
-        #       #referenced in TemplatePath
-        #       #Fn:GetParam pass it the Artifact name,
-        #       #json file name and the parameter in that file
-        #       #And it will retrieve it for parameter overrides
-        #       ParameterOverrides: |
-        #         {
-        #            "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
-        #         }
-        #           #'{"BucketName": "prod-sneekpeek"}'
-        #       RoleArn: !GetAtt [CFNRole, Arn]
-        #       StackName: !Ref ProdStackName
-        #       #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
-        #       #Artifact::template_file_name
-        #       #is what the deploy stage is expecting as input for the
-        #       #cloudformation template location
-        #       TemplatePath: sneakpeek::templates/dev_static_webpage.yml
-        #     RunOrder: '1'
+          ###################################
+          #Stage 3) Deploys to production
+          #by updating or creating a stack as
+          #necessary
+          ###################################
+        - Name: DeployProd
+          Actions:
+          - Name: Deploy
+            ActionTypeId:
+              Category: Deploy
+              Owner: AWS
+              Provider: CloudFormation
+              Version: '1'
+            InputArtifacts:
+              - Name: BuildDev
+              - Name: sneakpeek
+            OutputArtifacts:
+              - Name: ProdCf
+            Configuration:
+              #If the cloudformation stack does not exist
+              #it will be created, otherwise the stack will be updated
+              #with the template provided in TemplatePath
+              ActionMode: CREATE_UPDATE
+              #Used to pass parameters to Cloudformation template
+              #referenced in TemplatePath
+              #Fn:GetParam pass it the Artifact name,
+              #json file name and the parameter in that file
+              #And it will retrieve it for parameter overrides
+              ParameterOverrides: |
+                {
+                   "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
+                }
+                  #'{"BucketName": "prod-sneekpeek"}'
+              RoleArn: !GetAtt [CFNRole, Arn]
+              StackName: !Ref ProdStackName
+              #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
+              #Artifact::template_file_name
+              #is what the deploy stage is expecting as input for the
+              #cloudformation template location
+              TemplatePath: sneakpeek::templates/dev_static_webpage.yml
+            RunOrder: '1'
         ###############################
         #Stage 4 Builds the prod
         # environment by populating resources created
