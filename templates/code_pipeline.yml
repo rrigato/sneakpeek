@@ -149,7 +149,20 @@ Resources:
         Type: CODECOMMIT
       TimeoutInMinutes: 5
 
-
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: SneakPeek
+      ###############
+      #Allowable attributes for the user pool:
+      #valid values are phone_number, email, or preferred_username
+      #Basically what the user is allowed to login with
+      ###############
+      AliasAttributes:
+        - email
+      #How the user verify their account
+      AutoVerifiedAttributes:
+        - email
 
   ##########################################
   #Code Pipeline Is broken down into stages
