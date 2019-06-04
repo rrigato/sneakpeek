@@ -149,6 +149,11 @@ Resources:
         Type: CODECOMMIT
       TimeoutInMinutes: 5
 
+  ######################################
+  #Cognito User pools are used for sign in
+  #and verification
+  #
+  #####################################
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
@@ -376,3 +381,7 @@ Outputs:
   CloneUrlSsh:
     Description: SSH command for connecting to the CodeCommit repo
     Value: !Ref GitRepo
+
+  UserPoolId:
+    Description: Amazon Cognito User Pool ID
+    Value: !Ref UserPool
