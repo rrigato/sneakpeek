@@ -168,6 +168,19 @@ Resources:
       #How the user verify their account
       AutoVerifiedAttributes:
         - email
+  ####################################
+  #Will be used by our web client (static javascript calling
+  #lambda functions to authenticate users)
+  #
+  #
+  ####################################
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: SneakPeekWeb
+      UserPoolId: !Ref UserPool
+      GenerateSecret: false
+
 
   ##########################################
   #Code Pipeline Is broken down into stages
