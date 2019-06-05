@@ -78,7 +78,8 @@ class WebappLive(unittest.TestCase):
         added for login
         """
         self.assetIsNone(links)
-        import pdb; pdb.set_trace()
+
+
 
 if __name__ == '__main__':
     unittest.main()
