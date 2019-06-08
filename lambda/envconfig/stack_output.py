@@ -22,8 +22,36 @@ def describe_stacks_response(stack_name):
     cf_response, = cf_client.describe_stacks(
         StackName='sneakpeak-pipeline')['Stacks']
 
+    return (cf_response)
 
-output_values = cf_response['Outputs']
+def iterate_outputs(output_values):
+    '''Iterates over every OutputKey for the stack
+        Parameters
+        ----------
 
-for output in output_values:
-    if output['OutputKey'] == ''
+        Returns
+        -------
+
+        Raises
+        ------
+    '''
+    for output in output_values:
+        if output['OutputKey'] == 'UserPoolClientId':
+            print(output['OutputValue'])
+def main:
+    '''Entry point into the script
+        Parameters
+        ----------
+
+        Returns
+        -------
+
+        Raises
+        ------
+    '''
+    cf_response = describe_stacks_response(
+            stack_name='sneakpeak-pipeline'
+            )
+    iterate_outputs(output_values = cf_response['Outputs'])
+
+main()
