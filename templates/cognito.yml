@@ -3,6 +3,9 @@
 #using aws cognito
 #
 ###############################################
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Builds end user authentication resources using AWS Cognito
+
   ######################################
   #Cognito User pools are used for sign in
   #and verification
@@ -34,3 +37,12 @@
       ClientName: SneakPeekWeb
       UserPoolId: !Ref UserPool
       GenerateSecret: false
+
+Outputs:
+      UserPoolClientId:
+        Description: Client ID used by webpage to connect to cognito
+        Value: !Ref UserPoolClient
+
+      UserPoolId:
+        Description: Amazon Cognito User Pool ID
+        Value: !Ref UserPool
