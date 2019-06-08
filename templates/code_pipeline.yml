@@ -11,12 +11,12 @@ Parameters:
   GitRepoName:
     Type: String
     Default: sneakpeek
-  TagKey:
-    Type: String
-    Default: Name
-  TagValue:
-    Type: String
-    Default: CodeDeployEC2Tag
+  # TagKey:
+  #   Type: String
+  #   Default: Name
+  # TagValue:
+  #   Type: String
+  #   Default: CodeDeployEC2Tag
 
   DevBuildName:
     Type: String
