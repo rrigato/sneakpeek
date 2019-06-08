@@ -1,0 +1,36 @@
+###############################################
+#This Yaml sets up the end user authentcation pool
+#using aws cognito
+#
+###############################################
+  ######################################
+  #Cognito User pools are used for sign in
+  #and verification
+  #
+  #####################################
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: SneakPeek
+      ###############
+      #Allowable attributes for the user pool:
+      #valid values are phone_number, email, or preferred_username
+      #Basically what the user is allowed to login with
+      ###############
+      AliasAttributes:
+        - email
+      #How the user verify their account
+      AutoVerifiedAttributes:
+        - email
+  ####################################
+  #Will be used by our web client (static javascript calling
+  #lambda functions to authenticate users)
+  #
+  #
+  ####################################
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: SneakPeekWeb
+      UserPoolId: !Ref UserPool
+      GenerateSecret: false
