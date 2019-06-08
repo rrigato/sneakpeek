@@ -257,7 +257,8 @@ Resources:
         #cloudformation template to create a static
         #S3 webpage for hosting
         ############################
-          - Name: Deploy
+          Actions:
+          - Name: WebDeploy
             ActionTypeId:
               Category: Deploy
               Owner: AWS
