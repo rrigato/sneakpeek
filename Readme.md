@@ -78,6 +78,30 @@ Provides information on each directory/ source file
 - CI.sh = Establishes CodeCommit Repo and CodeBuild Project
     - For debugging errors go to the Phase details section of the console
     - Or use the batch-get-builds command in the aws cli
+
+#### lambda
+- Used to build lambda functions
+- Note that each folder can be bundled into a deployment package if it has a dependency other than the standard template libraries or the aws sdk (Boto3)
+
+- Deployment packages = zip archive with lambda function code and dependencies
+
+More on deployment packages can be found here:
+
+https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html
+
+
+It may be best practice to bundle deployments using code build, as some of the compiled C dependencies may not transfer over on your local even if you are running linux
+
+For example I have had issues in the past with installing pandas on ubuntu, bundling and trying to use in a lambda function.
+
+-t tells pip to install function locally
+```
+    cd lambda/<project>
+
+    pip install -r requirements.txt -t .
+
+
+```
 #### static
 - css = static stylesheet files for web application
 - fonts = static fonts to use for web application
