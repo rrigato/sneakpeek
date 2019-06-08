@@ -251,7 +251,54 @@ Resources:
           ###################################
         - Name: DeployProd
           Actions:
+        ############################
+        #First action of this deploy prod stage
+        #Creates/updates the templates/static_webpage.yml
+        #cloudformation template to create a static
+        #S3 webpage for hosting
+        ############################
           - Name: Deploy
+            ActionTypeId:
+              Category: Deploy
+              Owner: AWS
+              Provider: CloudFormation
+              Version: '1'
+            InputArtifacts:
+              - Name: BuildDev
+              - Name: sneakpeek
+            OutputArtifacts:
+              - Name: ProdCf
+            Configuration:
+              #If the cloudformation stack does not exist
+              #it will be created, otherwise the stack will be updated
+              #with the template provided in TemplatePath
+              ActionMode: CREATE_UPDATE
+              #Used to pass parameters to Cloudformation template
+              #referenced in TemplatePath
+              #Fn:GetParam pass it the Artifact name,
+              #json file name and the parameter in that file
+              #And it will retrieve it for parameter overrides
+              ParameterOverrides: |
+                {
+                   "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
+                }
+                  #'{"BucketName": "prod-sneekpeek"}'
+              RoleArn: !GetAtt [CFNRole, Arn]
+              StackName: prod-sneekpeek-cognito #!Ref ProdStackName
+              #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
+              #Artifact::template_file_name
+              #is what the deploy stage is expecting as input for the
+              #cloudformation template location
+              TemplatePath: sneakpeek::templates/cognito.yml
+            RunOrder: 1
+
+        ############################
+        #Second action of this deploy prod stage
+        #Creates/updates the templates/static_webpage.yml
+        #cloudformation template to create a static
+        #S3 webpage for hosting
+        ############################
+          - Name: DeployCognito
             ActionTypeId:
               Category: Deploy
               Owner: AWS
@@ -284,7 +331,8 @@ Resources:
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
               TemplatePath: sneakpeek::templates/static_webpage.yml
-            RunOrder: 1
+            RunOrder: 2
+
         ###############################
         #Stage 4 Builds the prod
         # environment by populating resources created
