@@ -35,10 +35,20 @@ def iterate_outputs(output_values):
         Raises
         ------
     '''
+    """
+        the Outputs section of the describe_stacks api
+        call returns a list of dicts
+
+        Each dict has a key which is the output name of 'OutputKey'
+        And a key for the output value of OutputValue which is
+        the outputs value
+    """
     for output in output_values:
         if output['OutputKey'] == 'UserPoolClientId':
             print(output['OutputValue'])
-def main:
+        elif output['OutputKey'] == 'UserPoolId':
+            print(output['OutputValue'])
+def main():
     '''Entry point into the script
         Parameters
         ----------
