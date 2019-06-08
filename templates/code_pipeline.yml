@@ -283,7 +283,7 @@ Resources:
               #Artifact::template_file_name
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
-              TemplatePath: sneakpeek::templates/dev_static_webpage.yml
+              TemplatePath: sneakpeek::templates/static_webpage.yml
             RunOrder: '1'
         ###############################
         #Stage 4 Builds the prod
