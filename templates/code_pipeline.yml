@@ -42,7 +42,7 @@ Resources:
           Value: dev
         -
           Key: retain
-          Value: false
+          Value: "false"
 
   DevArtifactsBucket:
     Type: AWS::S3::Bucket
@@ -54,7 +54,7 @@ Resources:
           Value: dev
         -
           Key: retain
-          Value: false
+          Value: "false"
   ProdArtifactsBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -65,7 +65,7 @@ Resources:
           Value: dev
         -
           Key: retain
-          Value: false
+          Value: "false"
   #################################
   #Code Build Project that runs python
   #unit/integration tests
@@ -284,7 +284,7 @@ Resources:
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
               TemplatePath: sneakpeek::templates/static_webpage.yml
-            RunOrder: '1'
+            RunOrder: 1
         ###############################
         #Stage 4 Builds the prod
         # environment by populating resources created
