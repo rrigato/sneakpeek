@@ -267,7 +267,7 @@ Resources:
               - Name: BuildDev
               - Name: sneakpeek
             OutputArtifacts:
-              - Name: ProdCf
+              - Name: WebProdCf
             Configuration:
               #If the cloudformation stack does not exist
               #it will be created, otherwise the stack will be updated
@@ -307,6 +307,7 @@ Resources:
             InputArtifacts:
               - Name: BuildDev
               - Name: sneakpeek
+              - Name: WebProdCf
             OutputArtifacts:
               - Name: ProdCf
             Configuration:
