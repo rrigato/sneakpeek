@@ -362,11 +362,3 @@ Outputs:
   CloneUrlSsh:
     Description: SSH command for connecting to the CodeCommit repo
     Value: !Ref GitRepo
-
-  UserPoolClientId:
-    Description: Client ID used by webpage to connect to cognito
-    Value: !Ref UserPoolClient
-
-  UserPoolId:
-    Description: Amazon Cognito User Pool ID
-    Value: !Ref UserPool
