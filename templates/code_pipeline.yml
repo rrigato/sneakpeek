@@ -284,19 +284,19 @@ Resources:
                 }
                   #'{"BucketName": "prod-sneekpeek"}'
               RoleArn: !GetAtt [CFNRole, Arn]
-              StackName: prod-sneekpeek-cognito #!Ref ProdStackName
+              StackName: !Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
               #Artifact::template_file_name
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
-              TemplatePath: sneakpeek::templates/cognito.yml
+              TemplatePath: sneakpeek::templates/static_webpage.yml
             RunOrder: 1
 
         ############################
         #Second action of this deploy prod stage
-        #Creates/updates the templates/static_webpage.yml
-        #cloudformation template to create a static
-        #S3 webpage for hosting
+        #Creates/updates the templates/cognito.yml
+        #cloudformation template to create a cognito authentication
+        #identity store for the backend
         ############################
           - Name: DeployCognito
             ActionTypeId:
@@ -314,16 +314,6 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
-              #Used to pass parameters to Cloudformation template
-              #referenced in TemplatePath
-              #Fn:GetParam pass it the Artifact name,
-              #json file name and the parameter in that file
-              #And it will retrieve it for parameter overrides
-              ParameterOverrides: |
-                {
-                   "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
-                }
-                  #'{"BucketName": "prod-sneekpeek"}'
               RoleArn: !GetAtt [CFNRole, Arn]
               StackName: !Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
