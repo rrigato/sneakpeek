@@ -3,6 +3,24 @@
 Serverless project used to build a web application to
 detect trailer numbers on a trailer
 
+### Development Tooling For Best Practices
+#### cfn-lint (cloudformation Linting)
+[cfn-lint] (https://github.com/aws-cloudformation/cfn-python-lint.git) Provides yaml/json cloudformation validation and checks for best practices
+
+- Install
+
+```
+    pip install cfn-lint
+```
+
+- Run on a file
+```
+    cfn-lint <filename.yml>
+
+    cfn-lint templates/code_pipeline.yml
+```
+
+
 ### Project Directory Overview
 Provides information on each directory/ source file
 
