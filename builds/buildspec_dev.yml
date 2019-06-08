@@ -45,7 +45,7 @@ phases:
       - echo Build started on `date`
       #Will not return until the stack create is complete
       - aws cloudformation create-stack --stack-name sneakpeek-webpage
-       --template-body file://templates/dev_static_webpage.yml
+       --template-body file://templates/static_webpage.yml
        --parameters  file://util/dev_config.json
        --capabilities CAPABILITY_NAMED_IAM
       #Waits until the stack has been successfully created
