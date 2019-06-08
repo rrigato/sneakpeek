@@ -5,7 +5,7 @@ detect trailer numbers on a trailer
 
 ### Development Tooling For Best Practices
 #### cfn-lint (cloudformation Linting)
-[cfn-lint] (https://github.com/aws-cloudformation/cfn-python-lint.git) Provides yaml/json cloudformation validation and checks for best practices
+[cfn-lint](https://github.com/aws-cloudformation/cfn-python-lint.git) Provides yaml/json cloudformation validation and checks for best practices
 
 - Install
 
@@ -18,6 +18,30 @@ detect trailer numbers on a trailer
     cfn-lint <filename.yml>
 
     cfn-lint templates/code_pipeline.yml
+```
+
+- Run on all files in Directory
+```
+    cfn-lint templates/*.yml
+```
+
+
+#### Git Secrets Scan
+
+[git secrets](https://github.com/awslabs/git-secrets.git) is a command line utility for validating that you do not have any git credentials stored in your git repo commit history
+
+This is useful for not only open source projects, but also to make sure best practices are being followed with limited duration credentials (IAM roles) instead of long term access keys
+
+- install
+
+```
+    git init
+
+    git remote add origin https://github.com/awslabs/git-secrets.git
+
+    git fetch origin
+
+    git merge origin/master
 ```
 
 
