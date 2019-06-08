@@ -32,7 +32,7 @@ detect trailer numbers on a trailer
 
 This is useful for not only open source projects, but also to make sure best practices are being followed with limited duration credentials (IAM roles) instead of long term access keys
 
-- install
+- Global install
 
 ```
     git init
@@ -42,6 +42,26 @@ This is useful for not only open source projects, but also to make sure best pra
     git fetch origin
 
     git merge origin/master
+
+    sudo make install
+```
+
+- Web Hook install
+
+Configuring git secrets as a web hook will ensure that git secrets runs on every commit, scanning for credentials
+```
+    cd ~/Documents/sneakpeek
+
+    git secrets --install
+
+    git secrets --register-aws
+```
+
+
+- Run a git secrets check recursively on all files in directory
+
+```
+git secrets --scan -r .
 ```
 
 
