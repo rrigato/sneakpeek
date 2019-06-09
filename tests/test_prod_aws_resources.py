@@ -42,7 +42,7 @@ class WebappLive(unittest.TestCase):
         '''
         logging.info("Testing if the website is alive")
         r = requests.get(
-            'http://prod-sneekpeek.s3-website-us-east-1.amazonaws.com/'
+            'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
         )
         self.assertEqual(r.status_code, 200)
         logging.info("The website is live")
@@ -67,7 +67,7 @@ class WebappLive(unittest.TestCase):
         logging.info("Started a requests session")
         with requests.Session() as s:
             login_homepage = s.get(
-                "http://prod-sneekpeek.s3-website-us-east-1.amazonaws.com/register.html"
+                "http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/register.html"
                 )
             # bsObj = BeautifulSoup(login_homepage.text, "lxml")
             links =( bsObj.find("div", {"id":"noCognitoMessage"})
@@ -78,7 +78,7 @@ class WebappLive(unittest.TestCase):
         added for login
         """
         self.assetIsNone(links)
-        
+
 
 if __name__ == '__main__':
     unittest.main()
