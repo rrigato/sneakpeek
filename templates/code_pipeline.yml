@@ -310,7 +310,7 @@ Resources:
               - Name: sneakpeek
               - Name: WebProdCf
             OutputArtifacts:
-              - Name: ProdCf
+              - Name: CognitoProdCf
             Configuration:
               #If the cloudformation stack does not exist
               #it will be created, otherwise the stack will be updated
@@ -323,6 +323,37 @@ Resources:
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
               TemplatePath: sneakpeek::templates/cognito.yml
+            RunOrder: 2
+        ############################
+        #Third action of this deploy prod stage
+        #Creates/updates the templates/env_config.yml
+        #cloudformation template to create an Systems Manager
+        #(SSM) Parameter Store
+        ############################
+          - Name: DeploySsmParameters
+            ActionTypeId:
+              Category: Deploy
+              Owner: AWS
+              Provider: CloudFormation
+              Version: '1'
+            InputArtifacts:
+              - Name: BuildDev
+              - Name: sneakpeek
+              - Name: CognitoProdCf
+            OutputArtifacts:
+              - Name: ProdCf
+            Configuration:
+              #If the cloudformation stack does not exist
+              #it will be created, otherwise the stack will be updated
+              #with the template provided in TemplatePath
+              ActionMode: CREATE_UPDATE
+              RoleArn: !GetAtt [CFNRole, Arn]
+              StackName: prod-sneakpeek-env-config #!Ref ProdStackName
+              #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
+              #Artifact::template_file_name
+              #is what the deploy stage is expecting as input for the
+              #cloudformation template location
+              TemplatePath: sneakpeek::templates/env_config.yml
             RunOrder: 2
 
         ###############################
