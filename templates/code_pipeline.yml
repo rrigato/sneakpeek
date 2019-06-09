@@ -20,14 +20,14 @@ Parameters:
 
   DevBuildName:
     Type: String
-    Default: dev-sneekpeek-tests
+    Default: dev-sneakpeek-tests
 
   ProdBuildName:
     Type: String
-    Default: prod-sneekpeek-deploy
+    Default: prod-sneakpeek-deploy
   ProdStackName:
     Type: String
-    Default: prod-sneekpeek
+    Default: prod-sneakpeek
 
 Resources:
   ArtifactStoreBucket:
@@ -283,7 +283,7 @@ Resources:
                 {
                    "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
                 }
-                  #'{"BucketName": "prod-sneekpeek"}'
+                  #'{"BucketName": "prod-sneakpeek"}'
               RoleArn: !GetAtt [CFNRole, Arn]
               StackName: !Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
