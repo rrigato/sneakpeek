@@ -52,7 +52,7 @@ phases:
       - aws cloudformation wait stack-create-complete
         --stack-name sneakpeek-webpage
       #copies static files to newly created S3 resources
-      - aws s3 cp ./static s3://dev-sneekpeek --recursive
+      - aws s3 cp ./static s3://dev-sneakpeek --recursive
   post_build:
     commands:
       - echo Entered the post_build phase...
@@ -60,7 +60,7 @@ phases:
       - echo Build completed on `date`
     finally:
       #deleting bucket and stack after testing
-      - aws s3 rm s3://dev-sneekpeek --recursive
+      - aws s3 rm s3://dev-sneakpeek --recursive
       - aws cloudformation delete-stack
         --stack-name sneakpeek-webpage
 artifacts:

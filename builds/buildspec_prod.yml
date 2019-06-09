@@ -51,7 +51,7 @@ phases:
     #   - aws cloudformation wait stack-create-complete
     #     --stack-name sneakpeek-webpage
       #copies static files to newly created S3 resources
-      - aws s3 cp ./static s3://prod-sneekpeek --recursive
+      - aws s3 cp ./static s3://prod-sneakpeek --recursive
   post_build:
     commands:
       - echo Entered the post_build phase...
