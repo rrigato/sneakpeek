@@ -20,7 +20,7 @@ def describe_stacks_response(stack_name):
         , =unpacks the list as a dictionary for searching
     """
     cf_response, = cf_client.describe_stacks(
-        StackName='sneakpeak-pipeline')['Stacks']
+        StackName=stack_name)['Stacks']
 
     return (cf_response)
 
@@ -45,9 +45,9 @@ def iterate_outputs(output_values):
     """
     for output in output_values:
         if output['OutputKey'] == 'UserPoolClientId':
-            print(output['OutputValue'])
+            print('UserPoolClientId: ' + output['OutputValue'])
         elif output['OutputKey'] == 'UserPoolId':
-            print(output['OutputValue'])
+            print('UserPoolId: ' + output['OutputValue'])
 def main():
     '''Entry point into the script
         Parameters
@@ -60,7 +60,7 @@ def main():
         ------
     '''
     cf_response = describe_stacks_response(
-            stack_name='sneakpeak-pipeline'
+            stack_name='cognito-prod-sneakpeek'
             )
     iterate_outputs(output_values = cf_response['Outputs'])
 
