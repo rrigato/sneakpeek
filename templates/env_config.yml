@@ -1,0 +1,14 @@
+###############################################
+#This Yaml sets up parameter store resources that
+#can be used to store secrets, build/deploy environment
+#variables, and outputs of Cloudformation stacks
+#
+###############################################
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Builds end user authentication resources using AWS Cognito
+Resources:
+  ######################################
+  #Cognito User pools are used for sign in
+  #and verification
+  #
+  #####################################
