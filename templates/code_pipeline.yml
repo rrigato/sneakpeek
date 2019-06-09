@@ -257,7 +257,6 @@ Resources:
         #cloudformation template to create a static
         #S3 webpage for hosting
         ############################
-          Actions:
           - Name: DeployBucket
             ActionTypeId:
               Category: Deploy
@@ -317,7 +316,17 @@ Resources:
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
               RoleArn: !GetAtt [CFNRole, Arn]
-              StackName: cognito-prod-sneakpeek #!Ref ProdStackName
+              ################################
+              #Appends cognito- to the prod stack
+              #name. The fn::join returns a string
+              #
+              ################################
+              StackName: !Join
+                          - '-'
+                          #The second argument is a list
+                          - - 'cognito'
+                            - !Ref ProdStackName
+
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
               #Artifact::template_file_name
               #is what the deploy stage is expecting as input for the
