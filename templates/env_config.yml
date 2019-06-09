@@ -14,7 +14,6 @@ Resources:
   UserPoolClientId:
     Type: AWS::SSM::Parameter
     Properties:
-      AllowedPattern: String
       Description: Cognito User Pool Client ID
       Name: UserPoolClientId
       #Tag has to be populated as a json
