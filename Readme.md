@@ -156,6 +156,6 @@ Run the
 
 
 ```
-aws cloudformation deploy --template-file ~/Documents/sneakpeek/templates/static_webpage.yaml --stack-name SneekPeek --capabilities CAPABILITY_IAM \
---parameter-overrides BucketName="dev-sneekpeek"
+aws cloudformation create-stack --template-file ~/Documents/sneakpeek/templates/static_webpage.yaml --stack-name sneakpeek --capabilities CAPABILITY_IAM \
+--parameter-overrides BucketName="dev-sneakpeek"
 ```

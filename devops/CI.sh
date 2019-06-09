@@ -35,7 +35,7 @@ aws cloudformation update-stack --stack-name sneakpeek-pipeline \
 aws s3 mb s3://codebuild-prod-sneakpeek
 
 #start a code build project
-aws codebuild start-build --project-name dev-sneekpeek-tests --source-version dev
+aws codebuild start-build --project-name dev-sneakpeek-tests --source-version dev
 
 #check the code build project status
-aws codebuild batch-get-builds --ids dev-sneekpeek:8eb0b978-ae31-444c-bbeb-14ccdd4defa8
+aws codebuild batch-get-builds --ids dev-sneakpeek:8eb0b978-ae31-444c-bbeb-14ccdd4defa8
