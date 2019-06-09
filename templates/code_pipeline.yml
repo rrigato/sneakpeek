@@ -357,7 +357,17 @@ Resources:
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
               RoleArn: !GetAtt [CFNRole, Arn]
-              StackName: prod-sneakpeek-env-config #!Ref ProdStackName
+              ################################
+              #Appends env-config- to the prod stack
+              #name. The fn::join returns a string
+              #
+              ################################
+              StackName: !Join
+                          - '-'
+                          #The second argument is a list
+                          - - 'env-config'
+                            - !Ref ProdStackName
+
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
               #Artifact::template_file_name
               #is what the deploy stage is expecting as input for the
