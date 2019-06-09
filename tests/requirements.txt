@@ -1,7 +1,5 @@
 awscli
 boto3
 bs4
-coverage
 pandas
 requests
-sphinx
