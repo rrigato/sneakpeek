@@ -354,7 +354,7 @@ Resources:
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
               TemplatePath: sneakpeek::templates/env_config.yml
-            RunOrder: 2
+            RunOrder: 3
 
         ###############################
         #Stage 4 Builds the prod
