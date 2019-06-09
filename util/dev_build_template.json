@@ -1,5 +1,5 @@
 {
-  "name": "dev-sneekpeek",
+  "name": "dev-sneakpeek",
   "source": {
     "type": "CODECOMMIT",
     "location": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/sneakpeek.git"
