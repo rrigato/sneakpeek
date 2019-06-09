@@ -258,7 +258,7 @@ Resources:
         #S3 webpage for hosting
         ############################
           Actions:
-          - Name: WebDeploy
+          - Name: DeployBucket
             ActionTypeId:
               Category: Deploy
               Owner: AWS
@@ -317,7 +317,7 @@ Resources:
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
               RoleArn: !GetAtt [CFNRole, Arn]
-              StackName: prod-sneakpeek-cognito #!Ref ProdStackName
+              StackName: cognito-prod-sneakpeek #!Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
               #Artifact::template_file_name
               #is what the deploy stage is expecting as input for the
