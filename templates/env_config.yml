@@ -8,7 +8,20 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: Builds end user authentication resources using AWS Cognito
 Resources:
   ######################################
-  #Cognito User pools are used for sign in
-  #and verification
+  #Will be used to store the User Pool Client ID
   #
   #####################################
+  UserPoolClientId:
+    Type: AWS::SSM::Parameter
+    Properties:
+      AllowedPattern: String
+      Description: Cognito User Pool Client ID
+      Name: UserPoolClientId
+      Tags:
+        -
+          Key: source
+          Value: python
+        -
+          Key: confidential
+          Value: yes      
+      Value: Default
