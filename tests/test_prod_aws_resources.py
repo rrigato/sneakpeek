@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import argparse
 import logging
 import os
 import pandas as pd
@@ -21,7 +22,7 @@ class WebappLive(unittest.TestCase):
         This will cause any CodeBuild Builds to fail out
 
         Preventing the Code Pipeline from continuing to delivery
-        
+
         Parameters
         ----------
 
@@ -45,7 +46,15 @@ class WebappLive(unittest.TestCase):
             Raises
             ------
         '''
-    def test_home_page(self, request_url):
+
+        parser = argparse.ArgumentParser(description='Process some integers.')
+        parser.add_argument('integers', metavar='N', type=int, nargs='+',
+                            help='an integer for the accumulator')
+        args = parser.parse_args()
+
+        print(args.integers)
+        
+    def test_home_page(self):
         '''Tests that the aws resources necessary for the webpage are running
 
             Parameters
