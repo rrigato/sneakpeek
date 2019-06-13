@@ -1,10 +1,10 @@
 {
-    'cognito': {
-        userPoolId: '',
-        userPoolClientId: '',
-        region: ''
+    "cognito": {
+        "userPoolId": "",
+        "userPoolClientId": "",
+        "region": ""
     },
-    api: {
-        invokeUrl: ''
+    "api": {
+        "invokeUrl": ""
     }
 }
