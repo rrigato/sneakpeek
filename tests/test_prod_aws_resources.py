@@ -13,6 +13,8 @@ format='%(asctime)s %(message)s',
  datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
 
 logging.info('\n')
+
+HOMEPAGE_URL = 'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
 class WebappLive(unittest.TestCase):
     '''Tests that the aws resources necessary for the webpage are running
 
@@ -47,13 +49,8 @@ class WebappLive(unittest.TestCase):
             ------
         '''
 
-        parser = argparse.ArgumentParser(description='Process some integers.')
-        parser.add_argument('integers', metavar='N', type=int, nargs='+',
-                            help='an integer for the accumulator')
-        args = parser.parse_args()
+        pass
 
-        print(args.integers)
-        
     def test_home_page(self):
         '''Tests that the aws resources necessary for the webpage are running
 
@@ -69,7 +66,7 @@ class WebappLive(unittest.TestCase):
         '''
         logging.info("Testing if the website is alive")
         r = requests.get(
-            'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
+            HOMEPAGE_URL
         )
         self.assertEqual(r.status_code, 200)
         logging.info("The website is live")
@@ -94,7 +91,7 @@ class WebappLive(unittest.TestCase):
         logging.info("Started a requests session")
         with requests.Session() as s:
             login_homepage = s.get(
-                "http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/register.html"
+                HOMEPAGE_URL + "register.html"
                 )
             # bsObj = BeautifulSoup(login_homepage.text, "lxml")
             links =( bsObj.find("div", {"id":"noCognitoMessage"})
@@ -108,4 +105,12 @@ class WebappLive(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    '''
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('integers', metavar='N', type=int, nargs='+',
+                        help='an integer for the accumulator')
+    args = parser.parse_args()
+
+    print(args.integers)
+    '''
     unittest.main()
