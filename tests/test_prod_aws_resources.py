@@ -34,7 +34,7 @@ class WebappLive(unittest.TestCase):
         Raises
         ------
     '''
-
+    @classmethod
     def setUpClass(self):
         '''Unitest function that is run once for the class
             Gets the arguements passed from the user
@@ -48,7 +48,6 @@ class WebappLive(unittest.TestCase):
             Raises
             ------
         '''
-
         pass
 
     def test_home_page(self):
@@ -70,6 +69,26 @@ class WebappLive(unittest.TestCase):
         )
         self.assertEqual(r.status_code, 200)
         logging.info("The website is live")
+
+    def test_cognito_json(self):
+        '''Tests json file containing cognito config is present
+
+            Parameters
+            ----------
+
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        logging.info("Testing if cognito json config is present")
+        r = requests.get(
+            HOMEPAGE_URL + "js/cognito_config.json"
+        )
+        self.assertEqual(r.status_code, 200)
+        logging.info("Cognito config is present")
+
 
     @unittest.skip("Skipping until Cognito user pool is live")
     def test_login(self):
