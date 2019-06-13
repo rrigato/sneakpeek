@@ -21,19 +21,37 @@ class WebappLive(unittest.TestCase):
         This will cause any CodeBuild Builds to fail out
 
         Preventing the Code Pipeline from continuing to delivery
+        
         Parameters
         ----------
+
         Returns
         -------
+
         Raises
         ------
     '''
-    def test_home_page(self):
-        '''Tests that the aws resources necessary for the webpage are running
+
+    def setUpClass(self):
+        '''Unitest function that is run once for the class
+            Gets the arguements passed from the user
 
             Parameters
             ----------
 
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+    def test_home_page(self, request_url):
+        '''Tests that the aws resources necessary for the webpage are running
+
+            Parameters
+            ----------
+                request_url : str
+                    Url string to send the request to
             Returns
             -------
 
