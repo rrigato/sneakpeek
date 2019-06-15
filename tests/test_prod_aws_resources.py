@@ -143,15 +143,17 @@ class WebappLive(unittest.TestCase):
             login_homepage = s.get(
                 HOMEPAGE_URL + "register.html"
                 )
-            # bsObj = BeautifulSoup(login_homepage.text, "lxml")
+            bsObj = BeautifulSoup(login_homepage.text, "lxml")
+
             links =( bsObj.find("div", {"id":"noCognitoMessage"})
-					.find("div", {"class":"panel"})
-					.find("h3", {"class":"panel-title"}))
+					)
+
+            logging.info("Checking to make sure cognito is found")
         """
-        This should be None once the cognito user pool is
-        added for login
+        Testing that the warning message for no authentication
+        is hidden
         """
-        self.assetIsNone(links)
+        self.assertEqual(links['style'], 'display: none;')
 
 
 if __name__ == '__main__':
