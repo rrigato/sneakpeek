@@ -69,7 +69,7 @@ class WebappLive(unittest.TestCase):
             Raises
             ------
         '''
-        pass
+        get_logger()
 
     def test_home_page(self):
         '''Tests that the aws resources necessary for the webpage are running
@@ -114,7 +114,7 @@ class WebappLive(unittest.TestCase):
             config file is not empty
 
         """
-        self.assertEqual(
+        self.assertNotEqual(
                 r.json()['cognito']['userPoolId'], ''
                 )
 
