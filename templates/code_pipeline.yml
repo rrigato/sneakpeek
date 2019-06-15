@@ -221,6 +221,8 @@ Resources:
         #cloudformation template to create a cognito authentication
         #identity store for the backend
         ############################
+        - Name: DeployIdentity
+          Actions:
           - Name: DeployCognito
             ActionTypeId:
               Category: Deploy
