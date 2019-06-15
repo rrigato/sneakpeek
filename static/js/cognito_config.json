@@ -2,7 +2,7 @@
     "cognito": {
         "userPoolId": "",
         "userPoolClientId": "",
-        "region": ""
+        "region": "us-east-1"
     },
     "api": {
         "invokeUrl": ""
