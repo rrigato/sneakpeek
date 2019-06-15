@@ -275,10 +275,9 @@ Resources:
                 Owner: AWS
                 Version: '1'
                 Provider: CodeBuild
-                
+
             InputArtifacts:
               - Name: !Ref GitRepoName
-              - Name: CognitoProdCf
             OutputArtifacts:
               - Name: BuildDev
 
