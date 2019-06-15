@@ -1,5 +1,14 @@
 import boto3
 import json
+import logging
+import os
+
+WORKING_DIRECTORY = os.getcwd()
+logging.basicConfig(
+filename=os.path.join(WORKING_DIRECTORY, 'logs/',
+os.path.basename(__file__)),
+format='%(asctime)s %(message)s',
+ datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
 
 def describe_stacks_response(stack_name):
     '''Returns a boto cloudformation describe_stacks api call
@@ -58,6 +67,7 @@ def iterate_outputs(output_values):
             output_dict['UserPoolId'] = output['OutputValue']
 
     print(output_dict)
+    return(output_dict)
 
 def populate_json(input_dict):
     '''Populates cognito_config.json file
@@ -73,7 +83,7 @@ def populate_json(input_dict):
         Raises
         ------
     '''
-    pass
+    import pdb; pdb.set_trace()
 
 def main():
     '''Entry point into the script
@@ -89,6 +99,7 @@ def main():
     cf_response = describe_stacks_response(
             stack_name='cognito-prod-sneakpeek'
             )
+    import pdb; pdb.set_trace()
     iterate_outputs(output_values = cf_response['Outputs'])
 
 main()
