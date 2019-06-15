@@ -143,7 +143,7 @@ class WebappLive(unittest.TestCase):
             login_homepage = s.get(
                 HOMEPAGE_URL + "register.html"
                 )
-            bsObj = BeautifulSoup(login_homepage.text, "lxml")
+            bsObj = BeautifulSoup(login_homepage.text, "html.parser")
 
             links =( bsObj.find("div", {"id":"noCognitoMessage"})
 					)
