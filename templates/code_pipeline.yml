@@ -214,6 +214,49 @@ Resources:
                 RepositoryName: !Ref GitRepoName
               #Run order within stage not between stages
               RunOrder: 1
+
+        ############################
+        #Second action of this deploy prod stage
+        #Creates/updates the templates/cognito.yml
+        #cloudformation template to create a cognito authentication
+        #identity store for the backend
+        ############################
+          - Name: DeployCognito
+            ActionTypeId:
+              Category: Deploy
+              Owner: AWS
+              Provider: CloudFormation
+              Version: '1'
+            InputArtifacts:
+              - Name: BuildDev
+              - Name: sneakpeek
+              - Name: WebProdCf
+            OutputArtifacts:
+              - Name: CognitoProdCf
+            Configuration:
+              #If the cloudformation stack does not exist
+              #it will be created, otherwise the stack will be updated
+              #with the template provided in TemplatePath
+              ActionMode: CREATE_UPDATE
+              RoleArn: !GetAtt [CFNRole, Arn]
+              ################################
+              #Appends cognito- to the prod stack
+              #name. The fn::join returns a string
+              #
+              ################################
+              StackName: !Join
+                          - '-'
+                          #The second argument is a list
+                          - - 'cognito'
+                            - !Ref ProdStackName
+
+              #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
+              #Artifact::template_file_name
+              #is what the deploy stage is expecting as input for the
+              #cloudformation template location
+              TemplatePath: sneakpeek::templates/cognito.yml
+            RunOrder: 1
+
         ###############################
         #Stage 2 Builds the code in the
         #Dev environment
@@ -293,47 +336,7 @@ Resources:
               TemplatePath: sneakpeek::templates/static_webpage.yml
             RunOrder: 1
 
-        ############################
-        #Second action of this deploy prod stage
-        #Creates/updates the templates/cognito.yml
-        #cloudformation template to create a cognito authentication
-        #identity store for the backend
-        ############################
-          - Name: DeployCognito
-            ActionTypeId:
-              Category: Deploy
-              Owner: AWS
-              Provider: CloudFormation
-              Version: '1'
-            InputArtifacts:
-              - Name: BuildDev
-              - Name: sneakpeek
-              - Name: WebProdCf
-            OutputArtifacts:
-              - Name: CognitoProdCf
-            Configuration:
-              #If the cloudformation stack does not exist
-              #it will be created, otherwise the stack will be updated
-              #with the template provided in TemplatePath
-              ActionMode: CREATE_UPDATE
-              RoleArn: !GetAtt [CFNRole, Arn]
-              ################################
-              #Appends cognito- to the prod stack
-              #name. The fn::join returns a string
-              #
-              ################################
-              StackName: !Join
-                          - '-'
-                          #The second argument is a list
-                          - - 'cognito'
-                            - !Ref ProdStackName
 
-              #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
-              #Artifact::template_file_name
-              #is what the deploy stage is expecting as input for the
-              #cloudformation template location
-              TemplatePath: sneakpeek::templates/cognito.yml
-            RunOrder: 2
         ############################
         #Third action of this deploy prod stage
         #Creates/updates the templates/env_config.yml
