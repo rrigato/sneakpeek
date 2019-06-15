@@ -26,6 +26,7 @@ def get_logger():
         format='%(asctime)s %(message)s',
          datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
          )
+    logging.info('\n')
 
 def describe_stacks_response(stack_name):
     '''Returns a boto cloudformation describe_stacks api call
@@ -42,6 +43,7 @@ def describe_stacks_response(stack_name):
         Raises
         ------
     '''
+    logging.info("Creating aws python client")
     cf_client = boto3.client('cloudformation')
     """
         , =unpacks the list as a dictionary for searching
@@ -56,8 +58,8 @@ def iterate_outputs(output_values):
 
         Parameters
         ----------
-        output_values : dict
-            dict of output value from the cloudformation stack
+        output_values : list
+            list of dicts of output value from the cloudformation stack
 
         Returns
         -------
@@ -68,6 +70,7 @@ def iterate_outputs(output_values):
         ------
     '''
     output_dict = {}
+    logging.info("Begining list parse")
     """
         the Outputs section of the describe_stacks api
         call returns a list of dicts
@@ -83,6 +86,7 @@ def iterate_outputs(output_values):
         elif output['OutputKey'] == 'UserPoolId':
             output_dict['UserPoolId'] = output['OutputValue']
 
+    logging.info(output_dict)
     print(output_dict)
     return(output_dict)
 
@@ -117,7 +121,7 @@ def main():
     cf_response = describe_stacks_response(
             stack_name='cognito-prod-sneakpeek'
             )
-    import pdb; pdb.set_trace()
+
     iterate_outputs(output_values = cf_response['Outputs'])
 
 main()
