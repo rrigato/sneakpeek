@@ -65,7 +65,7 @@ phases:
         --stack-name dev-sneakpeek-webpage
 artifacts:
   files:
-    - ./tests/runlog.txt
+    - ./logs/*
 
 
 
