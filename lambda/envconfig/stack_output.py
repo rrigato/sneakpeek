@@ -2,13 +2,30 @@ import boto3
 import json
 import logging
 import os
-
 WORKING_DIRECTORY = os.getcwd()
-logging.basicConfig(
-filename=os.path.join(WORKING_DIRECTORY, 'logs/',
-os.path.basename(__file__)),
-format='%(asctime)s %(message)s',
- datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
+
+def get_logger():
+    '''Returns a boto cloudformation describe_stacks api call
+        Parameters
+        ----------
+        stack_name: str
+            Name of the stack
+
+        Returns
+        -------
+        cf_response : dict
+                Dictionary output of the describe_stacks api call
+
+        Raises
+        ------
+    '''
+
+    logging.basicConfig(
+        filename=os.path.join(WORKING_DIRECTORY, 'logs/',
+        os.path.basename(__file__)),
+        format='%(asctime)s %(message)s',
+         datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
+         )
 
 def describe_stacks_response(stack_name):
     '''Returns a boto cloudformation describe_stacks api call
@@ -96,6 +113,7 @@ def main():
         Raises
         ------
     '''
+    get_logger()
     cf_response = describe_stacks_response(
             stack_name='cognito-prod-sneakpeek'
             )
