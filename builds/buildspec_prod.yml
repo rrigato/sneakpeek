@@ -53,8 +53,8 @@ phases:
 
       #Config script to update ./static directory before
       #files get copied to the S3 bucket
-      - python lambda/envconfig/stack_output.py
-      
+      - python builds/py/stack_output.py
+
       #copies static files to newly created S3 resources
       - aws s3 cp ./static s3://prod-sneakpeek --recursive
 
