@@ -69,6 +69,9 @@ git secrets --scan -r .
 Provides information on each directory/ source file
 
 #### builds
+
+##### py
+    Directory for custom python scripts that setup build configuration
 - buildspec_dev.yml = Buildspec to use for the development (QA)
     CodeBuild project
 
@@ -102,6 +105,10 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
 
 
 ```
+
+#### logs
+- directory for python log files
+
 #### static
 - css = static stylesheet files for web application
 - fonts = static fonts to use for web application
