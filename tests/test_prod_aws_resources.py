@@ -7,12 +7,33 @@ import requests
 import unittest
 
 WORKING_DIRECTORY = os.getcwd()
-logging.basicConfig(
-filename=os.path.join(WORKING_DIRECTORY, 'tests/runlog.txt'),
-format='%(asctime)s %(message)s',
- datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
 
-logging.info('\n')
+def get_logger():
+    '''Returns a boto cloudformation describe_stacks api call
+        Parameters
+        ----------
+        stack_name: str
+            Name of the stack
+
+        Returns
+        -------
+        cf_response : dict
+                Dictionary output of the describe_stacks api call
+
+        Raises
+        ------
+    '''
+    """
+        Adds the file name to the logs/ directory without
+        the extension
+    """
+    logging.basicConfig(
+        filename=os.path.join(WORKING_DIRECTORY, 'logs/',
+        os.path.basename(__file__).split('.')[0]),
+        format='%(asctime)s %(message)s',
+         datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
+         )
+    logging.info('\n')
 
 HOMEPAGE_URL = 'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
 class WebappLive(unittest.TestCase):
