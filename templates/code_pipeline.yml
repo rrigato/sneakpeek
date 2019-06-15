@@ -216,7 +216,7 @@ Resources:
               RunOrder: 1
 
         ############################
-        #Second action of this deploy prod stage
+        #Second stage of this pipeline
         #Creates/updates the templates/cognito.yml
         #cloudformation template to create a cognito authentication
         #identity store for the backend
@@ -228,9 +228,7 @@ Resources:
               Provider: CloudFormation
               Version: '1'
             InputArtifacts:
-              - Name: BuildDev
               - Name: sneakpeek
-              - Name: WebProdCf
             OutputArtifacts:
               - Name: CognitoProdCf
             Configuration:
