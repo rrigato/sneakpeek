@@ -36,6 +36,7 @@ def iterate_outputs(output_values):
         Raises
         ------
     '''
+    output_dict = {}
     """
         the Outputs section of the describe_stacks api
         call returns a list of dicts
@@ -46,11 +47,27 @@ def iterate_outputs(output_values):
     """
     for output in output_values:
         if output['OutputKey'] == 'UserPoolClientId':
-            print('UserPoolClientId: ' + output['OutputValue'])
+            output_dict['UserPoolClientId'] = output['OutputValue']
+
         elif output['OutputKey'] == 'UserPoolId':
-            print('UserPoolId: ' + output['OutputValue'])
+            output_dict['UserPoolId'] = output['OutputValue']
+
+    print(output_dict)
 
 def populate_json(json_key, json_value):
+    '''Populates cognito_config.json file
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+
+        Raises
+        ------
+    '''
+    pass
+    
 def main():
     '''Entry point into the script
         Parameters
