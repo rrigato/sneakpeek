@@ -129,7 +129,7 @@ def populate_json(input_dict, webpage_config_dir):
     logging.info("Assigned outputs from cloudformation template")
 
     with open(webpage_config_dir, 'w') as modified_config:
-        json.dump(original_file, modified_config)
+        json.dump(original_file, modified_config, indent=4)
 
     logging.info("Wrote the new cognito credientials to the config file")
 
