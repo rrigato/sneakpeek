@@ -90,7 +90,6 @@ def iterate_outputs(output_values):
             output_dict['UserPoolId'] = output['OutputValue']
 
     logging.info(output_dict)
-    print(output_dict)
     return(output_dict)
 
 def populate_json(input_dict, webpage_config_dir):
@@ -116,7 +115,24 @@ def populate_json(input_dict, webpage_config_dir):
         original_file = json.load(json_file)
     logging.info("Read in JSON from the following directory: ")
     logging.info(WORKING_DIRECTORY + webpage_config_dir)
-    import pdb; pdb.set_trace()
+
+
+    """
+        Assigning fields based on queried output file
+        And writing that json file to the web page static
+        directory
+    """
+    original_file['cognito']['userPoolId'] = input_dict['UserPoolId']
+    original_file['cognito']['userPoolClientId'] = (
+        input_dict['UserPoolClientId'])
+
+    logging.info("Assigned outputs from cloudformation template")
+
+    with open(webpage_config_dir, 'w') as modified_config:
+        json.dump(original_file, modified_config)
+
+    logging.info("Wrote the new cognito credientials to the config file")
+
 
 
 def main():
