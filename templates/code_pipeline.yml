@@ -275,11 +275,14 @@ Resources:
                 Owner: AWS
                 Version: '1'
                 Provider: CodeBuild
-            OutputArtifacts:
-              - Name: BuildDev
-              - Name: CognitoProdCf
+                
             InputArtifacts:
               - Name: !Ref GitRepoName
+              - Name: CognitoProdCf
+            OutputArtifacts:
+              - Name: BuildDev
+
+
             #########################################
             #Configuration Details by provider can be found here:
             #https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#structure-configuration-examples
