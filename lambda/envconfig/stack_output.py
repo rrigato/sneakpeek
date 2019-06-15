@@ -93,7 +93,7 @@ def iterate_outputs(output_values):
     print(output_dict)
     return(output_dict)
 
-def populate_json(input_dict):
+def populate_json(input_dict, webpage_config_dir):
     '''Populates cognito_config.json file
 
         Parameters
@@ -101,8 +101,10 @@ def populate_json(input_dict):
         input_dict : dict
             input dict that needs to be applied to json
 
-        relative_dir : str
+        webpage_config_dir : str
             Relative directory and file extension to json file
+            When running CodeBuild this will populate the json file
+            which will get pushed to s3
 
         Returns
         -------
@@ -110,8 +112,12 @@ def populate_json(input_dict):
         Raises
         ------
     '''
+    with open(webpage_config_dir) as json_file:
+        original_file = json.load(json_file)
+    logging.info("Read in JSON from the following directory: ")
+    logging.info(WORKING_DIRECTORY + webpage_config_dir)
     import pdb; pdb.set_trace()
-    logging.info("Reading in JSON")
+
 
 def main():
     '''Entry point into the script
@@ -131,7 +137,8 @@ def main():
 
     output_dict = iterate_outputs(output_values = cf_response['Outputs'])
 
-    populate_json(output_dict)
+    populate_json(input_dict=output_dict,
+        webpage_config_dir="static/js/cognito_config.json")
 
 
 main()
