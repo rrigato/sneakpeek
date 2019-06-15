@@ -1,4 +1,5 @@
 import boto3
+import json
 
 def describe_stacks_response(stack_name):
     '''Returns a boto cloudformation describe_stacks api call
@@ -48,6 +49,8 @@ def iterate_outputs(output_values):
             print('UserPoolClientId: ' + output['OutputValue'])
         elif output['OutputKey'] == 'UserPoolId':
             print('UserPoolId: ' + output['OutputValue'])
+
+def populate_json(json_key, json_value):
 def main():
     '''Entry point into the script
         Parameters
