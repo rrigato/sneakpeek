@@ -19,10 +19,13 @@ def get_logger():
         Raises
         ------
     '''
-
+    """
+        Adds the file name to the logs/ directory without
+        the extension
+    """
     logging.basicConfig(
         filename=os.path.join(WORKING_DIRECTORY, 'logs/',
-        os.path.basename(__file__)),
+        os.path.basename(__file__).split('.')[0]),
         format='%(asctime)s %(message)s',
          datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
          )
@@ -95,8 +98,11 @@ def populate_json(input_dict):
 
         Parameters
         ----------
-        input_dict : str
+        input_dict : dict
             input dict that needs to be applied to json
+
+        relative_dir : str
+            Relative directory and file extension to json file
 
         Returns
         -------
@@ -105,6 +111,7 @@ def populate_json(input_dict):
         ------
     '''
     import pdb; pdb.set_trace()
+    logging.info("Reading in JSON")
 
 def main():
     '''Entry point into the script
@@ -122,6 +129,9 @@ def main():
             stack_name='cognito-prod-sneakpeek'
             )
 
-    iterate_outputs(output_values = cf_response['Outputs'])
+    output_dict = iterate_outputs(output_values = cf_response['Outputs'])
+
+    populate_json(output_dict)
+
 
 main()
