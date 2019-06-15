@@ -93,7 +93,7 @@ class WebappLive(unittest.TestCase):
             config file is not empty
 
         """
-        self.assertNotEqual(
+        self.assertEqual(
                 r.json()['cognito']['userPoolId'], ''
                 )
 
