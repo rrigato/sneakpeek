@@ -121,7 +121,7 @@ class WebappLive(unittest.TestCase):
         logging.info("Cognito config is present")
 
 
-    @unittest.skip("Skipping until Cognito user pool is live")
+
     def test_login(self):
         '''Tests that we are able to login to the webpage
 

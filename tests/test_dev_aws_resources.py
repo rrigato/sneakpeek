@@ -92,67 +92,9 @@ class WebappLive(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         logging.info("The website is live")
 
-    def test_cognito_json(self):
-        '''Tests json file containing cognito config is present
-
-            Parameters
-            ----------
-
-            Returns
-            -------
-
-            Raises
-            ------
-        '''
-        logging.info("Testing if cognito json config is present")
-        r = requests.get(
-            HOMEPAGE_URL + "js/cognito_config.json"
-        )
-        self.assertEqual(r.status_code, 200)
-
-        """
-            Tests that the json response for the cognito
-            config file is not empty
-
-        """
-        self.assertNotEqual(
-                r.json()['cognito']['userPoolId'], ''
-                )
-
-        logging.info("Cognito config is present")
 
 
-    @unittest.skip("Skipping until Cognito user pool is live")
-    def test_login(self):
-        '''Tests that we are able to login to the webpage
 
-            Parameters
-            ----------
-
-            Returns
-            -------
-
-            Raises
-            ------
-        '''
-        """
-            Starting a request session for the
-            user login
-        """
-        logging.info("Started a requests session")
-        with requests.Session() as s:
-            login_homepage = s.get(
-                HOMEPAGE_URL + "register.html"
-                )
-            # bsObj = BeautifulSoup(login_homepage.text, "lxml")
-            links =( bsObj.find("div", {"id":"noCognitoMessage"})
-					.find("div", {"class":"panel"})
-					.find("h3", {"class":"panel-title"}))
-        """
-        This should be None once the cognito user pool is
-        added for login
-        """
-        self.assetIsNone(links)
 
 
 if __name__ == '__main__':
