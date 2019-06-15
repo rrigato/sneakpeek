@@ -87,6 +87,16 @@ class WebappLive(unittest.TestCase):
             HOMEPAGE_URL + "js/cognito_config.json"
         )
         self.assertEqual(r.status_code, 200)
+
+        """
+            Tests that the json response for the cognito
+            config file is not empty
+
+        """
+        self.assertNotEqual(
+                r.json()['cognito']['userPoolId'], ''
+                )
+
         logging.info("Cognito config is present")
 
 
