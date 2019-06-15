@@ -27,11 +27,16 @@ def describe_stacks_response(stack_name):
 
 def iterate_outputs(output_values):
     '''Iterates over every OutputKey for the stack
+
         Parameters
         ----------
+        output_values : dict
+            dict of output value from the cloudformation stack
 
         Returns
         -------
+        output_dict : dict
+            dict of values for UserPoolId and UserPoolClientId
 
         Raises
         ------
@@ -54,11 +59,13 @@ def iterate_outputs(output_values):
 
     print(output_dict)
 
-def populate_json(json_key, json_value):
+def populate_json(input_dict):
     '''Populates cognito_config.json file
 
         Parameters
         ----------
+        input_dict : str
+            input dict that needs to be applied to json
 
         Returns
         -------
@@ -67,7 +74,7 @@ def populate_json(json_key, json_value):
         ------
     '''
     pass
-    
+
 def main():
     '''Entry point into the script
         Parameters
