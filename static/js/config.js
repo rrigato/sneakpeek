@@ -1,13 +1,8 @@
 
 
-/**********************
-*This ensures that the getJSON is a synchronous
-*call, makes sure that nothing else is done
-*until the json is loaded
-************************/
-$.ajaxSetup({
-    async: false
-});
+
+
+
 
 /********************************
 *Loads the json file and assigns it
@@ -16,8 +11,16 @@ $.ajaxSetup({
 *the cognito user pool information in addition to
 *the api url will be available
 *********************************/
-$.getJSON("js/cognito_config.json",
-    function(json_config) {
-        window._config = json_config;
-
+$.ajax({
+  url: "js/cognito_config.json",
+  dataType: 'json',
+  /**********************
+  *This ensures that the getJSON is a synchronous
+  *call, makes sure that nothing else is done
+  *until the json is loaded
+  ************************/  
+  async: false,
+  success: function(json_config) {
+      window._config = json_config;
+  }
 });
