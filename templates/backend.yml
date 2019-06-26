@@ -1,0 +1,10 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description:
+  Creates the serverless backend using lambda, dynamodb and API Gateway
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: The name for the bucket hosting your website, e.g. 'wildrydes-yourname'
