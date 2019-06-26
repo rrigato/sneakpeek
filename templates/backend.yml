@@ -15,6 +15,10 @@ Resources:
   DynamoDBTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
+    #######################
+    #Attributes that will be a part of the dynamodb table
+    #
+    ##########################
       AttributeDefinitions:
         -
           AttributeName: "id"
@@ -22,6 +26,8 @@ Resources:
         -
           AttributeName: "customer_id"
           AttributeType: "N"
+      #on demand billing option
+      BillingMode: PAY_PER_REQUEST
       KeySchema:
         -
           AttributeName: "id"
@@ -29,10 +35,14 @@ Resources:
         -
           AttributeName: "customer_id"
           KeyType: "RANGE"
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-      TableName: "dev-sneakpeek"
+
+      #Name of the dynamodb table will be concatenated
+      #with the NamePrefix paramter and string "sneakpeek-table"
+      TableName:
+          Fn::Join:
+              - ""
+              - - !Ref NamePrefix
+                - "-sneakpeek-table"
 
 # Outputs:
 #   WebsiteURL:
