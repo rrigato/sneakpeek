@@ -12,39 +12,28 @@ Parameters:
 
 Resources:
 
-    DynamoTable:
-    Type: AWS::DynamoDB::Table
+  DynamoDBTable:
+    Type: "AWS::DynamoDB::Table"
     Properties:
       AttributeDefinitions:
-        - AttributeDefinition
-      BillingMode: String
-      GlobalSecondaryIndexes:
-        - GlobalSecondaryIndex
+        -
+          AttributeName: "id"
+          AttributeType: "S"
+        -
+          AttributeName: "customer_id"
+          AttributeType: "N"
       KeySchema:
-        - KeySchema
-      LocalSecondaryIndexes:
-        - LocalSecondaryIndex
-      PointInTimeRecoverySpecification:
-        PointInTimeRecoverySpecification
+        -
+          AttributeName: "id"
+          KeyType: "HASH"
+        -
+          AttributeName: "customer_id"
+          KeyType: "RANGE"
       ProvisionedThroughput:
-        ProvisionedThroughput
-      SSESpecification:
-        SSESpecification
-      StreamSpecification:
-        StreamSpecification
-      TableName: String
-      Tags:
-        - Tag
-      TimeToLiveSpecification:
-        TimeToLiveSpecification
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: "dev-sneakpeek"
 
-  WebsiteBucket:
-    Properties:
-      BucketName: !Ref BucketName
-      WebsiteConfiguration:
-        IndexDocument: index.html
-    Type: "AWS::S3::Bucket"
-
-Outputs:
-  WebsiteURL:
-    Value: !GetAtt WebsiteBucket.WebsiteURL
+# Outputs:
+#   WebsiteURL:
+#     Value: !GetAtt WebsiteBucket.WebsiteURL
