@@ -5,6 +5,19 @@ Description:
   Creates the serverless backend using lambda, dynamodb and API Gateway
 
 Parameters:
-  BucketName:
+  NamePrefix:
     Type: String
-    Description: The name for the bucket hosting your website, e.g. 'wildrydes-yourname'
+    Default: dev
+    Description: String for prefixing resources to differentiate prod/dev
+
+Resources:
+  WebsiteBucket:
+    Properties:
+      BucketName: !Ref BucketName
+      WebsiteConfiguration:
+        IndexDocument: index.html
+    Type: "AWS::S3::Bucket"
+
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt WebsiteBucket.WebsiteURL
