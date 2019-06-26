@@ -44,6 +44,10 @@ Resources:
               - - !Ref NamePrefix
                 - "-sneakpeek-table"
 
-# Outputs:
-#   WebsiteURL:
-#     Value: !GetAtt WebsiteBucket.WebsiteURL
+Outputs:
+##################################
+#Provides the arn for the dynamodb table
+#
+##################################
+  TableArn:
+    Value: !GetAtt DynamoDBTable.Arn
