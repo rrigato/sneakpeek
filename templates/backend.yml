@@ -26,6 +26,12 @@ Resources:
         -
           AttributeName: "customer_id"
           AttributeType: "N"
+        -
+          AttributeName: "load_id"
+          AttributeType: "N"
+        -
+          AttributeName: "image_class"
+          AttributeType: "N"
       #on demand billing option
       BillingMode: PAY_PER_REQUEST
       KeySchema:
