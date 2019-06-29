@@ -54,7 +54,7 @@ phases:
       #content
       - aws cloudformation create-stack --stack-name dev-sneakpeek-backend
        --template-body file://templates/backend.yml
-       --parameters  ParameterKey=NamePrefix,ParameterValue=Dev
+       --parameters  ParameterKey=NamePrefix,ParameterValue=dev
        --capabilities CAPABILITY_NAMED_IAM
 
       #Waits until the stack has been successfully created

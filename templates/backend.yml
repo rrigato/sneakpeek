@@ -17,21 +17,18 @@ Resources:
     Properties:
     #######################
     #Attributes that will be a part of the dynamodb table
-    #
+    #Note you only need to define primary key attributes
+    #As all other attributes added to the table do
+    #not need to be defined when the table is created
     ##########################
       AttributeDefinitions:
         -
           AttributeName: "id"
           AttributeType: "S"
         -
-          AttributeName: "customer_id"
-          AttributeType: "N"
-        -
           AttributeName: "load_id"
           AttributeType: "N"
-        -
-          AttributeName: "image_class"
-          AttributeType: "N"
+
       #on demand billing option
       BillingMode: PAY_PER_REQUEST
       KeySchema:
@@ -39,7 +36,7 @@ Resources:
           AttributeName: "id"
           KeyType: "HASH"
         -
-          AttributeName: "customer_id"
+          AttributeName: "load_id"
           KeyType: "RANGE"
 
       #Name of the dynamodb table will be concatenated
