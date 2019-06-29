@@ -48,14 +48,26 @@ phases:
        --template-body file://templates/static_webpage.yml
        --parameters  file://util/dev_config.json
        --capabilities CAPABILITY_NAMED_IAM
+
+      #Runs the backend cloudformation template to create the
+      #dynamodb table, api gateway, lambda function for dynamic
+      #content
+      - aws cloudformation create-stack --stack-name dev-sneakpeek-backend
+       --template-body file://templates/backend.yml
+       --parameters  
+       --capabilities CAPABILITY_NAMED_IAM
+
       #Waits until the stack has been successfully created
       - aws cloudformation wait stack-create-complete
         --stack-name dev-sneakpeek-webpage
       #copies static files to newly created S3 resources
       - aws s3 cp ./static s3://dev-sneakpeek --recursive
+
+
   post_build:
     commands:
       - echo Entered the post_build phase...
+      #runs tests on aws resources created in previous steps
       - python tests/test_dev_aws_resources.py
       - echo Build completed on `date`
     finally:
