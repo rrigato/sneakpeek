@@ -357,7 +357,7 @@ Resources:
               - Name: sneakpeek
               - Name: CognitoProdCf
             OutputArtifacts:
-              - Name: ProdCf
+              - Name: SsmProdCf
             Configuration:
               #If the cloudformation stack does not exist
               #it will be created, otherwise the stack will be updated
@@ -397,6 +397,7 @@ Resources:
               - Name: BuildDev
               - Name: sneakpeek
               - Name: CognitoProdCf
+              - Name: SsmProdCf
             OutputArtifacts:
               - Name: ProdCf
             Configuration:
@@ -404,6 +405,11 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
+              ParameterOverrides: |
+                {
+                   "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
+                }
+                              
               RoleArn: !GetAtt [CFNRole, Arn]
               ################################
               #Appends env-config- to the prod stack
@@ -413,7 +419,7 @@ Resources:
               StackName: !Join
                           - '-'
                           #The second argument is a list
-                          - - 'env-config'
+                          - - 'backend'
                             - !Ref ProdStackName
 
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
