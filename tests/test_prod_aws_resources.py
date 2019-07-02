@@ -57,7 +57,7 @@ def get_boto_clients(resource_name, region_name='us-east-1'):
         Raises
         ------
     '''
-    pass
+    return(boto3.client(resource_name, region_name))
 
 
 class WebappLive(unittest.TestCase):
@@ -178,6 +178,21 @@ class WebappLive(unittest.TestCase):
         is hidden
         """
         self.assertEqual(links['style'], 'display: none;')
+
+    @unittest.skip("demonstrating skipping")
+    def test_dynamodb(self):
+        '''Tests json file containing cognito config is present
+
+            Parameters
+            ----------
+
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        pass
 
 
 if __name__ == '__main__':
