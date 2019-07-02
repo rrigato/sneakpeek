@@ -1,4 +1,15 @@
+[
 {
+
     "ParameterKey": "BucketName",
     "ParameterValue": "prod-sneakpeek"
-}
+
+},
+{
+
+    "ParameterKey": "NamePrefix",
+    "ParameterValue": "prod"
+
+},
+
+]
