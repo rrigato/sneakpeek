@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import argparse
+import boto3
 import logging
 import os
 import pandas as pd
@@ -9,7 +10,7 @@ import unittest
 WORKING_DIRECTORY = os.getcwd()
 
 def get_logger():
-    '''Returns a boto cloudformation describe_stacks api call
+    '''Returns a logging instance for the script
         Parameters
         ----------
         stack_name: str
@@ -36,6 +37,29 @@ def get_logger():
     logging.info('\n')
 
 HOMEPAGE_URL = 'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
+
+
+def get_boto_clients(resource_name, region_name='us-east-1'):
+    '''Returns the boto client for various cloudformation resources
+        Parameters
+        ----------
+        resource_name : str
+            Name of the resource for the client
+
+        region_name : str
+                aws region you are using, defaults to
+                us-east-1
+
+        Returns
+        -------
+
+
+        Raises
+        ------
+    '''
+    pass
+
+
 class WebappLive(unittest.TestCase):
     '''Tests that the aws resources necessary for the webpage are running
 
