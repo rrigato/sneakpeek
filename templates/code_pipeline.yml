@@ -382,10 +382,8 @@ Resources:
               TemplatePath: sneakpeek::templates/env_config.yml
             RunOrder: 2
         ############################
-        #Third action of this deploy prod stage
-        #Creates/updates the templates/env_config.yml
-        #cloudformation template to create an Systems Manager
-        #(SSM) Parameter Store
+        #The third deploy stage deploys the backend
+        #lambda, DynamoDB and API gateway tables
         ############################
           - Name: DeployBackend
             ActionTypeId:
@@ -425,8 +423,6 @@ Resources:
                           - - 'backend'
                             - !Ref ProdStackName
 
-              #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
-              #Artifact::template_file_name
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
               TemplatePath: sneakpeek::templates/backend.yml
