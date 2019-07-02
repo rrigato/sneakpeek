@@ -405,11 +405,14 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
+
+              #Gets the parameter corresponding to NamePrefix in the
+              #util/prod_config.json file
               ParameterOverrides: |
                 {
-                   "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
+                   "NamePrefix" : { "Fn::GetParam" : [ "BackendPrefix", "util/prod_config.json", "ParameterValue" ] }
                 }
-                              
+
               RoleArn: !GetAtt [CFNRole, Arn]
               ################################
               #Appends env-config- to the prod stack
