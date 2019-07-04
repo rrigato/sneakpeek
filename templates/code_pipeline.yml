@@ -233,6 +233,10 @@ Resources:
               - Name: sneakpeek
             OutputArtifacts:
               - Name: CognitoProdCf
+            ##########################################
+            #configuration properties documentation:
+            #https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
+            ##########################################
             Configuration:
               #If the cloudformation stack does not exist
               #it will be created, otherwise the stack will be updated
@@ -315,6 +319,10 @@ Resources:
               - Name: sneakpeek
             OutputArtifacts:
               - Name: WebProdCf
+            ##########################################
+            #configuration properties documentation:
+            #https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
+            ##########################################
             Configuration:
               #If the cloudformation stack does not exist
               #it will be created, otherwise the stack will be updated
@@ -358,6 +366,10 @@ Resources:
               - Name: CognitoProdCf
             OutputArtifacts:
               - Name: SsmProdCf
+            ##########################################
+            #configuration properties documentation:
+            #https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
+            ##########################################
             Configuration:
               #If the cloudformation stack does not exist
               #it will be created, otherwise the stack will be updated
@@ -398,6 +410,10 @@ Resources:
               - Name: SsmProdCf
             OutputArtifacts:
               - Name: ProdCf
+            ##########################################
+            #configuration properties documentation:
+            #https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
+            ##########################################
             Configuration:
               #If the cloudformation stack does not exist
               #it will be created, otherwise the stack will be updated
