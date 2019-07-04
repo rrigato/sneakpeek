@@ -212,6 +212,21 @@ class WebappLive(unittest.TestCase):
         Item=test_dict)
 
 
+
+        """
+            Removes non-primary key fields and gets the item inserted
+            from the put item command
+
+            Tests the response against the original put_item
+        """
+        output_class = test_dict.pop('output_class')
+
+        dummy_item = dynamo_client.get_item(TableName=TABLE_NAME,
+        Key=test_dict)
+
+        import pdb; pdb.set_trace()
+
+
 if __name__ == '__main__':
     '''
     parser = argparse.ArgumentParser(description='Process some integers.')
