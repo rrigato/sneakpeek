@@ -117,12 +117,18 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
 - index.html = homepage for web applciation
 
 #### templates
+
+- backend.yml = dynamodb, lambda, and api gateway resources
+
 - code_pipeline.yml = Creates CodeBuild/Code Pipeline resources
     necessary for Dev/Prod
+
+- cognito.yml = user pool and client id to be used for authentication in the webpage
+
 - static_webpage.yml = builds the S3 bucket enabled for web hosting
 
 #### tests
-- test_aws_resources.py = tests that the underlying aws resources were successfully created
+- test_dev_aws_resources.py = after the dev environment is spun up in the CodeBuild project for builds/buildspec_dev.yml this script is run to validate deployment 
 
 
 #### static
