@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import argparse
+import boto3
 import logging
 import os
 import pandas as pd
@@ -36,6 +37,26 @@ def get_logger():
          datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
          )
     logging.info('\n')
+
+def get_boto_clients(resource_name, region_name='us-east-1'):
+    '''Returns the boto client for various cloudformation resources
+        Parameters
+        ----------
+        resource_name : str
+            Name of the resource for the client
+
+        region_name : str
+                aws region you are using, defaults to
+                us-east-1
+
+        Returns
+        -------
+
+
+        Raises
+        ------
+    '''
+    return(boto3.client(resource_name, region_name))
 
 
 class WebappLive(unittest.TestCase):
