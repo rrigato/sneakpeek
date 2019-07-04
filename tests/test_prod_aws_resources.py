@@ -36,7 +36,7 @@ def get_logger():
          )
     logging.info('\n')
 
-DYNAMO_TABLE_NAME = "dev-sneakpeek-table"
+DYNAMO_TABLE_NAME = "prod-sneakpeek-table"
 
 HOMEPAGE_URL = 'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
 
