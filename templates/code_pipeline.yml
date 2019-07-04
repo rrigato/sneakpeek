@@ -420,12 +420,12 @@ Resources:
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
 
-              #Gets the parameter corresponding to NamePrefix in the
-              #util/prod_config.json file
-            #   ParameterOverrides: |
-            #     {
-            #        "NamePrefix" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
-            #     }
+              #####################
+              #Allows the cloudformation created by
+              #CodePipeline to create IAM roles
+              #
+              #####################
+              Capabilities: CAPABILITY_IAM
 
               RoleArn: !GetAtt [CFNRole, Arn]
               ################################
