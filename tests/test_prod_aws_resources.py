@@ -208,10 +208,11 @@ class WebappLive(unittest.TestCase):
         region_name='us-east-1')
 
 
-        dynamo_client.put_item(TableName=TABLE_NAME,
+        put_response = dynamo_client.put_item(TableName=TABLE_NAME,
         Item=test_dict)
 
-
+        logging.info("successfully put the item in dynamodb")
+        logging.info(put_response)
 
         """
             Removes non-primary key fields and gets the item inserted
@@ -224,6 +225,27 @@ class WebappLive(unittest.TestCase):
         dummy_item = dynamo_client.get_item(TableName=TABLE_NAME,
         Key=test_dict)
 
+        logging.info("Dummy item returned: ")
+
+        logging.info(dummy_item)
+
+        self.assertEqual(
+            int(dummy_item['Item']['output_class']['N']),
+            int(output_class['N'])
+            )
+
+
+
+        removed_item = dynamo_client.delete_item(TableName=TABLE_NAME,
+        Key=test_dict)
+
+        logging.info("Deletion Response:")
+        logging.info(removed_item)
+
+        """
+            deletes the dummy item and tests to make sure it
+            was successfully deleted
+        """
         import pdb; pdb.set_trace()
 
 
