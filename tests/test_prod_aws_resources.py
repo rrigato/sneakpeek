@@ -179,8 +179,8 @@ class WebappLive(unittest.TestCase):
         """
         self.assertEqual(links['style'], 'display: none;')
 
-    @unittest.skip("demonstrating skipping")
-    def test_dynamodb(self):
+    #@unittest.skip("demonstrating skipping")
+    def test_dynamodb_put(self):
         '''Tests json file containing cognito config is present
 
             Parameters
@@ -192,7 +192,13 @@ class WebappLive(unittest.TestCase):
             Raises
             ------
         '''
-        pass
+        TABLE_NAME = "dev-sneakpeek-table"
+        """
+            Dict that will be put in the dynamodb table
+        """
+        test_dict = {}
+        dynamo_client = get_boto_clients(resource_name='dynamodb',
+        region_name='us-east-1')
 
 
 if __name__ == '__main__':
