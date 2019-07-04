@@ -128,15 +128,23 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
 - static_webpage.yml = builds the S3 bucket enabled for web hosting
 
 #### tests
-- test_dev_aws_resources.py = after the dev environment is spun up in the CodeBuild project for builds/buildspec_dev.yml this script is run to validate deployment 
+- test_dev_aws_resources.py = after the dev environment is spun up in the CodeBuild project for builds/buildspec_dev.yml this script is run to validate deployment of resources.
 
+If any of the test cases fail, the Pipeline stops before deploying to prod
+
+
+- test_prod_aws_resources.py = test cases run after the prod environment is spun up in the CodeBuild project for builds/buildspec_prod.yml
 
 #### static
+
+- dev_build_template.json = codeBuild project definition for devops/CI.sh
+
+
 - dev_config.json = Name of the bucket to pass to templates/static_webpage.yml must be array
 
 - dev_prod.json = Provides production configuration variables
 
-- dev_build_template.json = codeBuild project definition for devops/CI.sh
+- prod_backend_template_config.json = configuration file for cloudformation template that passes in parameters to the templates/backend.yml cloudformation script for production
 
 #### Setup Continuous Integration
 Run the devops/CI.sh shell script to create CodeCommit
