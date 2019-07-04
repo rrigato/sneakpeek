@@ -1,9 +1,4 @@
-[
 {
-
     "ParameterKey": "BucketName",
     "ParameterValue": "prod-sneakpeek"
-
-}
-
-]
+} 
