@@ -77,7 +77,10 @@ phases:
         --stack-name dev-sneakpeek-webpage
 
       - aws cloudformation delete-stack
-        --stack-name dev-sneakpeek-backend      
+        --stack-name dev-sneakpeek-backend
+
+      - aws cloudformation wait stack-delete-complete
+        --stack-name dev-sneakpeek-backend
 artifacts:
   files:
     - ./logs/*
