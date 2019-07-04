@@ -1,0 +1,5 @@
+{
+  "Parameters" : {
+    "KeyName" : "TestEC2Key"
+  }
+}
