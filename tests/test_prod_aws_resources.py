@@ -196,9 +196,20 @@ class WebappLive(unittest.TestCase):
         """
             Dict that will be put in the dynamodb table
         """
-        test_dict = {}
+        test_dict = {"id":{"S":"1"}, "load_id":{"N":"100000"},
+        "output_class":{"N":"1"}}
+
+
+        """
+            Creates dynamodb resource and
+            puts an item in the table
+        """
         dynamo_client = get_boto_clients(resource_name='dynamodb',
         region_name='us-east-1')
+
+
+        dynamo_client.put_item(TableName=TABLE_NAME,
+        Item=test_dict)
 
 
 if __name__ == '__main__':
