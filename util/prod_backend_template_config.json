@@ -1,5 +1,5 @@
 {
   "Parameters" : {
-    "KeyName" : "TestEC2Key"
+    "NamePrefix" : "TestEC2Key"
   }
 }

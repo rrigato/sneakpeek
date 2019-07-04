@@ -439,6 +439,12 @@ Resources:
                           - - 'backend'
                             - !Ref ProdStackName
 
+            #############################################
+            #Template configuration file is used to override
+            #parameters being passed downstream to cloudformation
+            #template
+            #############################################
+              TemplateConfiguration: sneakpeek::util/prod_backend_template_config.json
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
               TemplatePath: sneakpeek::templates/backend.yml
