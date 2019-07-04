@@ -406,10 +406,10 @@ Resources:
 
               #Gets the parameter corresponding to NamePrefix in the
               #util/prod_config.json file
-              ParameterOverrides: |
-                {
-                   "NamePrefix" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
-                }
+            #   ParameterOverrides: |
+            #     {
+            #        "NamePrefix" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
+            #     }
 
               RoleArn: !GetAtt [CFNRole, Arn]
               ################################
