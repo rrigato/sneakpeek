@@ -179,8 +179,7 @@ class WebappLive(unittest.TestCase):
         """
         self.assertEqual(links['style'], 'display: none;')
 
-    #@unittest.skip("demonstrating skipping")
-    def test_dynamodb_put(self):
+    def test_dynamodb(self):
         '''Tests json file containing cognito config is present
 
             Parameters
@@ -235,7 +234,10 @@ class WebappLive(unittest.TestCase):
             )
 
 
-
+        """
+            deletes the dummy item and tests to make sure it
+            was successfully deleted
+        """
         removed_item = dynamo_client.delete_item(TableName=TABLE_NAME,
         Key=test_dict)
 
@@ -243,10 +245,16 @@ class WebappLive(unittest.TestCase):
         logging.info(removed_item)
 
         """
-            deletes the dummy item and tests to make sure it
-            was successfully deleted
+            Making another get call after the item
+            was deleted
         """
-        import pdb; pdb.set_trace()
+        self.assertEqual(
+            removed_item['ResponseMetadata']['HTTPStatusCode'], 200
+            )
+
+
+
+
 
 
 if __name__ == '__main__':
