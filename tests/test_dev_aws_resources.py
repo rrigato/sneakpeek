@@ -7,6 +7,7 @@ import requests
 import unittest
 
 WORKING_DIRECTORY = os.getcwd()
+DYNAMO_TABLE_NAME = "dev-sneakpeek-table"
 HOMEPAGE_URL = 'http://dev-sneakpeek.s3-website-us-east-1.amazonaws.com/'
 
 def get_logger():
@@ -92,6 +93,79 @@ class WebappLive(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         logging.info("The website is live")
 
+
+    def test_dynamodb(self):
+        '''Tests json file containing cognito config is present
+
+            Parameters
+            ----------
+
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+
+        """
+            Dict that will be put in the dynamodb table
+        """
+        test_dict = {"id":{"S":"1"}, "load_id":{"N":"100000"},
+        "output_class":{"N":"1"}}
+
+
+        """
+            Creates dynamodb resource and
+            puts an item in the table
+        """
+        dynamo_client = get_boto_clients(resource_name='dynamodb',
+        region_name='us-east-1')
+
+
+        put_response = dynamo_client.put_item(TableName=DYNAMO_TABLE_NAME,
+        Item=test_dict)
+
+        logging.info("successfully put the item in dynamodb")
+        logging.info(put_response)
+
+        """
+            Removes non-primary key fields and gets the item inserted
+            from the put item command
+
+            Tests the response against the original put_item
+        """
+        output_class = test_dict.pop('output_class')
+
+        dummy_item = dynamo_client.get_item(TableName=DYNAMO_TABLE_NAME,
+        Key=test_dict)
+
+        logging.info("Dummy item returned: ")
+
+        logging.info(dummy_item)
+
+        self.assertEqual(
+            int(dummy_item['Item']['output_class']['N']),
+            int(output_class['N'])
+            )
+
+
+        """
+            deletes the dummy item and tests to make sure it
+            was successfully deleted
+        """
+        removed_item = dynamo_client.delete_item(TableName=DYNAMO_TABLE_NAME,
+        Key=test_dict)
+
+        logging.info("Deletion Response:")
+        logging.info(removed_item)
+
+        """
+            Making another get call after the item
+            was deleted
+        """
+        self.assertEqual(
+            removed_item['ResponseMetadata']['HTTPStatusCode'], 200
+            )
 
 
 
