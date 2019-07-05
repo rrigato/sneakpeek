@@ -64,7 +64,6 @@ Resources:
             Service: lambda.amazonaws.com
           Action: sts:AssumeRole
       Path: /
-      DeletionPolicy: Retain
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       ################################
@@ -88,6 +87,27 @@ Resources:
                   - "dynamodb:PutItem"
                 Resource:
                   - - !Ref DynamoDBTable
+
+# rLambdaFunction:
+# Type: AWS::Lambda::Function
+# DependsOn: rLambdaRole
+# Properties:
+#   Role: !GetAtt 'rLambdaRole.Arn'
+#   FunctionName: !Sub '${AWS::StackName}-LambdaFunction'
+#   Runtime: python3.6
+#   Timeout: 60
+#   Environment:
+#     Variables:
+#       outbound_topic_arn: !Ref 'rNotifyTopicSNS'
+#       required_keys: !Ref 'pGlacierTaggingKeyNames'
+#       logging_level: !Ref 'pLoggingLevel'
+#   Handler: index.lambda_handler
+#   Code:
+#     S3Bucket: !Ref pLambdaZipBucket
+#     S3Key: !Ref pLambdaZipKey
+
+
+
 Outputs:
 ##################################
 #Provides the arn for the dynamodb table, IAM role,
