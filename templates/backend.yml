@@ -72,18 +72,16 @@ Resources:
       #Template
       ###############################
       Policies:
-        PolicyName: TestName
-        PolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            - Sid: AllowDynamoDbPut
-              Effect: "Allow"
-              Action:
-                - "dynamodb:PutItem"
-              Resource:
-                - - !Ref DynamoDBTable.Arn
-
-
+        - PolicyName: TestName
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: AllowDynamoDbPut
+                Effect: "Allow"
+                Action:
+                  - "dynamodb:PutItem"
+                Resource:
+                  - - !Ref DynamoDBTable
 Outputs:
 ##################################
 #Provides the arn for the dynamodb table, IAM role,
