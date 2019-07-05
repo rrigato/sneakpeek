@@ -72,12 +72,17 @@ Resources:
       #Template
       ###############################
       Policies:
-        - PolicyName: TestName
+        - PolicyName: LambdaPutDynamoDb
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Sid: AllowDynamoDbPut
                 Effect: "Allow"
+                #######################################
+                #Allowing lambda to perform a PutItem on
+                #DynamoDB 
+                #
+                #######################################
                 Action:
                   - "dynamodb:PutItem"
                 Resource:
