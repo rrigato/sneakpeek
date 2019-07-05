@@ -64,6 +64,7 @@ Resources:
             Service: lambda.amazonaws.com
           Action: sts:AssumeRole
       Path: /
+      DeletionPolicy: Retain
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       ################################
@@ -80,7 +81,7 @@ Resources:
                 Effect: "Allow"
                 #######################################
                 #Allowing lambda to perform a PutItem on
-                #DynamoDB 
+                #DynamoDB
                 #
                 #######################################
                 Action:
