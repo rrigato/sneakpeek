@@ -66,6 +66,17 @@ Resources:
       Path: /
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Sid: AllowDynamoDbPut
+              Effect: "Allow"
+              Action:
+                - "dynamodb:PutItem"
+              Resource:
+                - "*"
+
 
 Outputs:
 ##################################
