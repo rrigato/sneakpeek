@@ -69,8 +69,10 @@ Resources:
 
 Outputs:
 ##################################
-#Provides the arn for the dynamodb table
-#
+#Provides the arn for the dynamodb table, IAM role,
+#etc.
 ##################################
+  LambdaRoleArn:
+    Value: !GetAtt LambdaRuntimeRole.Arn
   TableArn:
     Value: !GetAtt DynamoDBTable.Arn
