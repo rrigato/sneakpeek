@@ -66,7 +66,13 @@ Resources:
       Path: /
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      ################################
+      #Gets the arn of the dynamodb table
+      #that was created earlier in the cloudformation
+      #Template
+      ###############################
       Policies:
+        PolicyName: TestName
         PolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -75,7 +81,7 @@ Resources:
               Action:
                 - "dynamodb:PutItem"
               Resource:
-                - "*"
+                - - !Ref DynamoDBTable.Arn
 
 
 Outputs:
