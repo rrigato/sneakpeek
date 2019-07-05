@@ -63,9 +63,9 @@ Resources:
           Principal:
             Service: lambda.amazonaws.com
           Action: sts:AssumeRole
-      Path: /
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Path: "/"
       ################################
       #Gets the arn of the dynamodb table
       #that was created earlier in the cloudformation
@@ -77,16 +77,16 @@ Resources:
             Version: "2012-10-17"
             Statement:
               - Sid: DynamoDbPut
-                Effect: "Allow"
+                Effect: Allow
                 #######################################
                 #Allowing lambda to perform a PutItem on
                 #DynamoDB
                 #
                 #######################################
                 Action:
-                  - "dynamodb:PutItem"
+                  - dynamodb:PutItem
                 Resource:
-                  - - !GetAtt DynamoDBTable.Arn
+                  - !GetAtt DynamoDBTable.Arn
 
   # rLambdaFunction:
   #   Type: AWS::Lambda::Function
