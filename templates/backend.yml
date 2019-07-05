@@ -55,7 +55,6 @@ Resources:
 #########################
   LambdaRuntimeRole:
     Type: AWS::IAM::Role
-    DependsOn: DynamoDBTable
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
