@@ -63,14 +63,12 @@ phases:
       #copies static files to newly created S3 resources
       - aws s3 cp ./static s3://dev-sneakpeek --recursive
 
-
-  post_build:
-    commands:
-      - echo Entered the post_build phase...
+      - echo Running unit tests in python...
       #runs tests on aws resources created in previous steps
       - python tests/test_dev_aws_resources.py
-      - echo Build completed on `date`
+
     finally:
+      - echo cleaning up resources reguardless of test results
       #deleting bucket and stack after testing
       - aws s3 rm s3://dev-sneakpeek --recursive
       - aws cloudformation delete-stack
