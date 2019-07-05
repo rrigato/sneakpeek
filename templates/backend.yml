@@ -87,7 +87,7 @@ Resources:
                 Action:
                   - "dynamodb:PutItem"
                 Resource:
-                  - - !Ref DynamoDBTable
+                  - - !GetAtt DynamoDBTable.Arn
 
   # rLambdaFunction:
   #   Type: AWS::Lambda::Function
