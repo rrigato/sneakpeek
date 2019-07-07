@@ -1,9 +1,11 @@
 from sagemaker import get_execution_role
 from sagemaker.amazon.amazon_estimator import get_image_uri
+from time import gmtime, strftime
 
 import boto3
 import logging
 import os
+import time
 
 
 
@@ -59,6 +61,10 @@ class utilization:
 
         bucket=s3_bucket
 
+        '''
+            Docker container image that has a built in amazon
+            sagemaker model for image classification
+        '''
         training_image = get_image_uri(
             boto3.Session().region_name, 'image-classification'
             )
@@ -69,18 +75,89 @@ val_file = 'all_images_256_size.rec'
 # For this training, we will use 18 layers
 num_layers = "18"
 # we need to specify the input image shape for the training data
-image_shape = "3,224,224"
+image_shape = "3,256,256"
 # we also need to specify the number of training samples in the training set
 # for caltech it is 15420
 num_training_samples = "80"
 # specify the number of output classes
 num_classes = "4"
 # batch size for training
-mini_batch_size =  "64"
+mini_batch_size =  "16"
 # number of epochs
 epochs = "2"
 # learning rate
 learning_rate = "0.01"
+
+
+
+s3 = boto3.client('s3')
+# create unique job name
+job_name_prefix = 'DEMO-imageclassification'
+timestamp = time.strftime('-%Y-%m-%d-%H-%M-%S', time.gmtime())
+job_name = job_name_prefix + timestamp
+training_params = \
+{
+    # specify the training docker image
+    "AlgorithmSpecification": {
+        "TrainingImage": training_image,
+        "TrainingInputMode": "File"
+    },
+    "RoleArn": role,
+    "OutputDataConfig": {
+        "S3OutputPath": 's3://{}/{}/output'.format(bucket, job_name_prefix)
+    },
+    "ResourceConfig": {
+        "InstanceCount": 1,
+        "InstanceType": "ml.p2.xlarge",
+        "VolumeSizeInGB": 50
+    },
+    "TrainingJobName": job_name,
+    "HyperParameters": {
+        "image_shape": image_shape,
+        "num_layers": str(num_layers),
+        "num_training_samples": str(num_training_samples),
+        "num_classes": str(num_classes),
+        "mini_batch_size": str(mini_batch_size),
+        "epochs": str(epochs),
+        "learning_rate": str(learning_rate)
+    },
+    "StoppingCondition": {
+        "MaxRuntimeInSeconds": 360000
+    },
+#Training data should be inside a subdirectory called "train"
+#Validation data should be inside a subdirectory called "validation"
+#The algorithm currently only supports fullyreplicated model (where data is copied onto each machine)
+    "InputDataConfig": [
+        {
+            "ChannelName": "train",
+            "DataSource": {
+                "S3DataSource": {
+                    "S3DataType": "S3Prefix",
+                    "S3Uri": s3_train,
+                    "S3DataDistributionType": "FullyReplicated"
+                }
+            },
+            "ContentType": "application/x-recordio",
+            "CompressionType": "None"
+        },
+        {
+            "ChannelName": "validation",
+            "DataSource": {
+                "S3DataSource": {
+                    "S3DataType": "S3Prefix",
+                    "S3Uri": s3_validation,
+                    "S3DataDistributionType": "FullyReplicated"
+                }
+            },
+            "ContentType": "application/x-recordio",
+            "CompressionType": "None"
+        }
+    ]
+}
+print('Training job name: {}'.format(job_name))
+print('\nInput Data Location: {}'.format(training_params['InputDataConfig'][0]['DataSource']['S3DataSource']))
+
+
 
 def main():
     '''
