@@ -109,6 +109,9 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
 #### logs
 - directory for python log files
 
+#### models
+- directory for image classification models
+
 #### static
 - css = static stylesheet files for web application
 - fonts = static fonts to use for web application
