@@ -69,8 +69,24 @@ class utilization:
             boto3.Session().region_name, 'image-classification'
             )
 
-train_file = 'balanced_by_class_20_256_size.rec'
-val_file = 'all_images_256_size.rec'
+role = get_execution_role()
+
+s3_bucket='sc2-sagemaker'
+
+bucket=s3_bucket
+
+'''
+    Docker container image that has a built in amazon
+    sagemaker model for image classification
+'''
+training_image = get_image_uri(
+    boto3.Session().region_name, 'image-classification'
+    )
+
+
+
+train_file = 'train_balanced_by_class_15_resize_256.rec'
+val_file = 'val_balanced_by_class_15_resize_256.rec'
 # The algorithm supports multiple network depth (number of layers). They are 18, 34, 50, 101, 152 and 200
 # For this training, we will use 18 layers
 num_layers = "18"
@@ -172,5 +188,6 @@ def main():
     '''
     model_build = utilization()
 
+    utilization.setup_notebook(s3_bucket='sc2-sagemaker')
 if __name__ == "__main__":
     main()
