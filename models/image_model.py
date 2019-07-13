@@ -85,8 +85,8 @@ training_image = get_image_uri(
 
 
 
-train_file = 'train_balanced_by_class_15_resize_256.rec'
-val_file = 'val_balanced_by_class_15_resize_256.rec'
+s3_train_key = 'train_balanced_by_class_15_resize_256.rec'
+s3_validation_key = 'val_balanced_by_class_15_resize_256.rec'
 # The algorithm supports multiple network depth (number of layers). They are 18, 34, 50, 101, 152 and 200
 # For this training, we will use 18 layers
 num_layers = "18"
@@ -104,11 +104,16 @@ epochs = "2"
 # learning rate
 learning_rate = "0.01"
 
+"""
+    Formatting arn for train/validation
+"""
+s3_train = 's3://{}/{}/'.format(bucket, s3_train_key)
+s3_validation = 's3://{}/{}/'.format(bucket, s3_validation_key)
 
 
 s3 = boto3.client('s3')
 # create unique job name
-job_name_prefix = 'DEMO-imageclassification'
+job_name_prefix = 'sc2-imageclassification'
 timestamp = time.strftime('-%Y-%m-%d-%H-%M-%S', time.gmtime())
 job_name = job_name_prefix + timestamp
 training_params = \
@@ -124,8 +129,8 @@ training_params = \
     },
     "ResourceConfig": {
         "InstanceCount": 1,
-        "InstanceType": "ml.p2.xlarge",
-        "VolumeSizeInGB": 50
+        "InstanceType": "ml.t2.medium",
+        "VolumeSizeInGB": 5
     },
     "TrainingJobName": job_name,
     "HyperParameters": {
@@ -138,7 +143,7 @@ training_params = \
         "learning_rate": str(learning_rate)
     },
     "StoppingCondition": {
-        "MaxRuntimeInSeconds": 360000
+        "MaxRuntimeInSeconds": 3600
     },
 #Training data should be inside a subdirectory called "train"
 #Validation data should be inside a subdirectory called "validation"
@@ -173,7 +178,9 @@ training_params = \
 print('Training job name: {}'.format(job_name))
 print('\nInput Data Location: {}'.format(training_params['InputDataConfig'][0]['DataSource']['S3DataSource']))
 
-
+# create the Amazon SageMaker training job
+sagemaker = boto3.client(service_name='sagemaker')
+sagemaker.create_training_job(**training_params)
 
 def main():
     '''
