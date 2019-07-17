@@ -85,8 +85,10 @@ training_image = get_image_uri(
 
 
 
-s3_train_key = 'train_balanced_by_class_15_resize_256.rec'
-s3_validation_key = 'val_balanced_by_class_15_resize_256.rec'
+# s3_train_key = 'train_balanced_by_class_15_resize_256.rec'
+# s3_validation_key = 'val_balanced_by_class_15_resize_256.rec'
+s3_train_key = 'train'
+s3_validation_key = 'validation'
 # The algorithm supports multiple network depth (number of layers). They are 18, 34, 50, 101, 152 and 200
 # For this training, we will use 18 layers
 num_layers = "18"
@@ -129,7 +131,7 @@ training_params = \
     },
     "ResourceConfig": {
         "InstanceCount": 1,
-        "InstanceType": "ml.t2.medium",
+        "InstanceType": "ml.p2.xlarge",
         "VolumeSizeInGB": 5
     },
     "TrainingJobName": job_name,
@@ -181,6 +183,12 @@ print('\nInput Data Location: {}'.format(training_params['InputDataConfig'][0]['
 # create the Amazon SageMaker training job
 sagemaker = boto3.client(service_name='sagemaker')
 sagemaker.create_training_job(**training_params)
+
+
+# confirm that the training job has started
+status = sagemaker.describe_training_job(TrainingJobName=job_name)['TrainingJobStatus']
+print('Training job current status: {}'.format(status))
+
 
 def main():
     '''
