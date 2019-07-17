@@ -13,7 +13,7 @@ Parameters:
 
   NamePrefix:
     Type: String
-    Default: dev
+    Default: lambda-code-sneakpeek
     Description: String for prefixing resources to differentiate prod/dev
 
 
@@ -95,12 +95,23 @@ Resources:
                 Resource:
                   - !GetAtt DynamoDBTable.Arn
 
+########################################
+#Lambda function that will be called
+#when the user gets to /ride.html
+#
+#
+#
+#######################################
   AuthenticationLambda:
     Type: AWS::Lambda::Function
     DependsOn: LambdaRuntimeRole
     Properties:
-      Role: !GetAtt LambdaRuntimeRole.Arn
-      FunctionName: !Sub '${AWS::StackName}-LambdaFunction'
+      Role: !Ref LambdaRuntimeRole
+      FunctionName:
+        Fn::Join:
+          - ""
+          - - !Ref NamePrefix
+            - !Ref LambdaCode
       Runtime: python3.7
       Timeout: 60
       Environment:
@@ -108,8 +119,8 @@ Resources:
           test_table_arn: !Ref LambdaRoleArn
       Handler: index.lambda_handler
       Code:
-        S3Bucket: !Ref pLambdaZipBucket
-        S3Key: !Ref pLambdaZipKey
+        S3Bucket: "Hello"
+        S3Key: "World"
 
 
 
