@@ -88,24 +88,24 @@ Resources:
                 Resource:
                   - !GetAtt DynamoDBTable.Arn
 
-  # rLambdaFunction:
-  #   Type: AWS::Lambda::Function
-  #   DependsOn: rLambdaRole
-  #   Properties:
-  #     Role: !GetAtt 'rLambdaRole.Arn'
-  #     FunctionName: !Sub '${AWS::StackName}-LambdaFunction'
-  #     Runtime: python3.6
-  #     Timeout: 60
-  #     Environment:
-  #       Variables:
-  #         outbound_topic_arn: !Ref 'rNotifyTopicSNS'
-  #         required_keys: !Ref 'pGlacierTaggingKeyNames'
-  #         logging_level: !Ref 'pLoggingLevel'
-  #     Handler: index.lambda_handler
-  #     Code:
-  #       S3Bucket: !Ref pLambdaZipBucket
-  #       S3Key: !Ref pLambdaZipKey
-  #
+  rLambdaFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: LambdaRuntimeRole
+    Properties:
+      Role: !GetAtt LambdaRuntimeRole.Arn
+      FunctionName: !Sub '${AWS::StackName}-LambdaFunction'
+      Runtime: python3.7
+      Timeout: 60
+      Environment:
+        Variables:
+          outbound_topic_arn: !Ref 'rNotifyTopicSNS'
+          required_keys: !Ref 'pGlacierTaggingKeyNames'
+          logging_level: !Ref 'pLoggingLevel'
+      Handler: index.lambda_handler
+      Code:
+        S3Bucket: !Ref pLambdaZipBucket
+        S3Key: !Ref pLambdaZipKey
+
 
 
 
