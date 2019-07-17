@@ -132,7 +132,7 @@ training_params = \
     "ResourceConfig": {
         "InstanceCount": 1,
         "InstanceType": "ml.p2.xlarge",
-        "VolumeSizeInGB": 5
+        "VolumeSizeInGB": 50
     },
     "TrainingJobName": job_name,
     "HyperParameters": {
@@ -189,6 +189,21 @@ sagemaker.create_training_job(**training_params)
 status = sagemaker.describe_training_job(TrainingJobName=job_name)['TrainingJobStatus']
 print('Training job current status: {}'.format(status))
 
+########################
+#Writes model output
+#
+#
+########################
+import datetime
+import json
+def datetime_handler(x):
+    if isinstance(x, datetime.datetime):
+        return x.isoformat()
+    raise TypeError("Unknown type")
+
+with open('15_4_class_results.json', 'w') as fp:
+    json.dump(status, fp, default=datetime_handler)
+#json.dumps(status, default=datetime_handler)
 
 def main():
     '''
