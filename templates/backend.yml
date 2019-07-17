@@ -104,25 +104,27 @@ Resources:
 #######################################
   AuthenticationLambda:
     Type: AWS::Lambda::Function
-    DependsOn: LambdaRuntimeRole
     Properties:
-      Role: !Ref LambdaRuntimeRole
+      Role:
+        #Gets the role created above
+        Fn::GetAtt:
+          - LambdaRuntimeRole
+          - Arn
       FunctionName:
         Fn::Join:
           - ""
           - - !Ref NamePrefix
-            - !Ref LambdaCode
+            - "lambda-ride-sneapeek"
+      MemorySize: 128
       Runtime: python3.7
       Timeout: 60
       Environment:
         Variables:
-          test_table_arn: !Ref LambdaRoleArn
+          test_table_arn: !Ref DynamoDBTable
       Handler: index.lambda_handler
       Code:
         S3Bucket: "Hello"
         S3Key: "World"
-
-
 
 
 Outputs:
