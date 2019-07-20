@@ -42,6 +42,9 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
+      
+      #allows us to execute shell script
+      - chmod +x lambda/create_deployment_package.sh
       #Will not return until the stack create is complete
     #   - aws cloudformation create-stack --stack-name sneakpeek-webpage
     #    --template-body file://templates/static_webpage.yml
