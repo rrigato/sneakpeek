@@ -254,7 +254,20 @@ class WebappLive(unittest.TestCase):
             removed_item['ResponseMetadata']['HTTPStatusCode'], 200
             )
 
+    @unittest.skip("Ignoring until populated")
+    def test_lambda_ride(self):
+        '''Tests that the lambda function called for /ride is live
 
+            Parameters
+            ----------
+
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        pass
 
 
 
