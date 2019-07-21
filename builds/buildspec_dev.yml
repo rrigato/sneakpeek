@@ -43,15 +43,6 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      ############################################
-      #allows us to execute shell script and then runs it
-      #after the shell script is finished running it
-      #uploads the lambda deployment package to its
-      #runtime s3 bucket
-      ############################################
-      - chmod +x lambda/create_deployment_package.sh
-      - ./lambda/create_deployment_package.sh
-      - aws s3 cp ./ride.zip s3://cf-to-backend/ride.zip
 
       #Will not return until the stack create is complete
       - aws cloudformation create-stack --stack-name dev-sneakpeek-webpage
@@ -67,11 +58,24 @@ phases:
        --parameters  ParameterKey=NamePrefix,ParameterValue=dev
        --capabilities CAPABILITY_NAMED_IAM
 
+      #allows us to execute shell script and then runs it
+      - chmod +x lambda/create_deployment_package.sh
+      - ./lambda/create_deployment_package.sh
+
       #Waits until the stack has been successfully created
       - aws cloudformation wait stack-create-complete
         --stack-name dev-sneakpeek-webpage
+
+
       #copies static files to newly created S3 resources
       - aws s3 cp ./static s3://dev-sneakpeek --recursive
+      
+      ############################################
+      #after the shell script is finished running it
+      #uploads the lambda deployment package to its
+      #runtime s3 bucket
+      ############################################
+      - aws s3 cp ./ride.zip s3://cf-to-backend/ride.zip
 
       - echo Running unit tests in python...
       #runs tests on aws resources created in previous steps
