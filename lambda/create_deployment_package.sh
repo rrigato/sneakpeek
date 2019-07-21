@@ -8,5 +8,5 @@
 # and where the files are stores
 #(dont include lambda/ride in the zip)
 ###############################
-pip install --target . requests
-zip -9 -j ride.zip lambda/ride/*
+pip install --target ./lambda/ride requests
+zip -9j ride.zip lambda/ride/*
