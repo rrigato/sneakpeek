@@ -4,6 +4,26 @@ import json
 print('Loading function')
 dynamo = boto3.client('dynamodb')
 
+def get_boto_clients(resource_name, region_name='us-east-1'):
+    '''Returns the boto client for various cloudformation resources
+        Parameters
+        ----------
+        resource_name : str
+            Name of the resource for the client
+
+        region_name : str
+                aws region you are using, defaults to
+                us-east-1
+
+        Returns
+        -------
+
+
+        Raises
+        ------
+    '''
+    return(boto3.client(resource_name, region_name))
+
 
 def respond(err, res=None):
     return {
@@ -25,6 +45,12 @@ def lambda_handler(event, context):
     PUT, or DELETE request respectively, passing in the payload to the
     DynamoDB API as a JSON body.
     '''
+    """
+        Creates dynamodb resource and
+        puts an item in the table
+    """
+    dynamo_client = get_boto_clients(resource_name='dynamodb',
+    region_name='us-east-1')
     #print("Received event: " + json.dumps(event, indent=2))
 
     return (respond())
