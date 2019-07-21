@@ -78,8 +78,8 @@ phases:
       - aws s3 cp ./ride.zip s3://cf-to-backend/ride.zip
 
       #uploads zip file of code to lambda
-      - aws lambda update-function-code --function-name devlambda-ride-sneakpeek
-        --s3-bucket cf-to-backend --s3-key ride.zip
+      #- aws lambda update-function-code --function-name devlambda-ride-sneakpeek
+        #--s3-bucket cf-to-backend --s3-key ride.zip
 
       - echo Running unit tests in python...
       #runs tests on aws resources created in previous steps
