@@ -120,7 +120,7 @@ Resources:
         Fn::Join:
           - ""
           - - !Ref NamePrefix
-            - "lambda-ride-sneapeek"
+            - "lambda-ride-sneakpeek"
       MemorySize: 128
       Role:
         #Gets the role created above
