@@ -16,7 +16,7 @@ cd "$ORIGINAL_DIR/lambda/ride"
 #(dont include lambda/ride in the zip)
 ###############################
 
-pip install --target ./lambda/ride requests
-zip -9rj ride.zip lambda/ride/*
+pip install --target . requests
+zip -9r ride.zip ./*
 mv ride.zip $ORIGINAL_DIR
 cd $ORIGINAL_DIR
