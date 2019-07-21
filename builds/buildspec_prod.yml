@@ -53,6 +53,10 @@ phases:
       - ./lambda/create_deployment_package.sh
       - aws s3 cp ./ride.zip s3://cf-to-backend/ride.zip
 
+      #uploads zip file of code to lambda
+      - aws lambda update-function-code --function-name prodlambda-ride-sneakpeek
+        --s3-bucket cf-to-backend --s3-key ride.zip
+
       #Will not return until the stack create is complete
     #   - aws cloudformation create-stack --stack-name sneakpeek-webpage
     #    --template-body file://templates/static_webpage.yml
