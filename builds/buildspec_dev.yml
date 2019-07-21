@@ -43,9 +43,16 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      #allows us to execute shell script
+      ############################################
+      #allows us to execute shell script and then runs it
+      #after the shell script is finished running it
+      #uploads the lambda deployment package to its
+      #runtime s3 bucket
+      ############################################
       - chmod +x lambda/create_deployment_package.sh
-      
+      - ./lambda/create_deployment_package.sh
+      - aws s3 cp ./ride.zip s3://cf-to-backend/test-ride.zip
+
       #Will not return until the stack create is complete
       - aws cloudformation create-stack --stack-name dev-sneakpeek-webpage
        --template-body file://templates/static_webpage.yml
