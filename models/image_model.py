@@ -91,7 +91,7 @@ s3_train_key = 'train'
 s3_validation_key = 'validation'
 # The algorithm supports multiple network depth (number of layers). They are 18, 34, 50, 101, 152 and 200
 # For this training, we will use 18 layers
-num_layers = "18"
+num_layers = "34"
 # we need to specify the input image shape for the training data
 image_shape = "3,256,256"
 # we also need to specify the number of training samples in the training set
@@ -102,7 +102,7 @@ num_classes = "4"
 # batch size for training
 mini_batch_size =  "16"
 # number of epochs
-epochs = "2"
+epochs = "10"
 # learning rate
 learning_rate = "0.01"
 
@@ -115,7 +115,7 @@ s3_validation = 's3://{}/{}/'.format(bucket, s3_validation_key)
 
 s3 = boto3.client('s3')
 # create unique job name
-job_name_prefix = 'sc2-imageclassification'
+job_name_prefix = 'sc2-34layers-10epochs'
 timestamp = time.strftime('-%Y-%m-%d-%H-%M-%S', time.gmtime())
 job_name = job_name_prefix + timestamp
 training_params = \
@@ -186,7 +186,7 @@ sagemaker.create_training_job(**training_params)
 
 
 # confirm that the training job has started
-status = sagemaker.describe_training_job(TrainingJobName=job_name)['TrainingJobStatus']
+status = sagemaker.describe_training_job(TrainingJobName=job_name)
 print('Training job current status: {}'.format(status))
 
 ########################
@@ -201,7 +201,7 @@ def datetime_handler(x):
         return x.isoformat()
     raise TypeError("Unknown type")
 
-with open('15_4_class_results.json', 'w') as fp:
+with open('15_4_10epoch_34layers_results.json', 'w') as fp:
     json.dump(status, fp, default=datetime_handler)
 #json.dumps(status, default=datetime_handler)
 
