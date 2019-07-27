@@ -102,34 +102,38 @@ Resources:
 #
 #
 #######################################
-  AuthenticationLambda:
-    Type: AWS::Lambda::Function
-    Properties:
-      Code:
-        S3Bucket: "cf-to-backend"
-        #Name of the deployment package
-        S3Key: "ride.zip"
-      Environment:
-        Variables:
-          test_table_arn: !Ref DynamoDBTable
+"s3://cf-to-backend/ride.zip"
 
 
-      #filename.function_name for python script
-      Handler: ride.lambda_handler
-      FunctionName:
-        Fn::Join:
-          - ""
-          - - !Ref NamePrefix
-            - "lambda-ride-sneakpeek"
-      MemorySize: 128
-      Role:
-        #Gets the role created above
-        Fn::GetAtt:
-          - LambdaRuntimeRole
-          - Arn
 
-      Runtime: python3.7
-      Timeout: 60
+  # AuthenticationLambda:
+  #   Type: AWS::Lambda::Function
+  #   Properties:
+  #     Code:
+  #       S3Bucket: "cf-to-backend"
+  #       #Name of the deployment package
+  #       S3Key: "ride.zip"
+  #     Environment:
+  #       Variables:
+  #         test_table_arn: !Ref DynamoDBTable
+  #
+  #
+  #     #filename.function_name for python script
+  #     Handler: ride.lambda_handler
+  #     FunctionName:
+  #       Fn::Join:
+  #         - ""
+  #         - - !Ref NamePrefix
+  #           - "lambda-ride-sneakpeek"
+  #     MemorySize: 128
+  #     Role:
+  #       #Gets the role created above
+  #       Fn::GetAtt:
+  #         - LambdaRuntimeRole
+  #         - Arn
+  #
+  #     Runtime: python3.7
+  #     Timeout: 60
 
 
 
