@@ -1,7 +1,7 @@
 [
 {
     "ParameterKey": "NamePrefix",
-    "ParameterValue": "dev-sneakpeek"
+    "ParameterValue": "dev"
 },
 {
     "ParameterKey": "LambdaCode",
