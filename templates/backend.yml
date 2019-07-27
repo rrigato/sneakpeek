@@ -1,6 +1,7 @@
 ---
 AWSTemplateFormatVersion: "2010-09-09"
 
+#Transforms any serverless code to cloudformation
 Transform: AWS::Serverless-2016-10-31
 
 Description:
@@ -108,12 +109,27 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: "s3://cf-to-backend/ride.zip"
+
+      # Event sources to attach to this function.
+      #The function is
+      # called when a HTTP request is made
+      #to the API Gateway endpoint.
+      Events:
+        #api gateway event that triggers lambda
+        ImageUploadApiGw:
+            # Define an API Gateway endpoint that responds
+            #to HTTP GET at /ride
+            Type: Api
+            Properties:
+                Path: /ride
+                Method: GET
       FunctionName:
         Fn::Join:
           - ""
           - - !Ref NamePrefix
             - "lambda-ride-sneakpeek"
       MemorySize: 128
+      #filename.function_name for python script
       Handler: ride.lambda_handler
       Runtime: python3.7
       Role:
@@ -137,7 +153,7 @@ Resources:
   #         test_table_arn: !Ref DynamoDBTable
   #
   #
-  #     #filename.function_name for python script
+  #
 
 
 
