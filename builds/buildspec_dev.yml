@@ -88,7 +88,7 @@ phases:
 
       - echo $LAMBDA_FUNCTION
       #uploads zip file of code to lambda
-      - aws lambda update-function-code --function-name dev-sneakpeeklambda-ride-sneakpeek
+      - aws lambda update-function-code --function-name $LAMBDA_FUNCTION
         --s3-bucket cf-to-backend --s3-key ride.zip
 
       - echo Running unit tests in python...
