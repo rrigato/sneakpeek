@@ -80,6 +80,11 @@ phases:
       ############################################
       - aws s3 cp ./ride.zip s3://cf-to-backend/ride.zip
 
+
+      #Waits until the stack has been successfully created
+      - aws cloudformation wait stack-create-complete
+        --stack-name dev-sneakpeek-backend
+
         # #Gets the lambda function name as an output value
         #which will be used to update the lambda function code
       - LAMBDA_FUNCTION=$(aws cloudformation describe-stacks --query
