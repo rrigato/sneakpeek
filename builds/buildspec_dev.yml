@@ -26,16 +26,6 @@ phases:
        python: 3.7
     commands:
       - echo Entered the install phase...
-      #Runs the backend cloudformation template to create the
-      #dynamodb table, api gateway, lambda function for dynamic
-      #content
-      #capabilities =
-      #Ability to create iam roles and expand serverless
-      #functions
-      - aws cloudformation create-stack --stack-name dev-sneakpeek-backend
-       --template-body file://templates/backend.yml
-       --parameters   file://util/dev_config_backend.json
-       --capabilities CAPABILITY_NAMED_IAM CAPABILITY_AUTO_EXPAND
 
       - pip install -r tests/requirements.txt
       - ls -l
@@ -84,8 +74,21 @@ phases:
       ############################################
       - aws s3 cp ./ride.zip s3://cf-to-backend/ride.zip
 
+      #Runs the backend cloudformation template to create the
+      #dynamodb table, api gateway, lambda function for dynamic
+      #content
+      #capabilities =
+      #Ability to create iam roles and expand serverless
+      #functions
+      - aws cloudformation create-stack --stack-name dev-sneakpeek-backend
+       --template-body file://templates/backend.yml
+       --parameters   file://util/dev_config_backend.json
+       --capabilities CAPABILITY_NAMED_IAM CAPABILITY_AUTO_EXPAND
 
 
+      #Waits until the stack has been successfully created
+      - aws cloudformation wait stack-create-complete
+        --stack-name dev-sneakpeek-backend
 
         # #Gets the lambda function name as an output value
         #which will be used to update the lambda function code
