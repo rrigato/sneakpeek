@@ -87,8 +87,8 @@ phases:
 
 
       #Waits until the stack has been successfully created
-      - aws cloudformation wait stack-create-complete
-        --stack-name dev-sneakpeek-backend
+    #   - aws cloudformation wait stack-create-complete
+    #     --stack-name dev-sneakpeek-backend
 
         # #Gets the lambda function name as an output value
         #which will be used to update the lambda function code
@@ -98,8 +98,8 @@ phases:
 
       - echo $LAMBDA_FUNCTION
       #uploads zip file of code to lambda
-      - aws lambda update-function-code --function-name $LAMBDA_FUNCTION
-        --s3-bucket cf-to-backend --s3-key ride.zip
+    #   - aws lambda update-function-code --function-name $LAMBDA_FUNCTION
+    #     --s3-bucket cf-to-backend --s3-key ride.zip
 
       - echo Running unit tests in python...
       #runs tests on aws resources created in previous steps
