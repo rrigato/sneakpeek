@@ -71,9 +71,6 @@ phases:
 
 
 
-      #Waits until the stack has been successfully created
-      - aws cloudformation wait stack-create-complete
-        --stack-name dev-sneakpeek-backend
 
       #copies static files to newly created S3 resources
       - aws s3 cp ./static s3://dev-sneakpeek --recursive
