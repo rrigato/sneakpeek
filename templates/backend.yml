@@ -1,6 +1,8 @@
 ---
 AWSTemplateFormatVersion: "2010-09-09"
 
+Transform: AWS::Serverless-2016-10-31
+
 Description:
   Creates the serverless backend using lambda, dynamodb and API Gateway
 
@@ -102,10 +104,27 @@ Resources:
 #
 #
 #######################################
-"s3://cf-to-backend/ride.zip"
+  AuthenticationLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: "s3://cf-to-backend/ride.zip"
+      FunctionName:
+        Fn::Join:
+          - ""
+          - - !Ref NamePrefix
+            - "lambda-ride-sneakpeek"
+      MemorySize: 128
+      Handler: ride.lambda_handler
+      Runtime: python3.7
+      Role:
+        #Gets the role created above
+        Fn::GetAtt:
+          - LambdaRuntimeRole
+          - Arn
 
 
 
+      Timeout: 60
   # AuthenticationLambda:
   #   Type: AWS::Lambda::Function
   #   Properties:
@@ -119,21 +138,8 @@ Resources:
   #
   #
   #     #filename.function_name for python script
-  #     Handler: ride.lambda_handler
-  #     FunctionName:
-  #       Fn::Join:
-  #         - ""
-  #         - - !Ref NamePrefix
-  #           - "lambda-ride-sneakpeek"
-  #     MemorySize: 128
-  #     Role:
-  #       #Gets the role created above
-  #       Fn::GetAtt:
-  #         - LambdaRuntimeRole
-  #         - Arn
-  #
-  #     Runtime: python3.7
-  #     Timeout: 60
+
+
 
 
 
