@@ -1,0 +1,11 @@
+[
+{
+    "ParameterKey": "NamePrefix",
+    "ParameterValue": "dev-sneakpeek"
+},
+{
+    "ParameterKey": "LambdaCode",
+    "ParameterValue": "dev-2"
+}
+
+]
