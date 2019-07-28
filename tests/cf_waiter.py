@@ -105,6 +105,9 @@ def check_cf_stack_status(cf_stacks):
             print("Hello World")
             stack_current_status = cf_checker.describe_stacks(
                 StackName=aws_stack)
+            if (stack_current_status['Stacks'][0]['StackStatus']
+                != 'CREATE_COMPLETE'):
+                print("Not Great")
             print(cf_checker.describe_stacks(
                 StackName=aws_stack))
 def main():
