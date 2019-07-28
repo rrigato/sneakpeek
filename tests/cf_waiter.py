@@ -55,10 +55,9 @@ def define_parser():
     """
     cf_stacks = parser.parse_args()
 
-    cf_stacks = args(cf_stacks)['cf_stacks']
-    import pdb; pdb.set_trace()
-    for aws_stack in cf_stacks:
-        print(aws_stack)
+    cf_stacks = vars(cf_stacks)['cf_stacks']
+    return(cf_stacks)
+
 
 def main():
     '''Main function for script
@@ -73,5 +72,16 @@ def main():
         Raises
         ------
     '''
+    pass
 if __name__ == '__main__':
-    define_parser()
+    cf_stacks = define_parser()
+    for aws_stack in cf_stacks:
+        print(aws_stack)
+
+    cf_checker = get_boto_clients('cloudformation')
+    cf_waiter = cf_checker.get_waiter('stack_create_complete')
+    cf_waiter.wait(StackName=cf_stacks[0],
+        WaiterConfig={
+            'Delay': 5,
+            'MaxAttempts': 25
+        })
