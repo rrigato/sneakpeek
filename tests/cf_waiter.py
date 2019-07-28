@@ -33,9 +33,9 @@ def define_parser():
 
         Returns
         -------
-        parser : argparse.ArgumentParser
-            Returns what the program enters as args
-            to the command line
+        cf_stacks : list
+            list of str to wait on if the cloudformation
+            stack is created successfully
 
         Raises
         ------
@@ -59,7 +59,44 @@ def define_parser():
     cf_stacks = vars(cf_stacks)['cf_stacks']
     return(cf_stacks)
 
+def check_cf_stack_status(cf_stacks):
+    '''Waits until cloudformation stacks are created
+        Checks if the stack exists if the waiter command
+        fails
+        Parameters
+        ----------
+        cf_stacks : list
+            list of str to wait on if the cloudformation
+            stack is created successfully
 
+        Returns
+        -------
+
+
+        Raises
+        ------
+    '''
+    cf_checker = get_boto_clients('cloudformation')
+    cf_waiter = cf_checker.get_waiter('stack_create_complete')
+    """
+        Iterates over every aws stack in
+        the list
+    """
+    for aws_stack in cf_stacks:
+        """
+            F
+        """
+        try:
+
+            cf_waiter.wait(StackName=aws_stack,
+                WaiterConfig={
+                    'Delay': 5,
+                    'MaxAttempts': 25
+                })
+        except WaiterError as WE:
+            print("Hello World")
+            print(cf_checker.describe_stacks(
+                StackName=aws_stack))
 def main():
     '''Main function for script
         Parameters
@@ -73,20 +110,7 @@ def main():
         Raises
         ------
     '''
-    pass
-if __name__ == '__main__':
     cf_stacks = define_parser()
-    for aws_stack in cf_stacks:
-        cf_checker = get_boto_clients('cloudformation')
-        cf_waiter = cf_checker.get_waiter('stack_create_complete')
-        try:
-
-            cf_waiter.wait(StackName=aws_stack,
-                WaiterConfig={
-                    'Delay': 5,
-                    'MaxAttempts': 25
-                })
-        except WaiterError as WE:
-            print("Hello World")
-            print(cf_checker.describe_stacks(
-                StackName=aws_stack))
+    check_cf_stack_status(cf_stacks)
+if __name__ == '__main__':
+    main()
