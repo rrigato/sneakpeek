@@ -40,16 +40,25 @@ def define_parser():
         ------
     '''
     parser = argparse.ArgumentParser(
-        description='Process some integers.'
+        description='Provide the cloudformation stacks as strings'
         )
-    parser.add_argument('integers', metavar='N', type=int, nargs='+',
-                       help='an integer for the accumulator')
-    parser.add_argument('--sum', dest='accumulate', action='store_const',
-                       const=sum, default=max,
-                       help='sum the integers (default: find the max)')
+    parser.add_argument('cf_stacks', metavar='stacks',
+            type=str, nargs='+',
+            help='Cloudformation stack name')
 
-    args = parser.parse_args()
-    print(args.accumulate(args.integers))
+    """
+        Gets command line arguements passed into
+        a Namespace object and then converts into
+        a list of str
+
+        python cf_waiter.py arg1 arg2
+    """
+    cf_stacks = parser.parse_args()
+
+    cf_stacks = args(cf_stacks)['cf_stacks']
+    import pdb; pdb.set_trace()
+    for aws_stack in cf_stacks:
+        print(aws_stack)
 
 def main():
     '''Main function for script
