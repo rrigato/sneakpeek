@@ -88,3 +88,5 @@ if __name__ == '__main__':
                 })
         except WaiterError as WE:
             print("Hello World")
+            print(cf_checker.describe_stacks(
+                StackName=aws_stack))
