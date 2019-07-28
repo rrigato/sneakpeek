@@ -2,6 +2,7 @@
 The purpose of this script is to wait until the
 The cloudformation stack is created and complete
 """
+from botocore.exceptions import WaiterError
 import argparse
 import boto3
 def get_boto_clients(resource_name, region_name='us-east-1'):
@@ -76,12 +77,14 @@ def main():
 if __name__ == '__main__':
     cf_stacks = define_parser()
     for aws_stack in cf_stacks:
-        print(aws_stack)
+        cf_checker = get_boto_clients('cloudformation')
+        cf_waiter = cf_checker.get_waiter('stack_create_complete')
+        try:
 
-    cf_checker = get_boto_clients('cloudformation')
-    cf_waiter = cf_checker.get_waiter('stack_create_complete')
-    cf_waiter.wait(StackName=cf_stacks[0],
-        WaiterConfig={
-            'Delay': 5,
-            'MaxAttempts': 25
-        })
+            cf_waiter.wait(StackName=aws_stack,
+                WaiterConfig={
+                    'Delay': 5,
+                    'MaxAttempts': 25
+                })
+        except WaiterError as WE:
+            print("Hello World")
