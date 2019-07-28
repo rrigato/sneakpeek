@@ -84,7 +84,15 @@ def check_cf_stack_status(cf_stacks):
     """
     for aws_stack in cf_stacks:
         """
-            F
+            For some silly reason if you make an
+            api call to check the created status and
+            the stack exists aws will return a 255 error
+
+            This obviously breaks code builds automated
+            testing so the below code catches any waiter
+            exceptions and checks if the stack is in
+            create completed. If not it will throw
+            an error and exit the program
         """
         try:
 
@@ -95,6 +103,8 @@ def check_cf_stack_status(cf_stacks):
                 })
         except WaiterError as WE:
             print("Hello World")
+            stack_current_status = cf_checker.describe_stacks(
+                StackName=aws_stack)
             print(cf_checker.describe_stacks(
                 StackName=aws_stack))
 def main():
