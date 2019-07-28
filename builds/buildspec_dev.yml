@@ -111,12 +111,12 @@ phases:
     finally:
       - echo cleaning up resources reguardless of test results
       #deleting bucket and stack after testing
-      - aws s3 rm s3://dev-sneakpeek --recursive
-      - aws cloudformation delete-stack
-        --stack-name dev-sneakpeek-webpage
-
-      - aws cloudformation delete-stack
-        --stack-name dev-sneakpeek-backend
+    #   - aws s3 rm s3://dev-sneakpeek --recursive
+    #   - aws cloudformation delete-stack
+    #     --stack-name dev-sneakpeek-webpage
+      #
+    #   - aws cloudformation delete-stack
+    #     --stack-name dev-sneakpeek-backend
 
 artifacts:
   files:
