@@ -7,6 +7,12 @@ import pandas as pd
 import requests
 import unittest
 
+ENVIRON_DEF = "prod"
+DYNAMO_TABLE_NAME = ENVIRON_DEF + "-sneakpeek-table"
+
+HOMEPAGE_URL = 'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
+
+LAMBDA_FUNCTION_NAME = "backend-" + ENVIRON_DEF + "-sneakpeek"
 WORKING_DIRECTORY = os.getcwd()
 
 def get_logger():
@@ -36,9 +42,6 @@ def get_logger():
          )
     logging.info('\n')
 
-DYNAMO_TABLE_NAME = "prod-sneakpeek-table"
-
-HOMEPAGE_URL = 'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
 
 
 def get_boto_clients(resource_name, region_name='us-east-1'):
