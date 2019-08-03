@@ -423,9 +423,13 @@ Resources:
               #####################
               #Allows the cloudformation created by
               #CodePipeline to create IAM roles
-              #
+              #CAPABILITY_IAM = create iam role
+              #CAPABILITY_AUTO_EXPAND = expand serverless
+              #application model templates
               #####################
-              Capabilities: CAPABILITY_IAM
+              Capabilities:
+                - CAPABILITY_IAM
+                - CAPABILITY_AUTO_EXPAND
 
               RoleArn: !GetAtt [CFNRole, Arn]
               ################################
