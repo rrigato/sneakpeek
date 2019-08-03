@@ -430,7 +430,7 @@ Resources:
               #they will add the ability to provide a
               #list of capabilities in the future
               #####################
-              Capabilities: CAPABILITY_IAM, CAPABILITY_AUTO_EXPAND
+              Capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
 
               RoleArn: !GetAtt [CFNRole, Arn]
               ################################
