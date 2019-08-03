@@ -121,6 +121,8 @@ Resources:
             #to HTTP GET at /ride
             Type: Api
             Properties:
+                Auth:
+                    Authorizer: arn:aws:cognito-idp:us-east-1:350255258796:userpool/us-east-1_uWSFSS2Ph
                 Path: /ride
                 Method: GET
       FunctionName:
@@ -165,8 +167,8 @@ Outputs:
 #Provides the arn for the dynamodb table, IAM role,
 #etc.
 ##################################
-  RideEndpoint:
-    Value: !Ref AuthenticationLambda.ImageUploadApiGw
+  # RideEndpoint:
+  #   Value: !Ref AuthenticationLambda.ImageUploadApiGw
   LambdaFunctionName:
     Value: !Ref AuthenticationLambda
   LambdaRoleArn:
