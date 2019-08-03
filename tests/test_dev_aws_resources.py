@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import argparse
 import boto3
+import json
 import logging
 import os
 import pandas as pd
@@ -205,8 +206,17 @@ class WebappLive(unittest.TestCase):
             ------
         '''
         logging.info("Testing the following lambda function: ")
-        logging.info("")
-        pass
+        logging.info(LAMBDA_FUNCTION_NAME)
+
+        lambda_client = get_boto_clients('lambda')
+
+        logging.info("Calling lambda function")
+        lambda_client.invoke(FunctionName=LAMBDA_FUNCTION_NAME,
+        InvocationType="event"
+
+        )
+        logging.info("Lambda function response")
+
 
 
 if __name__ == '__main__':
