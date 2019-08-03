@@ -257,7 +257,7 @@ class WebappLive(unittest.TestCase):
             removed_item['ResponseMetadata']['HTTPStatusCode'], 200
             )
 
-    @unittest.skip("Ignoring until populated")
+    
     def test_lambda_ride(self):
         '''Tests that the lambda function called for /ride is live
 
@@ -270,7 +270,19 @@ class WebappLive(unittest.TestCase):
             Raises
             ------
         '''
-        pass
+        logging.info("Testing the following lambda function: ")
+        logging.info(LAMBDA_FUNCTION_NAME)
+
+        lambda_client = get_boto_clients('lambda')
+
+        logging.info("Calling lambda function")
+        lambda_client.invoke(
+            FunctionName=LAMBDA_FUNCTION_NAME,
+            InvocationType="event",
+            Payload="events/ride_event.json"
+
+        )
+        logging.info("Lambda function response")
 
 
 
