@@ -7,9 +7,12 @@ import pandas as pd
 import requests
 import unittest
 
-WORKING_DIRECTORY = os.getcwd()
-DYNAMO_TABLE_NAME = "dev-sneakpeek-table"
+ENVIRON_DEF = "dev"
+DYNAMO_TABLE_NAME = ENVIRON_DEF + "-sneakpeek-table"
+
 HOMEPAGE_URL = 'http://dev-sneakpeek.s3-website-us-east-1.amazonaws.com/'
+LAMBDA_FUNCTION_NAME = "backend-" + ENVIRON_DEF + "-sneakpeek"
+WORKING_DIRECTORY = os.getcwd()
 
 def get_logger():
     '''Returns a boto cloudformation describe_stacks api call
@@ -201,6 +204,8 @@ class WebappLive(unittest.TestCase):
             Raises
             ------
         '''
+        logging.info("Testing the following lambda function: ")
+        logging.info("")
         pass
 
 
