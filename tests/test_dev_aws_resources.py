@@ -12,7 +12,7 @@ ENVIRON_DEF = "dev"
 DYNAMO_TABLE_NAME = ENVIRON_DEF + "-sneakpeek-table"
 
 HOMEPAGE_URL = 'http://dev-sneakpeek.s3-website-us-east-1.amazonaws.com/'
-LAMBDA_FUNCTION_NAME = "backend-" + ENVIRON_DEF + "-sneakpeek"
+LAMBDA_FUNCTION_NAME = ENVIRON_DEF + "lambda-ride-sneakpeek"
 WORKING_DIRECTORY = os.getcwd()
 
 def get_logger():
@@ -192,7 +192,6 @@ class WebappLive(unittest.TestCase):
             removed_item['ResponseMetadata']['HTTPStatusCode'], 200
             )
 
-    @unittest.skip("Ignoring until populated")
     def test_lambda_ride(self):
         '''Tests that the lambda function called for /ride is live
 
@@ -208,14 +207,40 @@ class WebappLive(unittest.TestCase):
         logging.info("Testing the following lambda function: ")
         logging.info(LAMBDA_FUNCTION_NAME)
 
+        """
+            Opens the json file to be used as payload
+            for invoking the lambda function
+        """
+        with open("tests/events/ride_event.json",
+            "r") as ride_event:
+            ride_payload = json.load(ride_event)
+
+        logging.info("Test event json")
+        logging.info(ride_payload)
         lambda_client = get_boto_clients('lambda')
 
         logging.info("Calling lambda function")
-        lambda_client.invoke(FunctionName=LAMBDA_FUNCTION_NAME,
-        InvocationType="event"
+        """
+            Invoke the lambda function with the
+            provided json event
+            Syncronous event call
+        """
+        ride_response = lambda_client.invoke(
+            FunctionName=LAMBDA_FUNCTION_NAME,
+
+            InvocationType="RequestResponse",
+            Payload=json.dumps(ride_payload)
 
         )
+        ride_payload = json.load(ride_response['Payload'])
+
         logging.info("Lambda function response")
+        logging.info(ride_response)
+
+        self.assertEqual(
+            ride_payload['body']['test'],
+            "This is a test message"
+        )
 
 
 
