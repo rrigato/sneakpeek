@@ -27,9 +27,10 @@ aws cloudformation create-change-set --stack-name sneakpeak-pipeline \
 aws cloudformation execute-change-set --change-set-name \
 arn:aws:cloudformation:us-east-1:350255258796:changeSet/CodePipelineAddition/2326ac23-8154-49d4-a328-7edc708a2b53
 
-aws cloudformation update-stack --stack-name backend-prod-sneakpeek2 \
- --template-body file://templates/backend.yml \
- --capabilities CAPABILITY_NAMED_IAM
+#Update code pipeline
+aws cloudformation update-stack --stack-name sneakpeek-pipeline \
+ --template-body file://templates/code_pipeline.yml \
+ --capabilities CAPABILITY_NAMED_IAM CAPABILITY_AUTO_EXPAND
 
 
 ##allows for much more detailed error logging for stack
