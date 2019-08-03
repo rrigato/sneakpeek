@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import argparse
 import boto3
+import json
 import logging
 import os
 import pandas as pd
@@ -257,7 +258,7 @@ class WebappLive(unittest.TestCase):
             removed_item['ResponseMetadata']['HTTPStatusCode'], 200
             )
 
-    
+
     def test_lambda_ride(self):
         '''Tests that the lambda function called for /ride is live
 
@@ -273,15 +274,26 @@ class WebappLive(unittest.TestCase):
         logging.info("Testing the following lambda function: ")
         logging.info(LAMBDA_FUNCTION_NAME)
 
+        """
+            Opens the json file to be used as payload
+            for invoking the lambda function
+        """
+        with open("events/ride_event.json","r") as ride_event:
+            ride_payload = json.load(ride_event)
+
+        logging.info("Test event json")
+        logging.info(ride_payload)
         lambda_client = get_boto_clients('lambda')
 
         logging.info("Calling lambda function")
-        lambda_client.invoke(
+        import pdb; pdb.set_trace()
+        ride_response = lambda_client.invoke(
             FunctionName=LAMBDA_FUNCTION_NAME,
-            InvocationType="event",
-            Payload="events/ride_event.json"
+            InvocationType="DryRun",
+            Payload=ride_payload
 
         )
+        import pdb; pdb.set_trace()
         logging.info("Lambda function response")
 
 
