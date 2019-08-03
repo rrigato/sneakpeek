@@ -363,7 +363,7 @@ Resources:
             InputArtifacts:
               - Name: BuildDev
               - Name: sneakpeek
-              - Name: CognitoProdCf
+              #- Name: CognitoProdCf
             OutputArtifacts:
               - Name: SsmProdCf
             ##########################################
@@ -426,10 +426,11 @@ Resources:
               #CAPABILITY_IAM = create iam role
               #CAPABILITY_AUTO_EXPAND = expand serverless
               #application model templates
+              #this is an ugly solution hopefully
+              #they will add the ability to provide a
+              #list of capabilities in the future
               #####################
-              Capabilities:
-                - CAPABILITY_IAM
-                - CAPABILITY_AUTO_EXPAND
+              Capabilities: CAPABILITY_IAM, CAPABILITY_AUTO_EXPAND
 
               RoleArn: !GetAtt [CFNRole, Arn]
               ################################
