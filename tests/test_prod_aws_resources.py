@@ -13,7 +13,7 @@ DYNAMO_TABLE_NAME = ENVIRON_DEF + "-sneakpeek-table"
 
 HOMEPAGE_URL = 'http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/'
 
-LAMBDA_FUNCTION_NAME = "backend-" + ENVIRON_DEF + "-sneakpeek"
+LAMBDA_FUNCTION_NAME = ENVIRON_DEF + "lambda-ride-sneakpeek"
 WORKING_DIRECTORY = os.getcwd()
 
 def get_logger():
@@ -278,7 +278,8 @@ class WebappLive(unittest.TestCase):
             Opens the json file to be used as payload
             for invoking the lambda function
         """
-        with open("events/ride_event.json","r") as ride_event:
+        with open("tests/events/ride_event.json",
+            "r") as ride_event:
             ride_payload = json.load(ride_event)
 
         logging.info("Test event json")
@@ -286,11 +287,14 @@ class WebappLive(unittest.TestCase):
         lambda_client = get_boto_clients('lambda')
 
         logging.info("Calling lambda function")
-        import pdb; pdb.set_trace()
+        """
+            Invoke the lambda function with the
+            provided json event
+        """
         ride_response = lambda_client.invoke(
             FunctionName=LAMBDA_FUNCTION_NAME,
             InvocationType="DryRun",
-            Payload=ride_payload
+            Payload=json.dumps(ride_payload)
 
         )
         import pdb; pdb.set_trace()
