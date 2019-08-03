@@ -166,6 +166,9 @@ Outputs:
 ##################################
 #Provides the arn for the dynamodb table, IAM role,
 #etc.
+#https://awslabs.github.io/serverless-application-model/internals/generated_resources.html#api
+#the above link provides all of the resources that
+#can be used from a sam event source
 ##################################
   RideEndpoint:
     #gets the Arn associated with the API GW
