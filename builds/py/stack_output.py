@@ -51,7 +51,7 @@ def describe_stacks_response(stack_name):
     """
         , =unpacks the list as a dictionary for searching
     """
-    cf_response, = cf_client.describe_stacks(
+    cf_response = cf_client.describe_stacks(
         StackName=stack_name)['Stacks']
 
     return (cf_response)

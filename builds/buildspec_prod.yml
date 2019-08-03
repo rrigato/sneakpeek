@@ -70,6 +70,11 @@ phases:
       #files get copied to the S3 bucket
       - python builds/py/stack_output.py
 
+      - cat logs/stack_output
+      - cd ./logs/
+      - ls -l
+      - cd ..
+
       #copies static files to newly created S3 resources
       - aws s3 cp ./static s3://prod-sneakpeek --recursive
 
