@@ -53,4 +53,5 @@ def lambda_handler(event, context):
     region_name='us-east-1')
     #print("Received event: " + json.dumps(event, indent=2))
 
-    return (respond(err=None, res="This is a test message"))
+    return (respond(err=None, res=
+        {"test": "This is a test message"}))
