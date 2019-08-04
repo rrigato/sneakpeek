@@ -517,6 +517,10 @@ Resources:
       #List of Policies for Code Pipeline
       ManagedPolicyArns:
           - arn:aws:iam::aws:policy/AWSCodePipelineFullAccess
+          - arn:aws:iam::aws:policy/AWSCodeCommitFullAccess
+          - arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess
+          - arn:aws:iam::aws:policy/AmazonS3FullAccess
+          - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
 
 
 
