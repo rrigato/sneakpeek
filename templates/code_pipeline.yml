@@ -242,7 +242,7 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
-              RoleArn: !GetAtt [CFNRole, Arn]
+              RoleArn: !GetAtt [CognitoRole, Arn]
               ################################
               #Appends cognito- to the prod stack
               #name. The fn::join returns a string
@@ -488,7 +488,25 @@ Resources:
                 ProjectName: !Ref ProdBuildName
 
             RunOrder: 1
-
+###########################################
+#Defining roles used by cloudformation to deploy
+#resources
+#
+#1) CognitoRole = role used for the templates/cognito.yml
+###########################################
+  CognitoRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action: ['sts:AssumeRole']
+          Effect: Allow
+          Principal:
+            Service: [cloudformation.amazonaws.com]
+        Version: '2012-10-17'
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
   CFNRole:
     Type: AWS::IAM::Role
     Properties:
