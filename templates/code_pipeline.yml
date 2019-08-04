@@ -514,8 +514,9 @@ Resources:
             Service: codepipeline.amazonaws.com
           Action: sts:AssumeRole
       Path: /
+      #List of Policies for Code Pipeline
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AdministratorAccess
+          - arn:aws:iam::aws:policy/AWSCodePipelineFullAccess
 
 
 
