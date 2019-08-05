@@ -338,7 +338,7 @@ Resources:
                    "BucketName" : { "Fn::GetParam" : [ "sneakpeek", "util/prod_config.json", "ParameterValue" ] }
                 }
                   #'{"BucketName": "prod-sneakpeek"}'
-              RoleArn: !GetAtt [CFNRole, Arn]
+              RoleArn: !GetAtt [S3WebpageRole, Arn]
               StackName: !Ref ProdStackName
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
               #Artifact::template_file_name
@@ -572,7 +572,7 @@ Resources:
             Service: [cloudformation.amazonaws.com]
         Version: '2012-10-17'
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
       Path: /
 
 Outputs:
