@@ -140,7 +140,7 @@ Resources:
         Type: LINUX_CONTAINER
         Image: aws/codebuild/standard:2.0
       Name: !Ref ProdBuildName
-      ServiceRole: arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild
+      ServiceRole: arn:aws:iam::{$AWS::AccountId}:role/DevSneakPeekCodeBuild
       #CodeCommit Git repo used for CodeBuild
       Source:
         #Buildspec file to use for the prod build
@@ -493,6 +493,9 @@ Resources:
 #resources
 #
 #1) CognitoRole = role used for the templates/cognito.yml
+#
+#S3WebpageRole = role used for templates/static_webpage.yml
+#cloudformation page
 ###########################################
   CognitoRole:
     Type: AWS::IAM::Role
@@ -558,7 +561,19 @@ Resources:
           - arn:aws:iam::aws:policy/AmazonS3FullAccess
           - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
 
-
+  S3WebpageRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action: ['sts:AssumeRole']
+          Effect: Allow
+          Principal:
+            Service: [cloudformation.amazonaws.com]
+        Version: '2012-10-17'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
+      Path: /
 
 Outputs:
   CodeCommitURL:
