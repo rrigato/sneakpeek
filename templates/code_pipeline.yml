@@ -140,7 +140,14 @@ Resources:
         Type: LINUX_CONTAINER
         Image: aws/codebuild/standard:2.0
       Name: !Ref ProdBuildName
-      ServiceRole: arn:aws:iam::{$AWS::AccountId}:role/DevSneakPeekCodeBuild
+      ServiceRole:
+        Fn::Join:
+          - ""
+          #uses psuedo parameters to join the
+          #arn together
+          - - "arn:aws:iam::"
+            - Ref: 'AWS::AccountId'
+            - :role/DevSneakPeekCodeBuilde
       #CodeCommit Git repo used for CodeBuild
       Source:
         #Buildspec file to use for the prod build
