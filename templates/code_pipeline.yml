@@ -147,7 +147,7 @@ Resources:
           #arn together
           - - "arn:aws:iam::"
             - Ref: 'AWS::AccountId'
-            - :role/DevSneakPeekCodeBuilde
+            - :role/DevSneakPeekCodeBuild
       #CodeCommit Git repo used for CodeBuild
       Source:
         #Buildspec file to use for the prod build
