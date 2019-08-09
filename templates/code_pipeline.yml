@@ -382,7 +382,7 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
-              RoleArn: !GetAtt [CFNRole, Arn]
+              RoleArn: !GetAtt [SsmParameterStoreRole, Arn]
               ################################
               #Appends env-config- to the prod stack
               #name. The fn::join returns a string
