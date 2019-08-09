@@ -533,14 +533,12 @@ Resources:
           Principal:
             Service: [cloudformation.amazonaws.com]
         Version: '2012-10-17'
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
       Policies:
-          - PolicyName: LambdaPutDynamo
+          - PolicyName: SsmParameterStoreFullAccess
             PolicyDocument:
               Version: "2012-10-17"
               Statement:
-                - Sid: DynamoDbPut
+                - Sid: ParamStoreAllow
                   Effect: Allow
                   #######################################
                   #Allowing lambda to perform a PutItem on
@@ -548,7 +546,12 @@ Resources:
                   #
                   #######################################
                   Action:
-                    - dynamodb:PutItem
+                    - ssm:DeleteParameter
+                    - ssm:DeleteParameters
+                    - ssm:GetParameter
+                    - ssm:GetParameters
+                    - ssm:PutParameter
+                    - ssm:PutParameters
                   Resource:
                     - "*"
 
