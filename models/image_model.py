@@ -71,7 +71,7 @@ class utilization:
 
 role = get_execution_role()
 
-s3_bucket='sc2-sagemaker'
+s3_bucket='image-class-repo'
 
 bucket=s3_bucket
 
@@ -115,7 +115,7 @@ s3_validation = 's3://{}/{}/'.format(bucket, s3_validation_key)
 
 s3 = boto3.client('s3')
 # create unique job name
-job_name_prefix = 'sc2-34layers-10epochs'
+job_name_prefix = 'model-34layers-10epochs'
 timestamp = time.strftime('-%Y-%m-%d-%H-%M-%S', time.gmtime())
 job_name = job_name_prefix + timestamp
 training_params = \
@@ -218,6 +218,6 @@ def main():
     '''
     model_build = utilization()
 
-    utilization.setup_notebook(s3_bucket='sc2-sagemaker')
+    utilization.setup_notebook(s3_bucket='image-class-repo-sagemaker')
 if __name__ == "__main__":
     main()
