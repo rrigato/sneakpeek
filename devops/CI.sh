@@ -5,6 +5,15 @@
 #This script only needs to be run once
 ###############################
 
+#bucket used for nested stacks
+#excludes all templates that start with demo
+aws s3 mb sneakpeek-nested-stack
+
+
+aws s3 cp ./templates s3://sneakpeek-nested-stack --recursive \
+    --exclude "demo*"
+
+
 #note that the cli user needs to have https for username/password setup
 #or ssh public key uploaded to codecommit
 aws codecommit create-repository --repository-name sneakpeek
