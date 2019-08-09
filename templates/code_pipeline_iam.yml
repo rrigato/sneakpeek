@@ -1,0 +1,6 @@
+#################################
+#Nested stack that creates iam roles
+#which are passed from templates/code_pipeline.yml
+#to the cloudformation templates deploying
+#resources
+#################################
