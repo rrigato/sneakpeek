@@ -518,6 +518,11 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
       Path: /
 
+  CodePipelineIam:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/sneakpeek-nested-stack/code_pipeline_iam.yml
+
 ########################################
 #Role used by the DeploySsmParameters
 #deployment stage
