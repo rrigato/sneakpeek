@@ -44,3 +44,7 @@ Resources:
                     - iam:DetachRolePolicy
                   Resource:
                     - "*"
+Outputs:
+  BackendIamRole:
+    Description: Reference to IAM role used for templates/backend.yml
+    Value: !Ref BackendIamRole
