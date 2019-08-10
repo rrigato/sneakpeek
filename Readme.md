@@ -126,6 +126,16 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
 - code_pipeline.yml = Creates CodeBuild/Code Pipeline resources
     necessary for Dev/Prod
 
+- code_pipeline_iam.yml = nested stack for code_pipeline.yml contains iam resources that are used by code_pipeline.yml
+
+Make sure to run the following command before creating a stack with code_pipeline.yml
+
+```
+aws s3 cp ./templates s3://sneakpeek-nested-stack --recursive     --exclude "demo*"
+```
+
+The reason being that a nested stack has to be in an s3 bucket to be used by the parent
+
 - cognito.yml = user pool and client id to be used for authentication in the webpage
 
 - static_webpage.yml = builds the S3 bucket enabled for web hosting
