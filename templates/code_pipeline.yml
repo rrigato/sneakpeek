@@ -441,7 +441,7 @@ Resources:
 
               #getting the BackendIamRole resource from the
               #templates/code_pipeline_iam.yml nested stack
-              RoleArn: !GetAtt [CodePipelineIam, Resources.BackendIamRole.arn]
+              RoleArn: !GetAtt CodePipelineIam.Outputs.BackendIamRole
               ################################
               #Appends env-config- to the prod stack
               #name. The fn::join returns a string
