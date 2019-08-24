@@ -159,7 +159,7 @@ def main():
             stack_name='cognito-prod-sneakpeek'
             )
     cf_backend_response = describe_stacks_response(
-            stack_name='backend-dev-sneakpeek'
+            stack_name='dev-sneakpeek-backend'
             )
 
     output_dict = {}
