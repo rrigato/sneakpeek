@@ -75,7 +75,7 @@ phases:
       - ./lambda/create_deployment_package.sh
 
       #populates the ./static/js/cognito_config.json
-      python builds/py/dev_stack_output.py
+      - python builds/py/dev_stack_output.py
 
 
       #copies static files to newly created S3 resources
