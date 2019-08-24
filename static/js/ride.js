@@ -1,10 +1,17 @@
 /*global WildRydes _config*/
-
+/*
+    THis javascript is called when you navidate to ride.html
+*/
 var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 
 (function rideScopeWrapper($) {
     var authToken;
+    /*********
+    *Makes sure the user is signed in first
+    *
+    *
+    **********/
     WildRydes.authToken.then(function setAuthToken(token) {
         if (token) {
             authToken = token;
@@ -15,6 +22,11 @@ WildRydes.map = WildRydes.map || {};
         alert(error);
         window.location.href = '/signin.html';
     });
+    /*************
+    *Makes the ajax call to cognito_config.json
+    *ride.invokeUrl
+    *
+    *************/
     function requestUnicorn(pickupLocation) {
         $.ajax({
             method: 'POST',
