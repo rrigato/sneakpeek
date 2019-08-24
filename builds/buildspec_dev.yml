@@ -74,7 +74,8 @@ phases:
       - chmod +x lambda/create_deployment_package.sh
       - ./lambda/create_deployment_package.sh
 
-
+      #populates the ./static/js/cognito_config.json
+      #python builds/py/stack_output.py
 
 
       #copies static files to newly created S3 resources
@@ -103,8 +104,8 @@ phases:
 
       - echo $LAMBDA_FUNCTION
       #uploads zip file of code to lambda
-    #   - aws lambda update-function-code --function-name $LAMBDA_FUNCTION
-    #     --s3-bucket cf-to-backend --s3-key ride.zip
+      - aws lambda update-function-code --function-name $LAMBDA_FUNCTION
+        --s3-bucket cf-to-backend --s3-key ride.zip
 
       - echo Running unit tests in python...
       #runs tests on aws resources created in previous steps
@@ -119,7 +120,7 @@ phases:
 
       - aws cloudformation delete-stack
         --stack-name dev-sneakpeek-backend
-       
+
 
 artifacts:
   files:
