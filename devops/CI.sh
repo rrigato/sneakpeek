@@ -13,6 +13,8 @@ aws s3 mb sneakpeek-nested-stack
 aws s3 cp ./templates s3://sneakpeek-nested-stack --recursive \
     --exclude "demo*"
 
+#Setup codecommit repo for ssh
+https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-unixes.html
 
 #note that the cli user needs to have https for username/password setup
 #or ssh public key uploaded to codecommit
@@ -44,7 +46,7 @@ aws cloudformation update-stack --stack-name sneakpeek-pipeline \
 
 ##allows for much more detailed error logging for stack
 #creation events
- aws cloudformation describe-stack-events --stack-name backend-prod-sneakpeek2 \
+ aws cloudformation describe-stack-events --stack-name sneakpeek-pipeline \
  > output2.json
 
 #makes an output bucket for dev and prod Builds
