@@ -13,6 +13,7 @@ WildRydes.map = WildRydes.map || {};
     *
     **********/
     WildRydes.authToken.then(function setAuthToken(token) {
+        console.log(token);
         if (token) {
             authToken = token;
         } else {
@@ -77,6 +78,11 @@ WildRydes.map = WildRydes.map || {};
             }
         });
 
+        /************
+        *Shows the id with noApiMessage in
+        *the ride.html file if the invokeUrl for the
+        *lambda function is not configured
+        *************/
         if (!_config.api.invokeUrl) {
             $('#noApiMessage').show();
         }
