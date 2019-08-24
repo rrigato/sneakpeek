@@ -439,9 +439,10 @@ Resources:
               #####################
               Capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
 
-              #getting the BackendIamRole resource from the
-              #templates/code_pipeline_iam.yml nested stack
-              RoleArn: !GetAtt CodePipelineIam.Outputs.BackendIamRole
+            #   #getting the BackendIamRole resource from the
+            #   #templates/code_pipeline_iam.yml nested stack
+            #   RoleArn: !GetAtt CodePipelineIam.Outputs.BackendIamRole
+              RoleArn: !GetAtt [CFNRole, Arn]
               ################################
               #Appends env-config- to the prod stack
               #name. The fn::join returns a string
@@ -520,10 +521,10 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
       Path: /
 
-  CodePipelineIam:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://s3.amazonaws.com/sneakpeek-nested-stack/code_pipeline_iam.yml
+  # CodePipelineIam:
+  #   Type: AWS::CloudFormation::Stack
+  #   Properties:
+  #     TemplateURL: https://s3.amazonaws.com/sneakpeek-nested-stack/code_pipeline_iam.yml
 
 ########################################
 #Role used by the DeploySsmParameters
@@ -538,7 +539,7 @@ Resources:
         - Action: ['sts:AssumeRole']
           Effect: Allow
           Principal:
-            Service: [cloudformation.amazonaws.com]
+            Service: [cloudformation.amazonaws.com, codepipeline.amazonaws.com]
         Version: '2012-10-17'
       Policies:
           - PolicyName: SsmParameterStoreFullAccess
@@ -598,6 +599,22 @@ Resources:
           - arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess
           - arn:aws:iam::aws:policy/AmazonS3FullAccess
           - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+      Policies:
+          - PolicyName: PipelinePassRole
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Sid: IamPassRoleAllow
+                  Effect: Allow
+                  #######################################
+                  #Allowing lambda to perform a PutItem on
+                  #DynamoDB
+                  #
+                  #######################################
+                  Action:
+                    - iam:PassRole
+                  Resource:
+                    - "*"
 
   S3WebpageRole:
     Type: AWS::IAM::Role
