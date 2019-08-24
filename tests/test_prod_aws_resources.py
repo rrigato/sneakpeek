@@ -305,8 +305,8 @@ class WebappLive(unittest.TestCase):
         logging.info(ride_response)
 
         self.assertEqual(
-            ride_payload['body']['test'],
-            "This is a test message"
+            ride_payload['body']['Unicorn']['Name'],
+            "Rocinante"
         )
 
 
