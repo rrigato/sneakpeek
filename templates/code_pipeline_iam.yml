@@ -37,7 +37,7 @@ Resources:
                   #
                   #######################################
                   Action:
-                    - iam:PassRole
+                    #- iam:PassRole
                     - iam:CreateRole
                     - iam:GetRole
                     - iam:UpdateAssumeRolePolicy
