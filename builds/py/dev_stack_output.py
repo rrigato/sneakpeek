@@ -159,22 +159,33 @@ def main():
             stack_name='cognito-prod-sneakpeek'
             )
     cf_backend_response = describe_stacks_response(
-            stack_name='backend-prod-sneakpeek'
+            stack_name='backend-dev-sneakpeek'
             )
 
     output_dict = {}
 
+    """
+        First getting output values from
+        /templates/cognito.yml
+
+        Then getting output values from
+        /templates/backend.yml
+    """
     output_dict = iterate_outputs(
-            output_values = cf_response['Outputs']
+            output_values = cf_response['Outputs'],
             output_key = 'UserPoolClientId',
             input_dict = output_dict)
 
     output_dict = iterate_outputs(
-            output_values = cf_response['Outputs']
+            output_values = cf_response['Outputs'],
             output_key = 'UserPoolId',
             input_dict = output_dict)
-            
-    import pdb; pdb.set_trace()
+
+
+    """
+        Populates the /static/js/cognito_config.json
+        file
+    """
     populate_json(input_dict=output_dict,
         webpage_config_dir="static/js/cognito_config.json")
 
