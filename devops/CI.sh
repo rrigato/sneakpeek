@@ -57,3 +57,10 @@ aws codebuild start-build --project-name dev-sneakpeek-tests --source-version de
 
 #check the code build project status
 aws codebuild batch-get-builds --ids dev-sneakpeek:8eb0b978-ae31-444c-bbeb-14ccdd4defa8
+
+
+###############
+#Testing in dev but not prod:
+#run the dev code build projet in builds/buildspec_dev.yml
+#except for the portion that deletes the code at the end
+#################
