@@ -583,6 +583,7 @@ Resources:
         #access to all dynamodb apis
         - arn:aws:iam::aws:policy/AWSLambdaFullAccess
         - arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
+        - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
       Path: /
       Policies:
           - PolicyName: PassIamRole
