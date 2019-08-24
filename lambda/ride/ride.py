@@ -27,7 +27,7 @@ def get_boto_clients(resource_name, region_name='us-east-1'):
 
 def respond(err, res=None):
     return {
-        'statusCode': '400' if err else '200',
+        'statusCode': '400' if err else '201',
         'body': err.message if err else res,
         'headers': {
             'Content-Type': 'application/json',
@@ -54,4 +54,7 @@ def lambda_handler(event, context):
     #print("Received event: " + json.dumps(event, indent=2))
 
     return (respond(err=None, res=
-        {"test": "This is a test message"}))
+        {"RideId": "SvLnijIAtg6inAFUBRT+Fg==",
+        "Unicorn":
+        {"Name":"Rocinante","Color":"Yellow","Gender":"Female"},"Eta":"30 seconds"
+        }))
