@@ -68,7 +68,7 @@ phases:
 
       #Config script to update ./static directory before
       #files get copied to the S3 bucket
-      - python builds/py/stack_output.py
+      - python builds/py/prod_stack_output.py
 
       - cat logs/stack_output
       - cd ./logs/
