@@ -163,14 +163,18 @@ def main():
             )
 
     output_dict = {}
-    output_list = ['UserPoolClientId', 'UserPoolId']
-    import pdb; pdb.set_trace()
-    for output_value in output_list:
-        output_dict = iterate_outputs(
+
+    output_dict = iterate_outputs(
             output_values = cf_response['Outputs']
-            output_key = output_value,
+            output_key = 'UserPoolClientId',
             input_dict = output_dict)
 
+    output_dict = iterate_outputs(
+            output_values = cf_response['Outputs']
+            output_key = 'UserPoolId',
+            input_dict = output_dict)
+            
+    import pdb; pdb.set_trace()
     populate_json(input_dict=output_dict,
         webpage_config_dir="static/js/cognito_config.json")
 
