@@ -56,7 +56,7 @@ def describe_stacks_response(stack_name):
 
     return (cf_response)
 
-def iterate_outputs(output_values):
+def iterate_outputs(output_values, output_key, input_dict):
     '''Iterates over every OutputKey for the stack
 
         Parameters
@@ -64,15 +64,25 @@ def iterate_outputs(output_values):
         output_values : list
             list of dicts of output value from the cloudformation stack
 
+        output_key : str
+            The output name from the cloudformation stack we are
+            trying to find
+
+        input_dict : dict
+            Dict that will be appended with new output_key
+            and value
+
         Returns
         -------
-        output_dict : dict
+        input_dict : dict
             dict of values for UserPoolId and UserPoolClientId
 
         Raises
         ------
     '''
-    output_dict = {}
+    logging.info(input_dict)
+    logging.info(output_key)
+
     logging.info("Begining list parse")
     """
         the Outputs section of the describe_stacks api
@@ -83,14 +93,12 @@ def iterate_outputs(output_values):
         the outputs value
     """
     for output in output_values:
-        if output['OutputKey'] == 'UserPoolClientId':
-            output_dict['UserPoolClientId'] = output['OutputValue']
+        if output['OutputKey'] == output_key:
+            input_dict[output_key] = output['OutputValue']
 
-        elif output['OutputKey'] == 'UserPoolId':
-            output_dict['UserPoolId'] = output['OutputValue']
-
-    logging.info(output_dict)
-    return(output_dict)
+    logging.info("Description of input key")
+    logging.info(input_dict)
+    return(input_dict)
 
 def populate_json(input_dict, webpage_config_dir):
     '''Populates cognito_config.json file
@@ -155,9 +163,13 @@ def main():
             )
 
     output_dict = {}
+    output_list = ['UserPoolClientId', 'UserPoolId']
     import pdb; pdb.set_trace()
-    output_dict = iterate_outputs(
-        output_values = cf_response['Outputs'])
+    for output_value in output_list:
+        output_dict = iterate_outputs(
+            output_values = cf_response['Outputs']
+            output_key = output_value,
+            input_dict = output_dict)
 
     populate_json(input_dict=output_dict,
         webpage_config_dir="static/js/cognito_config.json")
