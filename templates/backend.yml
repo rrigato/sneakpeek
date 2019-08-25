@@ -157,8 +157,22 @@ Resources:
   #
   #
 
-
-
+###########################################
+#For the /upload.html page
+#Here is where the user will upload the image
+#to be processed by a computer recognition algoritm
+#
+###########################################
+  UploadBucket:
+    Properties:
+      BucketName:
+        Fn::Join:
+            - ""
+            - - !Ref NamePrefix
+              - "-sneakpeek-table"
+      WebsiteConfiguration:
+        IndexDocument: index.html
+    Type: "AWS::S3::Bucket"
 
 
 
