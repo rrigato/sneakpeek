@@ -20,6 +20,12 @@ Parameters:
     Description: String for prefixing resources to differentiate prod/dev
 
 
+  WebsiteDomainName:
+    Type: String
+    Default: "http://*.amazonaws.com"
+    Description: String for prefixing resources to differentiate prod/dev
+
+
 Resources:
 
   DynamoDBTable:
@@ -170,8 +176,16 @@ Resources:
             - ""
             - - !Ref NamePrefix
               - "-sneakpeek-table"
-      WebsiteConfiguration:
-        IndexDocument: index.html
+      #########################
+      #Used to determine cross origin
+      #resource sharing rules for javascript
+      #we only want to allow the s3 bucket and
+      #eventually the domain name the site is registered
+      #under to be able to upload images to this bucket
+      ##########################
+      CorsRules:
+        AllowedHeaders: *
+        AllowedOrigins: !Ref WebsiteDomainName
     Type: "AWS::S3::Bucket"
 
 
