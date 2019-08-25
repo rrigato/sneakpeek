@@ -183,9 +183,17 @@ Resources:
       #eventually the domain name the site is registered
       #under to be able to upload images to this bucket
       ##########################
-      CorsRules:
-        AllowedHeaders: *
-        AllowedOrigins: !Ref WebsiteDomainName
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            #HTTP methods allowed on bucket
+            AllowedMethods:
+              - "POST"
+            #allowed origin domain names
+            AllowedOrigins:
+              - !Ref WebsiteDomainName
+
     Type: "AWS::S3::Bucket"
 
 
