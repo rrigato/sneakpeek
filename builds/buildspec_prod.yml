@@ -70,7 +70,7 @@ phases:
       #files get copied to the S3 bucket
       - python builds/py/prod_stack_output.py
 
-      - cat logs/stack_output
+      
       - cd ./logs/
       - ls -l
       - cd ..
