@@ -175,7 +175,7 @@ Resources:
         Fn::Join:
             - ""
             - - !Ref NamePrefix
-              - "-sneakpeek-table"
+              - "-sneakpeek-image-trailer-repo"
       #########################
       #Used to determine cross origin
       #resource sharing rules for javascript
