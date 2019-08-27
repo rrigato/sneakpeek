@@ -34,7 +34,21 @@ def respond(err, res=None):
         },
     }
 
+def write_to_s3_output():
+    '''writes output csv to s3 bucket
+        Parameters
+        ----------
 
+        Returns
+        -------
+
+
+        Raises
+        ------
+    '''
+    get_boto_clients(resource='s3')
+    import pdb; pdb.set_trace()
+    
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
     access to the request and response payload, including headers and
@@ -53,6 +67,7 @@ def lambda_handler(event, context):
     region_name='us-east-1')
     #print("Received event: " + json.dumps(event, indent=2))
 
+    write_to_s3_output()
     return (respond(err=None, res=
         {"RideId": "SvLnijIAtg6inAFUBRT+Fg==",
         "Unicorn":
