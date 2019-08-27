@@ -4,6 +4,7 @@ import logging
 print('Loading function')
 dynamo = boto3.client('dynamodb')
 
+WORKING_DIRECTORY='.'
 def get_logger():
     '''Adds basic logging
 
@@ -21,7 +22,7 @@ def get_logger():
         the extension
     """
     logging.basicConfig(
-        filename=os.path.join(WORKING_DIRECTORY, 'logs/',
+        filename=os.path.join(WORKING_DIRECTORY, 
         os.path.basename(__file__).split('.')[0]),
         format='%(asctime)s %(message)s',
          datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
@@ -92,7 +93,7 @@ def lambda_handler(event, context):
     region_name='us-east-1')
     #print("Received event: " + json.dumps(event, indent=2))
 
-    
+
     return (respond(err=None, res=
         {"RideId": "SvLnijIAtg6inAFUBRT+Fg==",
         "Unicorn":
