@@ -22,7 +22,7 @@ def get_logger():
         the extension
     """
     logging.basicConfig(
-        filename=os.path.join(WORKING_DIRECTORY, 
+        filename=os.path.join(WORKING_DIRECTORY,
         os.path.basename(__file__).split('.')[0]),
         format='%(asctime)s %(message)s',
          datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
@@ -84,7 +84,7 @@ def lambda_handler(event, context):
     PUT, or DELETE request respectively, passing in the payload to the
     DynamoDB API as a JSON body.
     '''
-    get_logger()
+    #get_logger()
     """
         Creates dynamodb resource and
         puts an item in the table
