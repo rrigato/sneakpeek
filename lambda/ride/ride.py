@@ -1,8 +1,33 @@
 import boto3
 import json
-
+import logging
 print('Loading function')
 dynamo = boto3.client('dynamodb')
+
+def get_logger():
+    '''Adds basic logging
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+
+        Raises
+        ------
+    '''
+    """
+        Adds the file name to the logs/ directory without
+        the extension
+    """
+    logging.basicConfig(
+        filename=os.path.join(WORKING_DIRECTORY, 'logs/',
+        os.path.basename(__file__).split('.')[0]),
+        format='%(asctime)s %(message)s',
+         datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
+         )
+    logging.info('\n')
+
 
 def get_boto_clients(resource_name, region_name='us-east-1'):
     '''Returns the boto client for various cloudformation resources
@@ -48,7 +73,7 @@ def write_to_s3_output():
     '''
     get_boto_clients(resource='s3')
     import pdb; pdb.set_trace()
-    
+
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
     access to the request and response payload, including headers and
@@ -59,6 +84,7 @@ def lambda_handler(event, context):
     PUT, or DELETE request respectively, passing in the payload to the
     DynamoDB API as a JSON body.
     '''
+    get_logger()
     """
         Creates dynamodb resource and
         puts an item in the table
