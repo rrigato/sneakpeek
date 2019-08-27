@@ -71,8 +71,7 @@ def write_to_s3_output():
         Raises
         ------
     '''
-    get_boto_clients(resource='s3')
-    import pdb; pdb.set_trace()
+    get_boto_clients(resource_name='s3')
 
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
@@ -93,7 +92,7 @@ def lambda_handler(event, context):
     region_name='us-east-1')
     #print("Received event: " + json.dumps(event, indent=2))
 
-    write_to_s3_output()
+    
     return (respond(err=None, res=
         {"RideId": "SvLnijIAtg6inAFUBRT+Fg==",
         "Unicorn":
