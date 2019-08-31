@@ -4,8 +4,12 @@
 */
 .title-overlay{
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 50%;
-    transform: translate(-30%, -50%);
+    transform: translate(-50%, -25%);
     z-index:100;
+}
+
+.image-explanation{
+    font-size: 24px;
 }
