@@ -1,9 +1,9 @@
-![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoidkVnSCs4SHNIdmNMREQ4NW9VNk8xaC9zeWNLQkpYaGVqZnM1K0kyQXZpWlE5Z0ZpclRSSElWa29hTFRQVm45NHNkUlFpcTcwbkFNUlc5WDI0d1N5VXNrPSIsIml2UGFyYW1ldGVyU3BlYyI6IjJnY3pJRjVnNkZ2UVJyM2wiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=dev)
+![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZnR3cHhDRFhrcWYyMGNrRGoyeXkzZDFjbm05MVlIcDBPZktxV01Fc2RtTFJ2V1N6aHQ5Q1cwUlF6Nlp2ZkNzODEwY3RzUkxSSEpVRjYydnJkQzJDcHMwPSIsIml2UGFyYW1ldGVyU3BlYyI6Ikd6dDNtRmp3T21iSmZTdkIiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=dev)
 
 Serverless project used to build a web application to
 detect trailer numbers on a trailer
 
-### Development Tooling For Best Practices
+### Project Directory Overview
 #### cfn-lint (cloudformation Linting)
 [cfn-lint](https://github.com/aws-cloudformation/cfn-python-lint.git) Provides yaml/json cloudformation validation and checks for best practices
 
