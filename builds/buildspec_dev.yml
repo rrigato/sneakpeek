@@ -27,6 +27,8 @@ phases:
     commands:
       - echo Entered the install phase...
 
+      - git status
+      - git branch
 
       - pip install -r tests/requirements.txt
       - ls -l
