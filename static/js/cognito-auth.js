@@ -1,4 +1,16 @@
-/*global WildRydes _config AmazonCognitoIdentity AWSCognito*/
+/*
+This javascript handles the following scenarios:
+
+1) user register with cognito user pool
+handleRegister function
+
+2) user sign in
+handleSignin
+
+Once the user is signed in, this function returns
+the user to upload.html and creates a cognito session which
+includes a cognito token
+*/
 
 var WildRydes = window.WildRydes || {};
 
