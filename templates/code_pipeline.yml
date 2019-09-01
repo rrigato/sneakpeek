@@ -33,8 +33,6 @@ Resources:
   ArtifactStoreBucket:
     Type: AWS::S3::Bucket
     Properties:
-      VersioningConfiguration:
-        Status: Enabled
       AccessControl: BucketOwnerFullControl
       Tags:
         -
