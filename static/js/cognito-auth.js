@@ -10,6 +10,9 @@ handleSignin
 Once the user is signed in, this function returns
 the user to upload.html and creates a cognito session which
 includes a cognito token
+
+The cognito user pool for login/registration is
+from templates/cognito.yml
 */
 
 var WildRydes = window.WildRydes || {};
@@ -41,6 +44,8 @@ var WildRydes = window.WildRydes || {};
         userPool.getCurrentUser().signOut();
     };
 
+    //Gets user session and fetches auth token from cognito user
+    //pool
     WildRydes.authToken = new Promise(function fetchCurrentAuthToken(resolve, reject) {
         var cognitoUser = userPool.getCurrentUser();
 
@@ -94,7 +99,7 @@ var WildRydes = window.WildRydes || {};
             onFailure: onFailure
         });
     }
-
+    //Email verification for registration 
     function verify(email, code, onSuccess, onFailure) {
         createCognitoUser(email).confirmRegistration(code, true, function confirmCallback(err, result) {
             if (!err) {
@@ -126,6 +131,7 @@ var WildRydes = window.WildRydes || {};
         $('#verifyForm').submit(handleVerify);
     });
 
+    //Signs user in and redirects to upload.html
     function handleSignin(event) {
         var email = $('#emailInputSignin').val();
         var password = $('#passwordInputSignin').val();
@@ -133,7 +139,7 @@ var WildRydes = window.WildRydes || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Logged In');
-                window.location.href = 'ride.html';
+                window.location.href = 'html.html';
             },
             function signinError(err) {
                 alert(err);
