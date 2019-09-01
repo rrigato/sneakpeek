@@ -63,6 +63,11 @@ Resources:
               - - !Ref NamePrefix
                 - "-sneakpeek-table"
 
+
+
+
+
+
 #########################
 #The role that lambda will assume when it
 #calls DynamoDB
@@ -171,6 +176,11 @@ Resources:
 ###########################################
   UploadBucket:
     Properties:
+      #s3 managed encryption of buckets
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: AES256
       BucketName:
         Fn::Join:
             - ""
