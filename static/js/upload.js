@@ -53,8 +53,8 @@ $(document).ready(function(){
                     // Cognito identity pool credentials config session
                     //[] allows you to use a variable as an object key
                     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-        				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5',
-                        RoleArn: 'arn:aws:iam::350255258796:role/Cognito_test_s3_identity_poolAuth_Role',
+        				IdentityPoolId: '<IDENTITY_POOL_ID_HERE>',
+                        RoleArn: '<IDENTITY_POOL_AUTH_FLOW_ROLE_ARN_HERE>',
         				Logins: {
         					[userPoolSignIn] : result.getIdToken().getJwtToken()
         				}
@@ -84,7 +84,7 @@ $(document).ready(function(){
         s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
         var params = {
-         Bucket: 'dev-sneakpeek-image-trailer-repo',
+         Bucket: '<UPLOAD_BUCKET_NAME>',
          Delimiter: '/',
          Prefix: ''
         }
@@ -104,14 +104,15 @@ $(document).ready(function(){
       var fileName = file.name;
       //url encodes the bucket name
       var albumPhotosKey = encodeURIComponent(albumName) + '//';
-
+      console.log("Check 2");
       var photoKey = albumPhotosKey + fileName;
       s3.upload({
-        Key: photoKey,
-        Body: file,
-        ACL: 'public-read'
+        Bucket: albumName,
+        Key: fileName,
+        Body: file
       }, function(err, data) {
         if (err) {
+            console.log(err);
           return alert('There was an error uploading your photo: ', err.message);
         }
         alert('Successfully uploaded photo.');
@@ -129,7 +130,7 @@ $(document).ready(function(){
 
     $("form").on('submit', function (error) {
        //ajax call here
-       addPhoto('dev-sneakpeek-image-trailer-repo');
+       addPhoto('<UPLOAD_BUCKET_NAME>');
     });
 
 });
