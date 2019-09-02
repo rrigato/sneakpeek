@@ -95,6 +95,29 @@ $(document).ready(function(){
         });
     }
 
+    function addPhoto(albumName) {
+      var files = document.getElementById('photo-upload').files;
+      if (!files.length) {
+        return alert('Please choose a file to upload first.');
+      }
+      var file = files[0];
+      var fileName = file.name;
+      var albumPhotosKey = encodeURIComponent(albumName) + '//';
+
+      var photoKey = albumPhotosKey + fileName;
+      s3.upload({
+        Key: photoKey,
+        Body: file,
+        ACL: 'public-read'
+      }, function(err, data) {
+        if (err) {
+          return alert('There was an error uploading your photo: ', err.message);
+        }
+        alert('Successfully uploaded photo.');
+
+      });
+    }
+
     verifySignIn();
     createPool();
     postS3Bucket();
