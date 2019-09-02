@@ -34,8 +34,8 @@ function verifySignIn(){
     //Constructing user pool identity provider sign
     //in string
     var userPoolSignIn = (
-        'cognito-idp.'  + _config.cognito.region +
-        + '.amazonaws.com/' +
+        'cognito-idp.'  + _config.cognito.region
+     + '.amazonaws.com/' +
         _config.cognito.userPoolId
     );
     if (cognitoUser != null) {
@@ -52,11 +52,10 @@ function verifySignIn(){
                 // Cognito identity pool credentials config session
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5',
-                    RoleArn: 'arn:aws:iam::350255258796:role/Cognito_test_s3_identity_poolUnauth_Role'
-                    //,
-    				// Logins: {
-    				// 	userPoolSignIn : result.getIdToken().getJwtToken()
-    				// }
+                    RoleArn: 'arn:aws:iam::350255258796:role/Cognito_test_s3_identity_poolAuth_Role',
+    				Logins: {
+    					userPoolSignIn : result.getIdToken().getJwtToken()
+    				}
     			});
 
                 console.log(AWS.config.credentials.get());
@@ -83,13 +82,15 @@ function postS3Bucket(){
     // Create S3 service object
     s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
-    // Call S3 to list the buckets
-    s3.listBuckets(function(err, data) {
-      if (err) {
-        console.log("Error", err);
-      } else {
-        console.log("Success", data.Buckets);
-      }
+    var params = {
+     Bucket: 'dev-sneakpeek-image-trailer-repo',
+     Delimiter: '/',
+     Prefix: ''
+    }
+
+    s3.listObjects(params, function (err, data) {
+     if(err)throw err;
+     console.log(data);
     });
 }
 
