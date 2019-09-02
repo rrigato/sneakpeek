@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
-    //Clearing cache
-    AWS.config.credentials.clearCachedId();
+
     function createPool(){
         var cognitoUserPool = {
             UserPoolId: _config.cognito.userPoolId,
@@ -55,4 +54,6 @@ function postS3Bucket(){
 
 
 createPool();
+
+console.log(AWS.config.credentials);
 });
