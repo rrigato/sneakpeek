@@ -15,8 +15,7 @@
         <link rel="stylesheet" href="css/font.css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/index.css">
-        <link rel="stylesheet" href="/css/message.css">
-        <link rel="stylesheet" href="/css/register.css">
+        <link rel="stylesheet" href="css/message.css">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -36,27 +35,18 @@
         </div>
 
         <header>
-            <a href="/"><img src="images/logo.png"></a>
+          <img src="images/logo.png">
         </header>
 
 
         <section class="form-wrap">
             <h1>Sign In</h1>
-            <!--
-            form user signs in with to get a cognito auth
-            token
-            -->
             <form id="signinForm">
               <input type="email" id="emailInputSignin" placeholder="Email" required>
               <input type="password" id="passwordInputSignin" placeholder="Password" pattern=".*" required>
 
               <input type="submit" value="Sign in">
             </form>
-
-            <div id="register-home">
-
-             <a href="/register.html">Click here to Create Account</a>
-         </div>
         </section>
 
         <script src="js/vendor/jquery-3.1.0.js"></script>
