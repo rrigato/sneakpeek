@@ -199,6 +199,7 @@ Resources:
               - "*"
             #HTTP methods allowed on bucket
             AllowedMethods:
+              - "GET"
               - "POST"
             #allowed origin domain names
             AllowedOrigins:
