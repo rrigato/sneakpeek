@@ -1,4 +1,25 @@
+
+var UploadSession = window.UploadSession || {};
 $(document).ready(function(){
+
+function verifySignIn(){
+    /*********
+    *Makes sure the user is signed in first
+    *redirects to signin.html if they are not
+    *
+    **********/
+    UploadSession.authToken.then(function setAuthToken(token) {
+        console.log(token);
+        if (token) {
+            authToken = token;
+        } else {
+            window.location.href = '/signin.html';
+        }
+    }).catch(function handleTokenError(error) {
+        alert(error);
+        window.location.href = '/signin.html';
+    });
+}
 
 
     function createPool(){
@@ -9,6 +30,8 @@ $(document).ready(function(){
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(cognitoUserPool);
     var cognitoUser = userPool.getCurrentUser();
 
+    //Constructing user pool identity provider sign
+    //in string
     var userPoolSignIn = (
         'cognito-idp.'  + _config.cognito.region +
         + '.amazonaws.com/' +
@@ -18,13 +41,8 @@ $(document).ready(function(){
     	cognitoUser.getSession(function(err, result) {
     		if (result) {
 
-                //Constructing user pool identity provider sign
-                //in string
-                var userPoolSignIn =  (
-                    'cognito-idp.' + _config.cognito.region
-                    + '.amazonaws.com/'
-                    + _config.cognito.userPoolId
-                );
+
+
     			console.log('Logged into user pool');
 
 
@@ -60,7 +78,7 @@ function postS3Bucket(){
     });
 }
 
-
+verifySignIn();
 createPool();
 
 
