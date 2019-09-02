@@ -51,10 +51,11 @@ function verifySignIn(){
     			// Add the User's Id Token to the
                 // Cognito identity pool credentials config session
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5',
-    				Logins: {
-    					userPoolSignIn : result.getIdToken().getJwtToken()
-    				}
+    				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5'
+                    //,
+    				// Logins: {
+    				// 	userPoolSignIn : result.getIdToken().getJwtToken()
+    				// }
     			});
 
                 console.log(AWS.config.credentials);
