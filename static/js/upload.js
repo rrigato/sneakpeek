@@ -1,5 +1,6 @@
 
-var UploadSession = window.UploadSession || {};
+var WildRydes = window.WildRydes || {};
+WildRydes.map = WildRydes.map || {};
 $(document).ready(function(){
 
 function verifySignIn(){
@@ -8,7 +9,7 @@ function verifySignIn(){
     *redirects to signin.html if they are not
     *
     **********/
-    UploadSession.authToken.then(function setAuthToken(token) {
+    WildRydes.authToken.then(function setAuthToken(token) {
         console.log(token);
         if (token) {
             authToken = token;
