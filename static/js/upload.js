@@ -9,6 +9,11 @@ $(document).ready(function(){
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(cognitoUserPool);
     var cognitoUser = userPool.getCurrentUser();
 
+    var userPoolSignIn = (
+        'cognito-idp.'  + _config.cognito.region +
+        + '.amazonaws.com/' +
+        _config.cognito.userPoolId
+    );
     if (cognitoUser != null) {
     	cognitoUser.getSession(function(err, result) {
     		if (result) {
@@ -20,9 +25,10 @@ $(document).ready(function(){
                     + '.amazonaws.com/'
                     + _config.cognito.userPoolId
                 );
-    			console.log('You are now logged in.');
+    			console.log('Logged into user pool');
 
-                console.log(result.getIdToken().getJwtToken());
+
+                AWS.config.region = _config.cognito.region;
     			// Add the User's Id Token to the
                 // Cognito identity pool credentials config session
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -31,7 +37,9 @@ $(document).ready(function(){
     					userPoolSignIn : result.getIdToken().getJwtToken()
     				}
     			});
-                AWS.config.region = _config.cognito.region;
+
+                console.log(AWS.config.credentials);
+
     		}
     	});
     }
@@ -55,5 +63,5 @@ function postS3Bucket(){
 
 createPool();
 
-console.log(AWS.config.credentials);
+
 });
