@@ -102,6 +102,7 @@ $(document).ready(function(){
       }
       var file = files[0];
       var fileName = file.name;
+      //url encodes the bucket name
       var albumPhotosKey = encodeURIComponent(albumName) + '//';
 
       var photoKey = albumPhotosKey + fileName;
@@ -121,6 +122,14 @@ $(document).ready(function(){
     verifySignIn();
     createPool();
     postS3Bucket();
+    //When a file is input, the addPhoto function is called
+    // $("input#photo-upload").change(
+    //
+    // );
 
+    $("form").on('submit', function (error) {
+       //ajax call here
+       addPhoto('dev-sneakpeek-image-trailer-repo');
+    });
 
 });
