@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+    //Clearing cache
+    AWS.config.credentials.clearCachedId();
     function createPool(){
         var cognitoUserPool = {
             UserPoolId: _config.cognito.userPoolId,
@@ -26,7 +29,7 @@ $(document).ready(function(){
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5',
     				Logins: {
-    					userPoolSignIn : x//result.getIdToken().getJwtToken()
+    					userPoolSignIn : result.getIdToken().getJwtToken()
     				}
     			});
                 AWS.config.region = _config.cognito.region;
