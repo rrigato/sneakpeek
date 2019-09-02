@@ -1,4 +1,4 @@
-
+$(document).ready(function(){
     function createPool(){
         var cognitoUserPool = {
             UserPoolId: _config.cognito.userPoolId,
@@ -52,4 +52,4 @@ function postS3Bucket(){
 
 
 createPool();
-(jQuery));
+});
