@@ -1,7 +1,7 @@
 
 var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
-$(document).ready(function(){
+
 
 function verifySignIn(){
     /*********
@@ -51,14 +51,25 @@ function verifySignIn(){
     			// Add the User's Id Token to the
                 // Cognito identity pool credentials config session
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5'
+    				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5',
+                    RoleArn: 'arn:aws:iam::350255258796:role/Cognito_test_s3_identity_poolUnauth_Role'
                     //,
     				// Logins: {
     				// 	userPoolSignIn : result.getIdToken().getJwtToken()
     				// }
     			});
 
+                console.log(AWS.config.credentials.get());
+                console.log("test message 1");
                 console.log(AWS.config.credentials);
+                AWS.config.credentials.get(function(){
+
+                // Credentials will be available when this function is called.
+                var accessKeyId = AWS.config.credentials.accessKeyId;
+                var secretAccessKey = AWS.config.credentials.secretAccessKey;
+                var sessionToken = AWS.config.credentials.sessionToken;
+                console.log(accessKeyId);
+            });
 
     		}
     	});
@@ -67,6 +78,8 @@ function verifySignIn(){
 }
 
 function postS3Bucket(){
+    console.log("s3 buckets");
+    console.log(AWS.config.credentials);
     // Create S3 service object
     s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
@@ -82,6 +95,4 @@ function postS3Bucket(){
 
 verifySignIn();
 createPool();
-
-
-});
+postS3Bucket();
