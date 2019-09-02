@@ -99,7 +99,7 @@ var WildRydes = window.WildRydes || {};
             onFailure: onFailure
         });
     }
-    //Email verification for registration 
+    //Email verification for registration
     function verify(email, code, onSuccess, onFailure) {
         createCognitoUser(email).confirmRegistration(code, true, function confirmCallback(err, result) {
             if (!err) {
@@ -139,7 +139,7 @@ var WildRydes = window.WildRydes || {};
         signin(email, password,
             function signinSuccess() {
                 console.log('Successfully Logged In');
-                window.location.href = 'html.html';
+                window.location.href = 'upload.html';
             },
             function signinError(err) {
                 alert(err);
