@@ -31,36 +31,37 @@ function verifySignIn(){
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(cognitoUserPool);
     var cognitoUser = userPool.getCurrentUser();
 
-    //Constructing user pool identity provider sign
-    //in string
-    var userPoolSignIn = (
-        'cognito-idp.'  + _config.cognito.region
-     + '.amazonaws.com/' +
-        _config.cognito.userPoolId
-    );
+
     if (cognitoUser != null) {
     	cognitoUser.getSession(function(err, result) {
     		if (result) {
 
+                //Constructing user pool identity provider sign
+                //in string
+                var userPoolSignIn = (
+                    'cognito-idp.'  + _config.cognito.region
+                 + '.amazonaws.com/' +
+                    _config.cognito.userPoolId
+                );
 
-
+                console.log(userPoolSignIn);
     			console.log('Logged into user pool');
 
 
                 AWS.config.region = _config.cognito.region;
     			// Add the User's Id Token to the
                 // Cognito identity pool credentials config session
+                //[] allows you to use a variable as an object key
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5',
                     RoleArn: 'arn:aws:iam::350255258796:role/Cognito_test_s3_identity_poolAuth_Role',
     				Logins: {
-    					userPoolSignIn : result.getIdToken().getJwtToken()
+    					[userPoolSignIn] : result.getIdToken().getJwtToken()
     				}
     			});
 
-                console.log(AWS.config.credentials.get());
                 console.log("test message 1");
-                console.log(AWS.config.credentials);
+
                 AWS.config.credentials.get(function(){
 
                 // Credentials will be available when this function is called.
