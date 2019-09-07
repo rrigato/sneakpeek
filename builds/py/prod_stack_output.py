@@ -134,6 +134,13 @@ def populate_json(input_dict, webpage_config_dir):
     original_file['cognito']['userPoolClientId'] = (
         input_dict['UserPoolClientId'])
 
+
+    original_file['cognito']['IdentityPoolId'] = (
+        input_dict['IdentityPoolId'])
+
+    original_file['cognito']['IdentityAuthorizedRoleArn'] = (
+        input_dict['IdentityAuthorizedRoleArn'])
+
     logging.info("Assigned outputs from cloudformation template")
 
     with open(webpage_config_dir, 'w') as modified_config:
@@ -169,7 +176,7 @@ def main():
     """
     cf_output_values = [
         'UserPoolClientId', 'UserPoolId',
-        'CognitoAuthorizedRoleArn', 'IdentityPoolId'
+        'IdentityAuthorizedRoleArn', 'IdentityPoolId'
     ]
 
     for cf_output in cf_output_values:
