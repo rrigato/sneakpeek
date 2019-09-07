@@ -100,14 +100,14 @@ $(document).ready(function(){
       if (!files.length) {
         return alert('Please choose a file to upload first.');
       }
-
       s3 = new AWS.S3({apiVersion: '2006-03-01',
-  params:{Bucket: albumBucketName}});
+      params:{Bucket: albumName}});
       var file = files[0];
       var fileName = file.name;
       //url encodes the bucket name
       var albumPhotosKey = encodeURIComponent(albumName) + '//';
-      console.log("Check 2");
+      console.log(aws.config);
+
       var photoKey = albumPhotosKey + fileName;
 
       var params = {
@@ -137,9 +137,11 @@ $(document).ready(function(){
     //
     // );
 
-    $("form").on('submit', function (error) {
+    var button = document.getElementById('upload-button');
+    button.addEventListener('click', function() {
        //ajax call here
        addPhoto('dev-sneakpeek-image-trailer-repo');
-    });
+
+   });
 
 });
