@@ -1,8 +1,8 @@
 {
     "cognito": {
-        "identityPoolId":"",
-        "identityPoolAuthArn":"",
-        "identityPoolUnAuthArn":"",
+        "IdentityPoolId":"",
+        "IdentityAuthorizedRoleArn":"",
+        "IdentityUnAuthorizedRole":"",
         "userPoolId": "",
         "userPoolClientId": "",
         "region": "us-east-1"
