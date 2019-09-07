@@ -26,7 +26,7 @@ Resources:
         Fn::Join:
             - ""
             - - !Ref NamePrefix
-              - "SneakPeekUserPool"           
+              - "SneakPeekUserPool"
       ###############
       #Allowable attributes for the user pool:
       #valid values are phone_number, email, or preferred_username
@@ -159,11 +159,11 @@ Resources:
 
 Outputs:
 
-  CognitoAuthorizedRoleArn:
+  IdentityAuthorizedRoleArn:
       Value: !GetAtt [CognitoAuthorizedRole, Arn]
       Description: Arn for the authorized user role
 
-  CognitoUnAuthorizedRole:
+  IdentityUnAuthorizedRole:
       Value: !GetAtt [CognitoUnAuthorizedRole, Arn]
       Description: Arn for the unauthorized user role
 
