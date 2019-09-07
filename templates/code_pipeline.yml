@@ -247,6 +247,9 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
+              #Allows cognito.yml cloudformation template
+              #to create iam users
+              Capabilities: CAPABILITY_IAM
               RoleArn: !GetAtt [CognitoRole, Arn]
               ################################
               #Appends cognito- to the prod stack
