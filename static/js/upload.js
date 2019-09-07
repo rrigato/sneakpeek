@@ -53,8 +53,8 @@ $(document).ready(function(){
                     // Cognito identity pool credentials config session
                     //[] allows you to use a variable as an object key
                     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-        				IdentityPoolId: '<IDENTITY_POOL_ID_HERE>',
-                        RoleArn: '<IDENTITY_POOL_AUTH_FLOW_ROLE_ARN_HERE>',
+        				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5',
+                        RoleArn: 'arn:aws:iam::350255258796:role/Cognito_test_s3_identity_poolAuth_Role',
         				Logins: {
         					[userPoolSignIn] : result.getIdToken().getJwtToken()
         				}
