@@ -1,0 +1,18 @@
+{
+	"data": [{
+			"loadnumber": 12345,
+			"uploadtime": "2019-09-06",
+			"imageclass": 0
+		},
+		{
+			"loadnumber": 54321,
+			"uploadtime": "2018-09-06",
+			"imageclass": 4
+		},
+		{
+			"loadnumber": 10000,
+			"uploadtime": "2017-09-06",
+			"imageclass": 3
+		}
+	]
+}
