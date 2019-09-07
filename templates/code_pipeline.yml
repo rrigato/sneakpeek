@@ -541,6 +541,7 @@ Resources:
                     - iam:DetachRolePolicy
                     - iam:DeleteRolePolicy
                     - iam:DeleteRole
+                    - iam:PutRolePolicy
                   Resource:
                     - "*"
   # CodePipelineIam:
