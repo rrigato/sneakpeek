@@ -134,6 +134,12 @@ def populate_json(input_dict, webpage_config_dir):
     original_file['cognito']['userPoolClientId'] = (
         input_dict['UserPoolClientId'])
 
+    original_file['cognito']['IdentityPoolId'] = (
+        input_dict['IdentityPoolId'])
+
+    original_file['cognito']['IdentityAuthorizedRoleArn'] = (
+        input_dict['IdentityAuthorizedRoleArn'])
+
     import pdb; pdb.set_trace()
     logging.info("Assigned outputs from cloudformation template")
 
@@ -174,17 +180,20 @@ def main():
     ]
 
     for cf_output in cf_output_values:
-    """
-        First getting output values from
-        /templates/cognito.yml
+        """
+            First getting output values from
+            /templates/cognito.yml
 
-        Then getting output values from
-        /templates/backend.yml
-    """
+            Then getting output values from
+            /templates/backend.yml
+        """
+        logging.info("Processed cloudformation output value:")
+        logging.info(cf_output)
         output_dict = iterate_outputs(
                 output_values = cf_response['Outputs'],
                 output_key = cf_output,
                 input_dict = output_dict)
+
 
 
 
