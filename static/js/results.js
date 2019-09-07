@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 
     verifySignIn();
-
+    appendTable();
 
 
 });
