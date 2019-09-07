@@ -14,6 +14,8 @@ Below is a high level description of the automated CI/CD pipeline:
 
 3) Any build errors that occur testing on this qa environment will halt the pipeline before any changes are made to production
 
+![QA Code Build Failes](devops/images/pipeline_demo_3.jpg "Title")
+
 
 4) Once all unit tests are passed the qa environment cloudformation stacks are deleted and the changes are migrated to production. Code Build tests are run on prod and once successfully passed the changes are merged into the master branch
 
