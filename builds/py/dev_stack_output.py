@@ -134,6 +134,7 @@ def populate_json(input_dict, webpage_config_dir):
     original_file['cognito']['userPoolClientId'] = (
         input_dict['UserPoolClientId'])
 
+    import pdb; pdb.set_trace()
     logging.info("Assigned outputs from cloudformation template")
 
     with open(webpage_config_dir, 'w') as modified_config:
@@ -165,21 +166,26 @@ def main():
     output_dict = {}
 
     """
+        Cloudformation outputs that need to be iterated over
+    """
+    cf_output_values = [
+        'UserPoolClientId', 'UserPoolId',
+        'CognitoAuthorizedRoleArn', 'IdentityPoolId'
+    ]
+
+    for cf_output in cf_output_values:
+    """
         First getting output values from
         /templates/cognito.yml
 
         Then getting output values from
         /templates/backend.yml
     """
-    output_dict = iterate_outputs(
-            output_values = cf_response['Outputs'],
-            output_key = 'UserPoolClientId',
-            input_dict = output_dict)
+        output_dict = iterate_outputs(
+                output_values = cf_response['Outputs'],
+                output_key = cf_output,
+                input_dict = output_dict)
 
-    output_dict = iterate_outputs(
-            output_values = cf_response['Outputs'],
-            output_key = 'UserPoolId',
-            input_dict = output_dict)
 
 
     """
