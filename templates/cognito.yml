@@ -61,7 +61,7 @@ Resources:
         Fn::Join:
             - ""
             - - !Ref NamePrefix
-              - "-identity-pool"
+              - "SneakPeekIdentityPool"
       AllowUnauthenticatedIdentities: true
       CognitoIdentityProviders:
         - ClientId: !Ref UserPoolClient
@@ -141,8 +141,12 @@ Resources:
 Outputs:
 
   CognitoAuthorizedRoleArn:
-      Value: !GetAtt [CognitoAuthorizedRole, Arn] 
+      Value: !GetAtt [CognitoAuthorizedRole, Arn]
       Description: Arn for the authorized user role
+
+  CognitoUnAuthorizedRole:
+      Value: !GetAtt [CognitoUnAuthorizedRole, Arn]
+      Description: Arn for the unauthorized user role
 
   IdentityPoolId:
     Value: !Ref IdentityPool
