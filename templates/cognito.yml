@@ -6,10 +6,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Builds end user authentication resources using AWS Cognito
 Resources:
+
   ######################################
-  #Cognito User pools are used for sign in
-  #and verification
-  #
+  #Cognito User pools are used for authentication
+  #You are who you say you are
   #####################################
   UserPool:
     Type: AWS::Cognito::UserPool
@@ -37,6 +37,24 @@ Resources:
       ClientName: SneakPeekWeb
       UserPoolId: !Ref UserPool
       GenerateSecret: false
+
+
+  ######################################
+  #Cognito identity pools are used for authorization
+  #you are allowed to do actions x,y,z
+  # In a practical sense this is used for
+  # granting a role to the client so that
+  #short term privleges can be granted
+  #####################################
+  IdentityPool:
+    Type: "AWS::Cognito::IdentityPool"
+    Properties:
+      IdentityPoolName: !Sub ${AuthName}Identity
+      AllowUnauthenticatedIdentities: true
+      CognitoIdentityProviders:
+        - ClientId: !Ref UserPoolClient
+          ProviderName: !GetAtt UserPool.ProviderName
+
 
 Outputs:
       UserPoolClientId:
