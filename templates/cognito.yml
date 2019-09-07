@@ -141,9 +141,9 @@ Resources:
 Outputs:
 
   CognitoAuthorizedRoleArn:
-      Value: !Ref CognitoAuthorizedRole
+      Value: !GetAtt [CognitoAuthorizedRole, Arn] 
       Description: Arn for the authorized user role
-      
+
   IdentityPoolId:
     Value: !Ref IdentityPool
     Description: Specifies roles that can be assumed by end users
