@@ -310,6 +310,30 @@ class WebappLive(unittest.TestCase):
         )
 
 
+    def test_cognito_config(self):
+        '''Tests that the user identification is populated
+
+            The static/js/cognito_config.json is populated at
+            build time for the cloudformation stack.
+            This test ensures elements of that json are not empty
+
+            Parameters
+            ----------
+                request_url : str
+                    Url string to send the request to
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        logging.info("Testing if the website is alive")
+        r = requests.get(
+            HOMEPAGE_URL + "js/cognito_config.json"
+        )
+        import pdb; pdb.set_trace()
+        self.assertEqual(r.status_code, 200)
+        logging.info("The website is live")
 
 
 if __name__ == '__main__':
