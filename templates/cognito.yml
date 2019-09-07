@@ -139,10 +139,16 @@ Resources:
 
 
 Outputs:
-      UserPoolClientId:
-        Description: Client ID used by webpage to connect to cognito
-        Value: !Ref UserPoolClient
 
-      UserPoolId:
-        Description: Amazon Cognito User Pool ID
-        Value: !Ref UserPool
+  IdentityPoolId:
+    Value: !Ref IdentityPool
+    Description: Specifies roles that can be assumed by end users
+    Export:
+      Name: "IdentityPool::Id"
+  UserPoolClientId:
+    Description: Client ID used by webpage to connect to cognito
+    Value: !Ref UserPoolClient
+
+  UserPoolId:
+    Description: Amazon Cognito User Pool ID
+    Value: !Ref UserPool
