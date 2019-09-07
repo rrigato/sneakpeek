@@ -14,6 +14,12 @@ Parameters:
     Default: WebApplication/1_StaticWebHosting
     Description: Key prefix for resources referenced from the CodeBucket
 
+  WebsiteDomainName:
+    Type: String
+    Default: "http://*.amazonaws.com"
+    Description: String for prefixing resources to differentiate prod/dev
+
+
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
