@@ -135,11 +135,6 @@ Resources:
                   - "s3:PutObject"
                   - "s3:PutObjectAcl"
                 Resource: "*"
-              - Effect: "Allow"
-                Action:
-                  - "s3:PutObject"
-                  - "s3:PutObjectAcl"
-                Resource: "*sneakpeek-image-trailer-repo*"
 
 
 Outputs:
