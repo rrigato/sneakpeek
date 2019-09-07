@@ -521,7 +521,26 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
       Path: /
-
+      Policies:
+          - PolicyName: PassIamRole
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Sid: IAMallow
+                  Effect: Allow
+                  #######################################
+                  #Allowing lambda to perform a PutItem on
+                  #DynamoDB
+                  #
+                  #######################################
+                  Action:
+                    - iam:PassRole
+                    - iam:CreateRole
+                    - iam:GetRole
+                    - iam:UpdateAssumeRolePolicy
+                    - iam:DetachRolePolicy
+                  Resource:
+                    - "*"
   # CodePipelineIam:
   #   Type: AWS::CloudFormation::Stack
   #   Properties:
