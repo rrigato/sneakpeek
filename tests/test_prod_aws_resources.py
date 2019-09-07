@@ -331,10 +331,33 @@ class WebappLive(unittest.TestCase):
         r = requests.get(
             HOMEPAGE_URL + "js/cognito_config.json"
         )
-        import pdb; pdb.set_trace()
-        self.assertEqual(r.status_code, 200)
-        logging.info("The website is live")
 
+        logging.info("Got the cognito configuration response")
+        json_response = r.json()
+
+        logging.info(json_response)
+
+        """
+            Checking that all key javascript configuration
+            values are populated
+        """
+        self.assertNotEqual(
+            json_response['cognito']['IdentityPoolId'],
+            "")
+
+        self.assertNotEqual(
+            json_response['cognito']['UserPoolId'],
+            "")
+
+        self.assertNotEqual(
+            json_response['cognito']['IdentityAuthorizedRoleArn'],
+            "")
+
+        self.assertNotEqual(
+            json_response['cognito']['userPoolClientId'],
+            "")
+
+        logging.info("All key config values are populated")
 
 if __name__ == '__main__':
     '''
