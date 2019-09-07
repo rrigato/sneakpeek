@@ -106,7 +106,7 @@ $(document).ready(function(){
       var fileName = file.name;
       //url encodes the bucket name
       var albumPhotosKey = encodeURIComponent(albumName) + '//';
-      console.log(aws.config);
+      console.log(AWS.config);
 
       var photoKey = albumPhotosKey + fileName;
 
