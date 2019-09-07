@@ -4,10 +4,14 @@
 *https://codepen.io/geoffyuen/pen/FCBEg
 ************/
 @import "https://fonts.googleapis.com/css?family=Montserrat:300,400,700";
+
+
 .rwd-table {
   margin: 1em 0;
-  min-width: 300px;
+  /*How much of the webpage the table takes up*/
+  min-width: 80%;
 }
+
 .rwd-table tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -54,6 +58,7 @@
 body {
   padding: 0 2em;
   font-family: Montserrat, sans-serif;
+  font-size:18px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color: #444;
