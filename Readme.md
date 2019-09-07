@@ -10,14 +10,17 @@ Below is a high level description of the automated CI/CD pipeline:
 1) When new code is pushed to the dev branch this triggers a code pipeline revision
 
 2) Multiple cloudformation stacks will be spun up to enable a clean environment that replicates production
-
+![Building QA CF Stacks](devops/images/pipeline_demo_2.png )
 
 3) Any build errors that occur testing on this qa environment will halt the pipeline before any changes are made to production
 
-![QA Code Build Failes](devops/images/pipeline_demo_3.jpg "Title")
+![QA Code Build Failes](devops/images/pipeline_demo_3.png )
 
 
 4) Once all unit tests are passed the qa environment cloudformation stacks are deleted and the changes are migrated to production. Code Build tests are run on prod and once successfully passed the changes are merged into the master branch
+
+![Prod Build](devops/images/pipeline_demo_4.png )
+
 
 ### Project Directory Overview
 #### cfn-lint (cloudformation Linting)
