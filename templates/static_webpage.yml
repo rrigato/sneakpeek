@@ -39,8 +39,27 @@ Metadata:
 
 Resources:
   WebsiteBucket:
+
     Properties:
       BucketName: !Ref BucketName
+      #########################
+      #Used to determine cross origin
+      #resource sharing rules for javascript
+      #we only want to allow the s3 bucket and
+      #eventually the domain name the site is registered
+      #under to be able to upload images to this bucket
+      ##########################
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            #HTTP methods allowed on bucket
+            AllowedMethods:
+              - "GET"
+              - "POST"
+            #allowed origin domain names
+            AllowedOrigins:
+              - !Ref WebsiteDomainName
       WebsiteConfiguration:
         IndexDocument: index.html
     Type: "AWS::S3::Bucket"
