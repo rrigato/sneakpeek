@@ -1,7 +1,16 @@
 ![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZnR3cHhDRFhrcWYyMGNrRGoyeXkzZDFjbm05MVlIcDBPZktxV01Fc2RtTFJ2V1N6aHQ5Q1cwUlF6Nlp2ZkNzODEwY3RzUkxSSEpVRjYydnJkQzJDcHMwPSIsIml2UGFyYW1ldGVyU3BlYyI6Ikd6dDNtRmp3T21iSmZTdkIiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=dev)
 
 Serverless project used to build a web application to
-detect trailer numbers on a trailer
+detect trailer utilization from an uploaded image
+
+### Code Pipeline Deployment process
+
+When new code is pushed to the dev branch this triggers a code pipeline build
+
+Multiple cloudformation stacks will be spun up to enable a clean environment that replicates production
+
+
+Any errors
 
 ### Project Directory Overview
 #### cfn-lint (cloudformation Linting)
