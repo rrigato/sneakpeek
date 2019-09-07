@@ -53,14 +53,13 @@ $(document).ready(function(){
                     // Cognito identity pool credentials config session
                     //[] allows you to use a variable as an object key
                     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-        				IdentityPoolId: 'us-east-1:5b715989-3e44-4988-87ef-46a625c974b5',
-                        RoleArn: 'arn:aws:iam::350255258796:role/Cognito_test_s3_identity_poolAuth_Role',
+        				IdentityPoolId: _config.cognito.IdentityPoolId,
+                        RoleArn: _config.cognito.IdentityAuthorizedRoleArn,
         				Logins: {
         					[userPoolSignIn] : result.getIdToken().getJwtToken()
         				}
         			});
 
-                    console.log("test message 1");
 
                     AWS.config.credentials.get(function(){
 
@@ -68,7 +67,6 @@ $(document).ready(function(){
                     var accessKeyId = AWS.config.credentials.accessKeyId;
                     var secretAccessKey = AWS.config.credentials.secretAccessKey;
                     var sessionToken = AWS.config.credentials.sessionToken;
-                    console.log(accessKeyId);
                 });
 
         		}
@@ -132,10 +130,7 @@ $(document).ready(function(){
     verifySignIn();
     createPool();
     postS3Bucket();
-    //When a file is input, the addPhoto function is called
-    // $("input#photo-upload").change(
-    //
-    // );
+
 
     var button = document.getElementById('upload-button');
     button.addEventListener('click', function() {
