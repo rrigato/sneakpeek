@@ -93,28 +93,33 @@ $(document).ready(function(){
         });
     }
 
-    function addPhoto(albumName) {
+    function addPhoto(bucketName) {
       var files = document.getElementById('photo-upload').files;
       if (!files.length) {
         return alert('Please choose a file to upload first.');
       }
-      s3 = new AWS.S3({apiVersion: '2006-03-01',
-      params:{Bucket: albumName}});
+      s3 = new AWS.S3({
+          apiVersion: '2006-03-01',
+          params:{Bucket: bucketName}}
+        );
       var file = files[0];
       var fileName = file.name;
       //url encodes the bucket name
-      var albumPhotosKey = encodeURIComponent(albumName) + '//';
+      var imagePhotoKey = encodeURIComponent(bucketName) + '//';
       console.log(AWS.config);
 
-      var photoKey = albumPhotosKey + fileName;
+      var photoKey = imagePhotoKey + fileName;
 
       var params = {
         ACL: 'public-read',
-        Bucket:albumName,
+        Bucket:bucketName,
         Key: fileName,
         Body: file,
         ContentType: file.type
     };
+    /*
+        Uploads image to s3 bucket
+    */
       s3.upload(params, function(err, data) {
         if (err) {
             console.log(err);
@@ -135,7 +140,7 @@ $(document).ready(function(){
     var button = document.getElementById('upload-button');
     button.addEventListener('click', function() {
        //ajax call here
-       addPhoto('dev-sneakpeek-image-trailer-repo');
+       addPhoto('prod-sneakpeek-image-trailer-repo');
 
    });
 
