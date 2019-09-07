@@ -244,6 +244,55 @@ class WebappLive(unittest.TestCase):
 
 
 
+    def test_cognito_config(self):
+        '''Tests that the user identification is populated
+
+            The static/js/cognito_config.json is populated at
+            build time for the cloudformation stack.
+            This test ensures elements of that json are not empty
+
+            Parameters
+            ----------
+                request_url : str
+                    Url string to send the request to
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        logging.info("Testing if the website is alive")
+        r = requests.get(
+            HOMEPAGE_URL + "js/cognito_config.json"
+        )
+
+        logging.info("Got the cognito configuration response")
+        json_response = r.json()
+
+        logging.info(json_response)
+
+        """
+            Checking that all key javascript configuration
+            values are populated
+        """
+        self.assertNotEqual(
+            json_response['cognito']['IdentityPoolId'],
+            "")
+
+        self.assertNotEqual(
+            json_response['cognito']['userPoolId'],
+            "")
+
+        self.assertNotEqual(
+            json_response['cognito']['IdentityAuthorizedRoleArn'],
+            "")
+
+        self.assertNotEqual(
+            json_response['cognito']['userPoolClientId'],
+            "")
+
+        logging.info("All key config values are populated")
+
 if __name__ == '__main__':
     '''
     parser = argparse.ArgumentParser(description='Process some integers.')
