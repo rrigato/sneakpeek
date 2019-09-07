@@ -111,12 +111,7 @@ phases:
       #runs tests on aws resources created in previous steps
       - python tests/test_dev_aws_resources.py
 
-      #merges dev branch into master now that all tests have
-      #been passed and artifacts created
-      - aws codecommit merge-branches-by-fast-forward
-        --source-commit-specifier dev
-        --destination-commit-specifier master
-        --repository-name sneakpeek
+
 
     finally:
       - echo cleaning up resources reguardless of test results

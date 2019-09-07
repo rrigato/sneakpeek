@@ -70,7 +70,7 @@ phases:
       #files get copied to the S3 bucket
       - python builds/py/prod_stack_output.py
 
-      
+
       - cd ./logs/
       - ls -l
       - cd ..
@@ -78,7 +78,13 @@ phases:
       #copies static files to newly created S3 resources
       - aws s3 cp ./static s3://prod-sneakpeek --recursive
 
-
+      #merges dev branch into master now that all tests have
+      #been passed and artifacts created
+      - aws codecommit merge-branches-by-fast-forward
+        --source-commit-specifier dev
+        --destination-commit-specifier master
+        --repository-name sneakpeek
+        
   post_build:
     commands:
       - echo Entered the post_build phase...
