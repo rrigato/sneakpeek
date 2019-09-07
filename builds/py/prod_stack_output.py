@@ -165,21 +165,27 @@ def main():
     output_dict = {}
 
     """
-        First getting output values from
-        /templates/cognito.yml
-
-        Then getting output values from
-        /templates/backend.yml
+        Cloudformation outputs that need to be iterated over
     """
-    output_dict = iterate_outputs(
-            output_values = cf_response['Outputs'],
-            output_key = 'UserPoolClientId',
-            input_dict = output_dict)
+    cf_output_values = [
+        'UserPoolClientId', 'UserPoolId',
+        'CognitoAuthorizedRoleArn', 'IdentityPoolId'
+    ]
 
-    output_dict = iterate_outputs(
-            output_values = cf_response['Outputs'],
-            output_key = 'UserPoolId',
-            input_dict = output_dict)
+    for cf_output in cf_output_values:
+        """
+            First getting output values from
+            /templates/cognito.yml
+
+            Then getting output values from
+            /templates/backend.yml
+        """
+        logging.info("Processed cloudformation output value:")
+        logging.info(cf_output)
+        output_dict = iterate_outputs(
+                output_values = cf_response['Outputs'],
+                output_key = cf_output,
+                input_dict = output_dict)
 
 
     """
