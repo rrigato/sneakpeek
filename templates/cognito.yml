@@ -5,6 +5,12 @@
 ###############################################
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Builds end user authentication resources using AWS Cognito
+Parameters:
+  NamePrefix:
+    Type: String
+    Default: prod
+    Description: String for prefixing resources to differentiate prod/dev
+
 Resources:
 
   ######################################
