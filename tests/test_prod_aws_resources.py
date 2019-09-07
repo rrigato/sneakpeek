@@ -346,7 +346,7 @@ class WebappLive(unittest.TestCase):
             "")
 
         self.assertNotEqual(
-            json_response['cognito']['UserPoolId'],
+            json_response['cognito']['userPoolId'],
             "")
 
         self.assertNotEqual(
