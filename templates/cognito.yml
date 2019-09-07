@@ -22,7 +22,11 @@ Resources:
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: SneakPeek
+      UserPoolName:
+        Fn::Join:
+            - ""
+            - - !Ref NamePrefix
+              - "SneakPeekUserPool"           
       ###############
       #Allowable attributes for the user pool:
       #valid values are phone_number, email, or preferred_username
@@ -42,7 +46,11 @@ Resources:
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      ClientName: SneakPeekWeb
+      ClientName:
+        Fn::Join:
+            - ""
+            - - !Ref NamePrefix
+              - "SneakPeekWebClient"
       UserPoolId: !Ref UserPool
       GenerateSecret: false
 
