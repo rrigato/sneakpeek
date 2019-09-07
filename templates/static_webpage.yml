@@ -9,11 +9,6 @@ Parameters:
     Type: String
     Description: The name for the bucket hosting your website, e.g. 'wildrydes-yourname'
 
-  CodeBucket:
-    Type: String
-    Default: wildrydes-us-east-1
-    Description: S3 bucket containing the code deployed by this template
-
   CodeKeyPrefix:
     Type: String
     Default: WebApplication/1_StaticWebHosting
@@ -31,7 +26,6 @@ Metadata:
         Label:
           default: "Advanced Configuration"
         Parameters:
-          - CodeBucket
           - CodeKeyPrefix
     ParameterLabels:
       BucketName:
