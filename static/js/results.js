@@ -29,7 +29,7 @@ $(document).ready(function(){
         *Appends html table with json response
         *
         **********/
-        $.getJSON( "http://dev-sneakpeek.s3-website-us-east-1.amazonaws.com/js/test_results.json",
+        $.getJSON( "http://prod-sneakpeek.s3-website-us-east-1.amazonaws.com/js/test_results.json",
         function( json_response ) {
             console.log(json_response);
         //   var items = [];
