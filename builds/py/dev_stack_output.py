@@ -230,7 +230,11 @@ def main():
         cf_response=cf_cognito_response
         )
 
-
+    output_dict = iterate_stack_outputs(
+        cf_output_dict=output_dict,
+        cf_output_list=cf_backend_values,
+        cf_response=cf_backend_response
+        )
 
     """
         Populates the /static/js/cognito_config.json
