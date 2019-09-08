@@ -100,6 +100,27 @@ def iterate_outputs(output_values, output_key, input_dict):
     logging.info(input_dict)
     return(input_dict)
 
+def iterate_stack(output_dict):
+    '''Populates cognito_config.json file
+
+        Parameters
+        ----------
+        outpur_dict : dict
+            Dict that needs to be appended with cloudformation
+            output names and values
+
+        webpage_config_dir : str
+            Relative directory and file extension to json file
+            When running CodeBuild this will populate the json file
+            which will get pushed to s3
+
+        Returns
+        -------
+
+        Raises
+        ------
+    '''
+
 def populate_json(input_dict, webpage_config_dir):
     '''Populates cognito_config.json file
 
