@@ -9,5 +9,8 @@
     },
     "api": {
         "invokeUrl": ""
+    },
+    "backend":{
+        "ImageUploadBucket":""
     }
 }
