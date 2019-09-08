@@ -100,26 +100,45 @@ def iterate_outputs(output_values, output_key, input_dict):
     logging.info(input_dict)
     return(input_dict)
 
-def iterate_stack(output_dict):
+def iterate_stack(cf_output_dict, cf_output_list):
     '''Populates cognito_config.json file
 
         Parameters
         ----------
-        outpur_dict : dict
+        cf_output_dict : dict
             Dict that needs to be appended with cloudformation
             output names and values
 
-        webpage_config_dir : str
-            Relative directory and file extension to json file
-            When running CodeBuild this will populate the json file
-            which will get pushed to s3
+        cf_output_list : list
+            List of cloudformation output names to
+             iterate over
 
         Returns
         -------
+        output_dict : dict
+            Dict where the key is the cloudformation
+            output name and the value is the cloudformation
+            output value
 
         Raises
         ------
     '''
+
+    for cf_output in cf_output_list:
+        """
+            iterates over every output name in
+            the list
+
+        """
+        logging.info("Processed cloudformation output value:")
+        logging.info(cf_output)
+        output_dict = iterate_outputs(
+                output_values = cf_response['Outputs'],
+                output_key = cf_output,
+                input_dict = output_dict)
+
+    return(output_dict)
+
 
 def populate_json(input_dict, webpage_config_dir):
     '''Populates cognito_config.json file
