@@ -1,4 +1,12 @@
-
+/************************
+*Handles image upload to S3
+*
+*Note: _config is set when the js/config.js
+*script is run to populate build time variables
+*For references dependent on cloudformation resource
+*creation
+*
+*************************/
 var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 $(document).ready(function(){
@@ -139,8 +147,8 @@ $(document).ready(function(){
 
     var button = document.getElementById('upload-button');
     button.addEventListener('click', function() {
-       //ajax call here
-       addPhoto('prod-sneakpeek-image-trailer-repo');
+       //ajax call using _config bucket name
+       addPhoto(_config.backend.ImageUploadBucket);
 
    });
 
