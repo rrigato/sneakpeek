@@ -217,6 +217,10 @@ Outputs:
 #the above link provides all of the resources that
 #can be used from a sam event source
 ##################################
+
+  ImageUploadBucket:
+    Description: Provides Bucket name for image repo
+    Value: !Ref UploadBucket
   RideEndpoint:
     #gets the Arn associated with the API GW
     #used as an event source for the lambda function
