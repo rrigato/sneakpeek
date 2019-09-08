@@ -357,6 +357,10 @@ class WebappLive(unittest.TestCase):
             json_response['cognito']['userPoolClientId'],
             "")
 
+        self.assertNotEqual(
+            json_response['backend']['ImageUploadBucket'],
+            "")
+            
         logging.info("All key config values are populated")
 
 if __name__ == '__main__':
