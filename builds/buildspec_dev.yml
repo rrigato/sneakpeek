@@ -66,13 +66,18 @@ phases:
 
       #Waits until the stack has been successfully created
       - aws cloudformation wait stack-create-complete
-        --stack-name dev-sneakpeek-backend
+        --stack-name dev-sneakpeek-website
+
 
 
 
       #allows us to execute shell script and then runs it
       - chmod +x lambda/create_deployment_package.sh
       - ./lambda/create_deployment_package.sh
+
+
+      #waiting for backend function
+      - python tests/cf_waiter.py dev-sneakpeek-backend
 
       #populates the ./static/js/cognito_config.json
       - python builds/py/dev_stack_output.py
@@ -89,8 +94,7 @@ phases:
       - aws s3 cp ./ride.zip s3://cf-to-backend/ride.zip
 
 
-      #waiting for backend function
-      - python tests/cf_waiter.py dev-sneakpeek-backend
+
 
       #Waits until the stack has been successfully created
     #   - aws cloudformation wait stack-create-complete
