@@ -100,7 +100,8 @@ def iterate_outputs(output_values, output_key, input_dict):
     logging.info(input_dict)
     return(input_dict)
 
-def iterate_stack(cf_output_dict, cf_output_list):
+def iterate_stack(cf_output_dict, cf_output_list,
+    cf_response):
     '''Populates cognito_config.json file
 
         Parameters
@@ -113,9 +114,12 @@ def iterate_stack(cf_output_dict, cf_output_list):
             List of cloudformation output names to
              iterate over
 
+        cf_response : dict
+            Json returned by the describe stacks api call
+
         Returns
         -------
-        output_dict : dict
+        cf_output_dict : dict
             Dict where the key is the cloudformation
             output name and the value is the cloudformation
             output value
@@ -132,12 +136,12 @@ def iterate_stack(cf_output_dict, cf_output_list):
         """
         logging.info("Processed cloudformation output value:")
         logging.info(cf_output)
-        output_dict = iterate_outputs(
+        cf_output_dict = iterate_outputs(
                 output_values = cf_response['Outputs'],
                 output_key = cf_output,
-                input_dict = output_dict)
+                input_dict = cf_output_dict)
 
-    return(output_dict)
+    return(cf_output_dict)
 
 
 def populate_json(input_dict, webpage_config_dir):
