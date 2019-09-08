@@ -232,6 +232,10 @@ def main():
         'IdentityAuthorizedRoleArn', 'IdentityPoolId'
     ]
 
+    cf_backend_values= [
+        'ImageUploadBucket'
+    ]
+    
     output_dict = iterate_stack_outputs(
         cf_output_dict=output_dict,
         cf_output_list=cf_output_values,
