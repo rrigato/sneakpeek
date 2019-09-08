@@ -169,6 +169,8 @@ def populate_json(input_dict, webpage_config_dir):
     logging.info("Read in JSON from the following directory: ")
     logging.info(WORKING_DIRECTORY + webpage_config_dir)
 
+    logging.info("Original file before modification: ")
+    logging.info(original_file)
 
     """
         Assigning fields based on queried output file
@@ -179,19 +181,25 @@ def populate_json(input_dict, webpage_config_dir):
     original_file['cognito']['userPoolClientId'] = (
         input_dict['UserPoolClientId'])
 
+
     original_file['cognito']['IdentityPoolId'] = (
         input_dict['IdentityPoolId'])
 
     original_file['cognito']['IdentityAuthorizedRoleArn'] = (
         input_dict['IdentityAuthorizedRoleArn'])
 
+    original_file['backend']['ImageUploadBucket'] = (
+        input_dict['ImageUploadBucket'])
 
-    logging.info("Assigned outputs from cloudformation template")
+    logging.info("config file after modification: ")
+
+    logging.info(original_file)
 
     with open(webpage_config_dir, 'w') as modified_config:
         json.dump(original_file, modified_config, indent=4)
 
     logging.info("Wrote the new cognito credientials to the config file")
+
 
 
 
@@ -235,6 +243,7 @@ def main():
         cf_output_list=cf_backend_values,
         cf_response=cf_backend_response
         )
+
 
     """
         Populates the /static/js/cognito_config.json
