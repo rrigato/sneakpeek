@@ -162,7 +162,7 @@ def main():
         ------
     '''
     get_logger()
-    cf_response = describe_stacks_response(
+    cf_cognito_response = describe_stacks_response(
             stack_name='cognito-prod-sneakpeek'
             )
     cf_backend_response = describe_stacks_response(
@@ -179,21 +179,11 @@ def main():
         'IdentityAuthorizedRoleArn', 'IdentityPoolId'
     ]
 
-    for cf_output in cf_output_values:
-        """
-            First getting output values from
-            /templates/cognito.yml
-
-            Then getting output values from
-            /templates/backend.yml
-        """
-        logging.info("Processed cloudformation output value:")
-        logging.info(cf_output)
-        output_dict = iterate_outputs(
-                output_values = cf_response['Outputs'],
-                output_key = cf_output,
-                input_dict = output_dict)
-
+    output_dict = iterate_stack_outputs(
+        cf_output_dict=output_dict,
+        cf_output_list=cf_output_values,
+        cf_response=cf_cognito_response
+        )
 
 
 
