@@ -102,6 +102,7 @@ $(document).ready(function(){
     }
 
     function addPhoto(bucketName) {
+    console.log("Function Fired")
       var files = document.getElementById('photo-upload').files;
       if (!files.length) {
         return alert('Please choose a file to upload first.');
@@ -144,12 +145,20 @@ $(document).ready(function(){
     createPool();
     postS3Bucket();
 
+    var input_file = document.getElementById('upload-button');
+    input_file.addEventListener('change', function() {
+       //ajax call using _config bucket name
+       addPhoto(_config.backend.ImageUploadBucket);
 
+   });
+
+    /* Old uploader
     var button = document.getElementById('upload-button');
     button.addEventListener('click', function() {
        //ajax call using _config bucket name
        addPhoto(_config.backend.ImageUploadBucket);
 
    });
+   */
 
 });
