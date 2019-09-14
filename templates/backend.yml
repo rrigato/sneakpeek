@@ -201,6 +201,7 @@ Resources:
             AllowedMethods:
               - "GET"
               - "POST"
+              - "PUT"
             #allowed origin domain names
             AllowedOrigins:
               - !Ref WebsiteDomainName
