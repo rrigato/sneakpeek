@@ -11,10 +11,16 @@ var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 $(document).ready(function(){
 
+    /*****************************
+     *Makes sure the user is signed in first
+     *redirects to signin.html if they are not
+     * s3
+     * @param {}
+     * @returns {html} signin.html or upload.html
+     ****************************/
     function verifySignIn(){
         /*********
-        *Makes sure the user is signed in first
-        *redirects to signin.html if they are not
+
         *
         **********/
         WildRydes.authToken.then(function setAuthToken(token) {
@@ -30,48 +36,63 @@ $(document).ready(function(){
         });
     }
 
+/*****************************
+ * Connects to cognito user pool and
+ * uses that authentication in order to
+ * authorize with aws identity pool to access
+ * s3
+ * @param {number} input any number
+ * @returns {credentials} AWS.config.credentials
+ *object which gets sts short term tokens
+ ****************************/
+function createPool(){
+    /****************
+    *
+    *
+    *
+    *****************/
 
-        function createPool(){
-            var cognitoUserPool = {
-                UserPoolId: _config.cognito.userPoolId,
-                ClientId: _config.cognito.userPoolClientId
-            };
-            var userPool = new AmazonCognitoIdentity.CognitoUserPool(cognitoUserPool);
-        var cognitoUser = userPool.getCurrentUser();
-
-
-        if (cognitoUser != null) {
-
-
-	cognitoUser.getSession(function(err, result) {
-        /*************************
-        *Establishes cognito user pool session
-        *and gets aws credentials to use for
-        *gets cognito identity pool sts role
-        ***************************/
-		if (result) {
-
-                //Constructing user pool identity provider sign
-                //in string
-                var userPoolSignIn = (
-                    'cognito-idp.'  + _config.cognito.region
-                 + '.amazonaws.com/' +
-                    _config.cognito.userPoolId
-                );
+    var cognitoUserPool = {
+        UserPoolId: _config.cognito.userPoolId,
+        ClientId: _config.cognito.userPoolClientId
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(
+        cognitoUserPool);
+    var cognitoUser = userPool.getCurrentUser();
 
 
+    if (cognitoUser != null) {
 
-            AWS.config.region = _config.cognito.region;
-			// Add the User's Id Token to the
-            // Cognito identity pool credentials config session
-            //[] allows you to use a variable as an object key
-        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-			IdentityPoolId: _config.cognito.IdentityPoolId,
-            RoleArn: _config.cognito.IdentityAuthorizedRoleArn,
-			Logins: {
-				[userPoolSignIn] : result.getIdToken().getJwtToken()
-			}
-		});
+
+    	cognitoUser.getSession(function(err, result) {
+            /*************************
+            *Establishes cognito user pool session
+            *and gets aws credentials to use for
+            *gets cognito identity pool sts role
+            ***************************/
+    		if (result) {
+
+                    //Constructing user pool identity provider sign
+                    //in string
+                    var userPoolSignIn = (
+                        'cognito-idp.'  + _config.cognito.region
+                     + '.amazonaws.com/' +
+                        _config.cognito.userPoolId
+                    );
+
+
+
+                AWS.config.region = _config.cognito.region;
+    			// Add the User's Id Token to the
+                // Cognito identity pool credentials config session
+                //[] allows you to use a variable as an object key
+            AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    			IdentityPoolId: _config.cognito.IdentityPoolId,
+                RoleArn: _config.cognito.IdentityAuthorizedRoleArn,
+    			Logins: {
+    				[userPoolSignIn] : result.getIdToken().getJwtToken()
+    			}
+    		});
 
 
                 AWS.config.credentials.get(function(){
@@ -88,7 +109,13 @@ $(document).ready(function(){
 
     }
 
-
+    /*****************************
+     *Makes sure the user is signed in first
+     *redirects to signin.html if they are not
+     * s3
+     * @param {bucketName} 
+     * @returns {html} signin.html or upload.html
+     ****************************/
     function addPhoto(bucketName) {
     /*************************
     *Prepares the file uploaded by the
