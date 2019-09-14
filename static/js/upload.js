@@ -90,7 +90,7 @@ $(document).ready(function(){
         s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
         var params = {
-         Bucket: 'dev-sneakpeek-image-trailer-repo',
+         Bucket: _config.backend.ImageUploadBucket,
          Delimiter: '/',
          Prefix: ''
         }
