@@ -198,6 +198,8 @@ Resources:
           - AllowedHeaders:
               - "*"
             #HTTP methods allowed on bucket
+            #for cross origin resource sharing
+            #by different domain
             AllowedMethods:
               - "GET"
               - "POST"

@@ -106,6 +106,10 @@ Install and run documentation.js
 [documentation.js github](https://github.com/documentationjs/documentation)
 ```
 npm install -g documentation
+
+#build all javascript files
+documentation build static/js/** -f html -o docs/js
+
 ```
 
 #### devops
