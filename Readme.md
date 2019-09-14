@@ -96,6 +96,18 @@ Provides information on each directory/ source file
 
 - buildspec_prod.yml = Buildspec to use for the prod deployment CodeBuild project
 
+#### docs
+Used for auto-populated html documentation files for
+javascript documentation.js library and python sphinx library
+
+
+Install and run documentation.js
+
+[documentation.js github](https://github.com/documentationjs/documentation)
+```
+npm install -g documentation
+```
+
 #### devops
 - CI.sh = Establishes CodeCommit Repo and CodeBuild Project
     - For debugging errors go to the Phase details section of the console
