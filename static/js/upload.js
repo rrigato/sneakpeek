@@ -11,16 +11,17 @@ var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 $(document).ready(function(){
 
-    /*****************************
+    /**
      *Makes sure the user is signed in first
      *redirects to signin.html if they are not
      * s3
      * @param {}
      * @returns {html} signin.html or upload.html
-     ****************************/
+     */
     function verifySignIn(){
         /*********
-
+        *Redirects to signin.html if
+        * the user is not signed in
         *
         **********/
         WildRydes.authToken.then(function setAuthToken(token) {
@@ -36,21 +37,17 @@ $(document).ready(function(){
         });
     }
 
-/*****************************
+/**
  * Connects to cognito user pool and
  * uses that authentication in order to
  * authorize with aws identity pool to access
  * s3
- * @param {number} input any number
+ * @param {}
  * @returns {credentials} AWS.config.credentials
  *object which gets sts short term tokens
- ****************************/
+ */
 function createPool(){
-    /****************
-    *
-    *
-    *
-    *****************/
+
 
     var cognitoUserPool = {
         UserPoolId: _config.cognito.userPoolId,
@@ -113,7 +110,7 @@ function createPool(){
      *Makes sure the user is signed in first
      *redirects to signin.html if they are not
      * s3
-     * @param {bucketName} 
+     * @param {bucketName}
      * @returns {html} signin.html or upload.html
      ****************************/
     function addPhoto(bucketName) {
