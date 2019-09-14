@@ -43,40 +43,43 @@ $(document).ready(function(){
         if (cognitoUser != null) {
 
 
-        	cognitoUser.getSession(function(err, result) {
-        		if (result) {
+	cognitoUser.getSession(function(err, result) {
+        /*************************
+        *Establishes cognito user pool session
+        *and gets aws credentials to use for
+        *gets cognito identity pool sts role
+        ***************************/
+		if (result) {
 
-                    //Constructing user pool identity provider sign
-                    //in string
-                    var userPoolSignIn = (
-                        'cognito-idp.'  + _config.cognito.region
-                     + '.amazonaws.com/' +
-                        _config.cognito.userPoolId
-                    );
-
-                    console.log(userPoolSignIn);
-        			console.log('Logged into user pool');
-
-
-                    AWS.config.region = _config.cognito.region;
-        			// Add the User's Id Token to the
-                    // Cognito identity pool credentials config session
-                    //[] allows you to use a variable as an object key
-                    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-        				IdentityPoolId: _config.cognito.IdentityPoolId,
-                        RoleArn: _config.cognito.IdentityAuthorizedRoleArn,
-        				Logins: {
-        					[userPoolSignIn] : result.getIdToken().getJwtToken()
-        				}
-        			});
+                //Constructing user pool identity provider sign
+                //in string
+                var userPoolSignIn = (
+                    'cognito-idp.'  + _config.cognito.region
+                 + '.amazonaws.com/' +
+                    _config.cognito.userPoolId
+                );
 
 
-                    AWS.config.credentials.get(function(){
 
-                    // Credentials will be available when this function is called.
-                    var accessKeyId = AWS.config.credentials.accessKeyId;
-                    var secretAccessKey = AWS.config.credentials.secretAccessKey;
-                    var sessionToken = AWS.config.credentials.sessionToken;
+            AWS.config.region = _config.cognito.region;
+			// Add the User's Id Token to the
+            // Cognito identity pool credentials config session
+            //[] allows you to use a variable as an object key
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+			IdentityPoolId: _config.cognito.IdentityPoolId,
+            RoleArn: _config.cognito.IdentityAuthorizedRoleArn,
+			Logins: {
+				[userPoolSignIn] : result.getIdToken().getJwtToken()
+			}
+		});
+
+
+                AWS.config.credentials.get(function(){
+
+                // Credentials will be available when this function is called.
+                var accessKeyId = AWS.config.credentials.accessKeyId;
+                var secretAccessKey = AWS.config.credentials.secretAccessKey;
+                var sessionToken = AWS.config.credentials.sessionToken;
                 });
 
         		}
@@ -111,9 +114,9 @@ $(document).ready(function(){
       console.log(AWS.config);
 
       var photoKey = imagePhotoKey + fileName;
-
+      //parameters for s3 upload
       var params = {
-        ACL: 'public-read',
+        ACL: 'private',
         Bucket:bucketName,
         Key: fileName,
         Body: file,
