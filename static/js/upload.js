@@ -85,30 +85,21 @@ $(document).ready(function(){
 
     }
 
-    function postS3Bucket(){
-        console.log("s3 buckets");
-        console.log(AWS.config.credentials);
-        // Create S3 service object
-        s3 = new AWS.S3({apiVersion: '2006-03-01'});
-
-        var params = {
-         Bucket: _config.backend.ImageUploadBucket,
-         Delimiter: '/',
-         Prefix: ''
-        }
-
-        s3.listObjects(params, function (err, data) {
-         if(err)throw err;
-         console.log(data);
-        });
-    }
 
     function addPhoto(bucketName) {
-    console.log("Function Fired")
+    /*************************
+    *Prepares the file uploaded by the
+    *user to make an s3 put operation using
+    *the javascript sdk
+    **************************/
       var files = document.getElementById('photo-upload').files;
       if (!files.length) {
         return alert('Please choose a file to upload first.');
       }
+      /*
+      *AWS SDK for s3 is setup with the
+      *credentials that are retrieved by createPool
+      */
       s3 = new AWS.S3({
           apiVersion: '2006-03-01',
           params:{Bucket: bucketName}}
@@ -143,10 +134,9 @@ $(document).ready(function(){
       });
     }
 
-    
+
     verifySignIn();
     createPool();
-    postS3Bucket();
 
     var input_file = document.getElementById('photo-upload');
     input_file.addEventListener('change', function() {
