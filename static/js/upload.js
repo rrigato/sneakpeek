@@ -41,6 +41,8 @@ $(document).ready(function(){
 
 
         if (cognitoUser != null) {
+
+
         	cognitoUser.getSession(function(err, result) {
         		if (result) {
 
@@ -141,11 +143,12 @@ $(document).ready(function(){
       });
     }
 
+    
     verifySignIn();
     createPool();
     postS3Bucket();
 
-    var input_file = document.getElementById('upload-button');
+    var input_file = document.getElementById('photo-upload');
     input_file.addEventListener('change', function() {
        //ajax call using _config bucket name
        addPhoto(_config.backend.ImageUploadBucket);
