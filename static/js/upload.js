@@ -106,19 +106,15 @@ function createPool(){
 
     }
 
-    /*****************************
-     *Makes sure the user is signed in first
-     *redirects to signin.html if they are not
-     * s3
-     * @param {bucketName}
-     * @returns {html} signin.html or upload.html
-     ****************************/
-    function addPhoto(bucketName) {
-    /*************************
+    /**
     *Prepares the file uploaded by the
     *user to make an s3 put operation using
     *the javascript sdk
-    **************************/
+     * @param {bucketName} string
+     * @returns {result_message} Either prompts for
+     * an error or displays a sucess message
+     */
+    function addPhoto(bucketName) {
       var files = document.getElementById('photo-upload').files;
       if (!files.length) {
         return alert('Please choose a file to upload first.');
@@ -172,13 +168,6 @@ function createPool(){
 
    });
 
-    /* Old uploader
-    var button = document.getElementById('upload-button');
-    button.addEventListener('click', function() {
-       //ajax call using _config bucket name
-       addPhoto(_config.backend.ImageUploadBucket);
 
-   });
-   */
 
 });
