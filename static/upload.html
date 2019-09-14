@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  crossorigin="anonymous">
     <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
 
+<link rel="stylesheet" href="css/upload.css">
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.521.0.min.js"></script>
 
 </head>
@@ -18,12 +19,21 @@
 <body>
 
       <h1>Image Classification Upload</h1>
-
+      <!--
+      Credit for this uploader comes here:
+      https://codepen.io/aaronvanston/pen/yNYOXR
+      -->
       <div class="file-upload">
         <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
 
         <div class="image-upload-wrap">
-          <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+
+        <!--
+            Input that is used to load the
+            file into s3
+        -->
+          <input class="file-upload-input" id="photo-upload"
+          type='file' onchange="postS3Bucket();" />
           <div class="drag-text">
             <h3>Drag and drop a file or select add Image</h3>
           </div>
@@ -31,22 +41,23 @@
         <div class="file-upload-content">
           <img class="file-upload-image" src="#" alt="your image" />
           <div class="image-title-wrap">
-            <button type="button" onclick="removeUpload()" class="remove-image">Remove
+            <button type="button" id="photo-upload" class="remove-image">Remove
                 <span class="image-title">Uploaded Image</span>
             </button>
           </div>
         </div>
       </div>
+      <!--
       <div id="app">
 
 
-              <!--accept="image/*"
+              accept="image/*"
             <input id="photo-upload" type="file" name="pic" >
               <button id="upload-button">Upload to S3</button>
-                -->
+
 
       </div>
-
+                -->
     <script src="js/vendor/jquery-3.1.0.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/aws-cognito-sdk.min.js"></script>
