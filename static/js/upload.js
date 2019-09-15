@@ -142,14 +142,14 @@ function createPool(){
       var photoKey = imagePhotoKey + fileName;
       //parameters for s3 upload
       //Tagging must be key=Value
-      var load_id = 'loadid=' +
+      var load_id = 'loadid=' + loadNumber;
       var params = {
         ACL: 'private',
         Bucket:bucketName,
         Key: fileName,
         Body: file,
         ContentType: file.type,
-        Tagging:
+        Tagging: load_id
     };
     /*
         Uploads image to s3 bucket
