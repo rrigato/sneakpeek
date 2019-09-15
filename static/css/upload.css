@@ -6,12 +6,17 @@ body {
   font-family: sans-serif;
   background-color: #eeeeee;
 }
-
+/*
+*centers image uploader
+*and provides a small margin
+*
+*/
 .file-upload {
   background-color: #ffffff;
   width: 70%;
-  margin-top: 5%;
+
   margin: 0 auto;
+  margin-top:2%;
   padding: 20px;
 }
 
@@ -76,4 +81,12 @@ body {
   text-transform: uppercase;
   color: #15824B;
   padding: 60px 0;
+}
+
+/**
+*Used for displaying div when you have a
+*successful upload
+*/
+.success-message{
+    display:none
 }
