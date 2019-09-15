@@ -178,12 +178,18 @@ function createPool(){
         display_message="You Have uploaded an image"){
         var success_div = document.getElementById(
             "success-message");
-        success_div.style.display = "block";
-    }
 
+        console.log("test 4");
+        //Makes div visibilbe then changes
+        //message inside of div
+        success_div.style.display = "block";
+
+        success_div.innerHtml= display_message;
+    }
+    displaySuccess();
     verifySignIn();
     createPool();
-    displaySuccess();
+
     var input_file = document.getElementById('photo-upload');
     input_file.addEventListener('change', function() {
        //ajax call using _config bucket name

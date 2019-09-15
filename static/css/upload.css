@@ -87,6 +87,6 @@ body {
 *Used for displaying div when you have a
 *successful upload
 */
-.success-message{
+#success-message{
     display:none
 }
