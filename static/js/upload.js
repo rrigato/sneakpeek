@@ -167,6 +167,17 @@ function createPool(){
     }
 
 
+    /**
+     * Displays sucessful uplaod information
+     * as applicable
+     * @param {display_message}
+     * @returns {}
+     */
+    function displaySuccess(
+        display_message="You Have uploaded an image"){
+            
+    }
+
     verifySignIn();
     createPool();
 
