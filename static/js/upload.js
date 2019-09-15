@@ -110,11 +110,17 @@ function createPool(){
     *Prepares the file uploaded by the
     *user to make an s3 put operation using
     *the javascript sdk
-     * @param {bucketName} string
+     * @param {bucketName} string Name of the bucket
+     * for the upload
+     * @param {loadNumber} int Numeric Load identifier
+     * for the trailer
+     * @param {trackingNumber} string Tracking number
+     * for the trailer
      * @returns {result_message} Either prompts for
      * an error or displays a sucess message
      */
-    function addPhoto(bucketName) {
+    function addPhoto(bucketName, loadNumber = -1,
+        trackingNumber='testNumber') {
       var files = document.getElementById('photo-upload').files;
       if (!files.length) {
         return alert('Please choose a file to upload first.');
@@ -135,12 +141,15 @@ function createPool(){
 
       var photoKey = imagePhotoKey + fileName;
       //parameters for s3 upload
+      //Tagging must be key=Value
+      var load_id = 'loadid=' +
       var params = {
         ACL: 'private',
         Bucket:bucketName,
         Key: fileName,
         Body: file,
-        ContentType: file.type
+        ContentType: file.type,
+        Tagging:
     };
     /*
         Uploads image to s3 bucket
