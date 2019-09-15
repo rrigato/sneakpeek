@@ -170,17 +170,20 @@ function createPool(){
     /**
      * Displays sucessful uplaod information
      * as applicable
-     * @param {display_message}
+     * @param {display_message} string message you
+     *want the div to display after upload
      * @returns {}
      */
     function displaySuccess(
         display_message="You Have uploaded an image"){
-            
+        var success_div = document.getElementById(
+            "success-message");
+        success_div.style.display = "block";
     }
 
     verifySignIn();
     createPool();
-
+    displaySuccess();
     var input_file = document.getElementById('photo-upload');
     input_file.addEventListener('change', function() {
        //ajax call using _config bucket name
