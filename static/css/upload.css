@@ -97,7 +97,10 @@ body {
 
 #imagePreview{
     background-image: url("../images/shadowfox.png");
+    width: 192px;
+    height: 192px;
 }
+/*
 .avatar-preview {
         width: 192px;
         height: 192px;
@@ -115,3 +118,4 @@ body {
         }
     }
 }
+*/
