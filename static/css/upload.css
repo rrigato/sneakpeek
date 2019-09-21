@@ -95,9 +95,9 @@ body {
     font-size: 26px;
 }
 
-
-
-
+#imagePreview{
+    background-image: url("../images/shadowfox.png");
+}
 .avatar-preview {
         width: 192px;
         height: 192px;

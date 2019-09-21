@@ -197,7 +197,7 @@ function createPool(){
             reader.readAsDataURL(input.files[0]);
         }
     }
-    $("#imageUpload").change(function() {
+    $("#photo-upload").change(function() {
         readURL(this);
     });
 
