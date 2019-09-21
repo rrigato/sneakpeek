@@ -186,13 +186,24 @@ function createPool(){
         success_div.innerText= display_message;
     }
 
+
+    /**
+     * Displays an image preview before the upload
+     *
+     * @param {input} string message you
+     *want the div to display after upload
+     * @returns {}
+     *
+     *inspiration for image preview comes from
+     *this codepen
+     *https://codepen.io/siremilomir/pen/jBbQGo
+     */
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-                $('#imagePreview').hide();
-                $('#imagePreview').fadeIn(650);
+
             }
             reader.readAsDataURL(input.files[0]);
             var image_preview = document.getElementsByClassName(
@@ -203,9 +214,7 @@ function createPool(){
             image_preview[0].style.display = "block";
         }
     }
-    $("#photo-upload").change(function() {
-        readURL(this);
-    });
+
 
 
     verifySignIn();
@@ -214,6 +223,7 @@ function createPool(){
     var input_file = document.getElementById('photo-upload');
     input_file.addEventListener('change', function() {
        //ajax call using _config bucket name
+       readURL(this);
        addPhoto(_config.backend.ImageUploadBucket);
 
    });
