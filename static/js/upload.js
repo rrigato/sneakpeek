@@ -188,6 +188,27 @@ function createPool(){
 
 
     /**
+     * Hides the uploader once we have a successful
+     *image and unhides a button that returns to the
+     * upload homepage 
+     * @param {display_message} string message you
+     *want the div to display after upload
+     * @returns {}
+     */
+    function addReturnButton(
+        display_message="You Have uploaded an image"){
+        var success_div = document.getElementById(
+            "success-message");
+
+
+        //Makes div visibilbe then changes
+        //message inside of div
+        success_div.style.display = "block";
+
+        success_div.innerText= display_message;
+    }
+
+    /**
      * Displays an image preview before the upload
      *
      * @param {input} this passes the global object
@@ -213,6 +234,7 @@ function createPool(){
             //with the image upload preview
             image_preview[0].style.display = "block";
         }
+        addReturnButton();
     }
 
 
