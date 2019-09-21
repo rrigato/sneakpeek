@@ -190,22 +190,18 @@ function createPool(){
     /**
      * Hides the uploader once we have a successful
      *image and unhides a button that returns to the
-     * upload homepage 
-     * @param {display_message} string message you
-     *want the div to display after upload
+     * upload homepage
+     * @param {} 
      * @returns {}
      */
-    function addReturnButton(
-        display_message="You Have uploaded an image"){
-        var success_div = document.getElementById(
-            "success-message");
+    function addReturnButton(){
+        var retry_upload_div = document.getElementById(
+            "try-again");
 
 
         //Makes div visibilbe then changes
         //message inside of div
-        success_div.style.display = "block";
-
-        success_div.innerText= display_message;
+        retry_upload_div.style.display = "block";
     }
 
     /**
