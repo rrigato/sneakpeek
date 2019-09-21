@@ -159,9 +159,8 @@ function createPool(){
             console.log(err);
           return alert('There was an error uploading your photo: ', err.message);
         }else {
-                    console.log(data);
+                    displaySuccess();
                 }
-        alert('Successfully uploaded photo.');
 
       });
     }
@@ -184,9 +183,9 @@ function createPool(){
         //message inside of div
         success_div.style.display = "block";
 
-        success_div.innerHtml= display_message;
+        success_div.innerText= display_message;
     }
-    displaySuccess();
+
     verifySignIn();
     createPool();
 
