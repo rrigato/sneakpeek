@@ -248,11 +248,18 @@ function createPool(){
 
         var load_number = document.getElementById(
             'load-number').value;
-        //Makes div return button visibile and hides
-        //the uploader div
-        //retry_upload_div.style.display = "block";
 
-        //hide_file_upload.style.display = "none";
+
+        var background_overlay = document.getElementById(
+            'input-overlay');
+        var input_form = document.getElementById(
+            'load-input-form');
+
+        //Removing the overlay now that
+        //the user has provided the tracking number information
+        background_overlay.style.display = "none";
+        input_form.style.display = "none";
+        
         return(load_number);
     }
 
@@ -284,21 +291,21 @@ function createPool(){
        }
      }
  );
-/*
+
    $('.next-button').click(
      function(){
-             var load_number = document.getElementById('load-number');
-       $(this).css('cursor', 'pointer');
+         var load_number = handleLoadInput();
+         console.log(load_number);
      }
    );
- */
+ /*
 var load_input = document.getElementsByClassName('next-button');
-   var load_number = load_input.addEventListener('click',
-        function() {
-       return(handleLoadInput());
+  load_input[0].addEventListener('click',function() {
+       var load_number = handleLoadInput();
+       console.log(load_number);
 
   });
 
-
+*/
 
 });
