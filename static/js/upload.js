@@ -238,24 +238,22 @@ function createPool(){
     }
 
     /**
-     * Hides the uploader once we have a successful
-     *image and unhides a button that returns to the
-     * upload homepage
+     * gets the load number input by user
+     *Hides any forms used for the upload
      * @param {}
-     * @returns {}
+     * @returns {load_number} string Load number
+     *input by the user
      */
     function handleLoadInput(){
-        var retry_upload_div = document.getElementById(
-            "try-again");
-        var hide_file_upload = document.getElementById(
-            "file-uploader-wrapper");
 
+        var load_number = document.getElementById(
+            'load-number').value;
         //Makes div return button visibile and hides
         //the uploader div
-        retry_upload_div.style.display = "block";
+        //retry_upload_div.style.display = "block";
 
-        hide_file_upload.style.display = "none";
-
+        //hide_file_upload.style.display = "none";
+        return(load_number);
     }
 
     verifySignIn();
@@ -295,8 +293,9 @@ function createPool(){
    );
  */
 var load_input = document.getElementsByClassName('next-button');
-   load_input.addEventListener('click', function() {
-
+   var load_number = load_input.addEventListener('click',
+        function() {
+       return(handleLoadInput());
 
   });
 
