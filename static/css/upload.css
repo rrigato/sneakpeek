@@ -116,7 +116,11 @@ body {
 }
 
 
-
+/**
+*Button to return back to upload.html
+* to retry upload
+*/
 #try-again{
     display:none;
+    font-size: 30px;
 }
