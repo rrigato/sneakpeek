@@ -190,9 +190,9 @@ function createPool(){
     /**
      * Displays an image preview before the upload
      *
-     * @param {input} string message you
-     *want the div to display after upload
-     * @returns {}
+     * @param {input} this passes the global object
+     * @returns {thumbnail-preview} div Contains
+     *the image as a background thumbnail
      *
      *inspiration for image preview comes from
      *this codepen
@@ -207,7 +207,7 @@ function createPool(){
             }
             reader.readAsDataURL(input.files[0]);
             var image_preview = document.getElementsByClassName(
-                "avatar-preview");
+                "thumbnail-preview");
 
             //Makes div visibilbe with the
             //with the image upload preview
