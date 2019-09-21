@@ -134,7 +134,8 @@ function createPool(){
           params:{Bucket: bucketName}}
         );
       var file = files[0];
-      var fileName = file.name;
+      //Adds load number to file name
+      var fileName = loadNumber + "_" + file.name;
       //url encodes the bucket name
       var imagePhotoKey = encodeURIComponent(bucketName) + '//';
       console.log(AWS.config);
@@ -174,7 +175,7 @@ function createPool(){
      * @returns {}
      */
     function displaySuccess(
-        display_message="You Have uploaded an image"){
+        display_message="You have uploaded the below image"){
         var success_div = document.getElementById(
             "success-message");
 
