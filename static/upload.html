@@ -10,13 +10,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  crossorigin="anonymous">
     <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+    <!--This stylesheet is used for the animated button-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" href="css/upload.css">
+    <link rel="stylesheet" href="css/upload.css">
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.521.0.min.js"></script>
 
 </head>
 
 <body>
+    <!--
+      Form overlay for tracking number
+      associated with the load
+    -->
+<div class="back"></div>
+
+    <div class="registration-form">
+      <header>
+        <h1>Sign Up</h1>
+        <p>Fill in all informations</p>
+      </header>
+      <form>
+        <div class="input-section email-section">
+          <input class="email" type="email" placeholder="ENTER YOUR E-MAIL HERE" autocomplete="off"/>
+          <div class="animated-button"><span class="icon-paper-plane"><i class="fa fa-envelope-o"></i></span><span class="next-button email"><i class="fa fa-arrow-up"></i></span></div>
+        </div>
+        <div class="input-section password-section folded">
+          <input class="password" type="password" placeholder="ENTER YOUR PASSWORD HERE"/>
+          <div class="animated-button"><span class="icon-lock"><i class="fa fa-lock"></i></span><span class="next-button password"><i class="fa fa-arrow-up"></i></span></div>
+        </div>
+        <div class="input-section repeat-password-section folded">
+          <input class="repeat-password" type="password" placeholder="REPEAT YOUR PASSWORD HERE"/>
+          <div class="animated-button"><span class="icon-repeat-lock"><i class="fa fa-lock"></i></span><span class="next-button repeat-password"><i class="fa fa-paper-plane"></i></span></div>
+        </div>
+        <div class="success">
+          <p>ACCOUNT CREATED</p>
+        </div>
+      </form>
+    </div>
+
+
+
+
 
     <!--
         Hidden button on page load, will be displayed
