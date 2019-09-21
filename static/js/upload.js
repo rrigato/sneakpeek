@@ -259,20 +259,13 @@ function createPool(){
         //the user has provided the tracking number information
         background_overlay.style.display = "none";
         input_form.style.display = "none";
-        
+
         return(load_number);
     }
 
     verifySignIn();
     createPool();
 
-    var input_file = document.getElementById('photo-upload');
-    input_file.addEventListener('change', function() {
-       //ajax call using _config bucket name
-       readURL(this);
-       addPhoto(_config.backend.ImageUploadBucket);
-
-   });
 
 
 
@@ -295,7 +288,15 @@ function createPool(){
    $('.next-button').click(
      function(){
          var load_number = handleLoadInput();
-         console.log(load_number);
+
+         var input_file = document.getElementById('photo-upload');
+         input_file.addEventListener('change', function() {
+            //ajax call using _config bucket name
+            readURL(this);
+            addPhoto(_config.backend.ImageUploadBucket);
+
+        });
+
      }
    );
  /*
