@@ -195,12 +195,12 @@ function createPool(){
                 $('#imagePreview').fadeIn(650);
             }
             reader.readAsDataURL(input.files[0]);
-            var success_div = document.getElementById(
+            var image_preview = document.getElementsByClassName(
                 "avatar-preview");
 
             //Makes div visibilbe with the
             //with the image upload preview
-            success_div.style.display = "block";
+            image_preview[0].style.display = "block";
         }
     }
     $("#photo-upload").change(function() {
