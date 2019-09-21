@@ -114,3 +114,9 @@ body {
     margin-left:35%;
     min-height:300px;
 }
+
+
+
+#try-again{
+    display:none;
+}
