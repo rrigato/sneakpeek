@@ -178,7 +178,7 @@ function createPool(){
         var success_div = document.getElementById(
             "success-message");
 
-        console.log("test 4");
+
         //Makes div visibilbe then changes
         //message inside of div
         success_div.style.display = "block";
@@ -195,6 +195,12 @@ function createPool(){
                 $('#imagePreview').fadeIn(650);
             }
             reader.readAsDataURL(input.files[0]);
+            var success_div = document.getElementById(
+                "avatar-preview");
+
+            //Makes div visibilbe with the
+            //with the image upload preview
+            success_div.style.display = "block";
         }
     }
     $("#photo-upload").change(function() {
