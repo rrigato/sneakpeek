@@ -95,14 +95,22 @@ body {
     font-size: 26px;
 }
 
+
+/**
+*Used for displaying an image upload preview
+*before an upload
+*/
 #imagePreview{
     background-image: url("../images/shadowfox.png");
     background-repeat: no-repeat;
-    background-size: 300px 100px;
+    background-size: cover;
+    width:400px;
+    height:300px;
 }
 
 .avatar-preview {
-    margin-left:30%;
-    height:250px;
-    width:300px;
+    display:none;
+    margin-top:1%;
+    margin-left:35%;
+    min-height:300px;
 }
