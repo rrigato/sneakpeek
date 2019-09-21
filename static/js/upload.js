@@ -237,7 +237,26 @@ function createPool(){
         addReturnButton();
     }
 
+    /**
+     * Hides the uploader once we have a successful
+     *image and unhides a button that returns to the
+     * upload homepage
+     * @param {}
+     * @returns {}
+     */
+    function handleLoadInput(){
+        var retry_upload_div = document.getElementById(
+            "try-again");
+        var hide_file_upload = document.getElementById(
+            "file-uploader-wrapper");
 
+        //Makes div return button visibile and hides
+        //the uploader div
+        retry_upload_div.style.display = "block";
+
+        hide_file_upload.style.display = "none";
+
+    }
 
     verifySignIn();
     createPool();
@@ -266,23 +285,20 @@ function createPool(){
          $('.icon-paper-plane').removeClass("next");
        }
      }
-   );
-
-   $('.next-button').hover(
+ );
+/*
+   $('.next-button').click(
      function(){
+             var load_number = document.getElementById('load-number');
        $(this).css('cursor', 'pointer');
      }
    );
+ */
+var load_input = document.getElementsByClassName('next-button');
+   load_input.addEventListener('click', function() {
 
-   $('.next-button.email').click(
-     function(){
 
-        console.log($(this).val());
-       $('.email-section').addClass("fold-up");
-       $('.password-section').removeClass("folded");
-     }
-   );
-
+  });
 
 
 
