@@ -285,6 +285,11 @@ function createPool(){
      }
  );
 
+    /*
+    *Reads the load number from the input form
+    *Removes the overlay and form after completion
+    *
+    **/
    $('.next-button').click(
      function(){
          var load_number = handleLoadInput();
