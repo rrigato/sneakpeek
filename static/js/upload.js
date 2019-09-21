@@ -191,17 +191,21 @@ function createPool(){
      * Hides the uploader once we have a successful
      *image and unhides a button that returns to the
      * upload homepage
-     * @param {} 
+     * @param {}
      * @returns {}
      */
     function addReturnButton(){
         var retry_upload_div = document.getElementById(
             "try-again");
+        var hide_file_upload = document.getElementById(
+            "file-uploader-wrapper");
 
-
-        //Makes div visibilbe then changes
-        //message inside of div
+        //Makes div return button visibile and hides
+        //the uploader div
         retry_upload_div.style.display = "block";
+
+        hide_file_upload.style.display = "none";
+
     }
 
     /**
