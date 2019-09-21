@@ -294,24 +294,21 @@ function createPool(){
      function(){
          var load_number = handleLoadInput();
 
+         //Now that we have the load tracking number,
+         //Placing a listener waiting for the image upload
          var input_file = document.getElementById('photo-upload');
          input_file.addEventListener('change', function() {
             //ajax call using _config bucket name
             readURL(this);
-            addPhoto(_config.backend.ImageUploadBucket);
+            addPhoto(
+                buckent_name =_config.backend.ImageUploadBucket,
+                load_number=load_number
+                );
 
         });
 
      }
    );
- /*
-var load_input = document.getElementsByClassName('next-button');
-  load_input[0].addEventListener('click',function() {
-       var load_number = handleLoadInput();
-       console.log(load_number);
 
-  });
-
-*/
 
 });
