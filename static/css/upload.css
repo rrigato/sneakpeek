@@ -88,5 +88,9 @@ body {
 *successful upload
 */
 #success-message{
-    display:none
+    display:none;
+    padding-top: 50px;
+    margin-left: 40%;
+    color: blue;
+    font-size: 26px;
 }
