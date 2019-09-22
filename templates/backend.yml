@@ -91,13 +91,15 @@ Resources:
       #Gets the arn of the dynamodb table
       #that was created earlier in the cloudformation
       #Template
+      #Uses that arn to allow the following operations:
+      #
       ###############################
       Policies:
-        - PolicyName: LambdaPutDynamoDb
+        - PolicyName: LambdaDynamoDb
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
-              - Sid: DynamoDbPut
+              - Sid: DynamoDbSneakPeekTable
                 Effect: Allow
                 #######################################
                 #Allowing lambda to perform a PutItem on
@@ -106,6 +108,7 @@ Resources:
                 #######################################
                 Action:
                   - dynamodb:PutItem
+                  - dynamodb:Scan
                 Resource:
                   - !GetAtt DynamoDBTable.Arn
 
