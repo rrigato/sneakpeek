@@ -101,7 +101,7 @@ def write_to_s3_output():
     '''
     get_boto_clients(resource_name='s3')
 
-def query_load_table(boto_client):
+def query_load_table(boto_client, table_name):
     '''Returns all items in dynamodb db load table
 
         Parameters
@@ -109,14 +109,19 @@ def query_load_table(boto_client):
         boto_client : boto3
             python 3 boto client for dynamodb
 
+        table_name : str
+            name of the dynamodb table
+
         Returns
         -------
-
-
 
         Raises
         ------
     '''
+    import pdb; pdb.set_trace()
+    all_items = dynamo_client.query(TableName=table_name,
+    Select='ALL_ATTRIBUTES'
+    )
     pass
 
 def lambda_handler(event, context):
@@ -130,13 +135,19 @@ def lambda_handler(event, context):
     DynamoDB API as a JSON body.
     '''
     get_logger()
+
+    logging.info("Received event: " + json.dumps(event, indent=2))
+
     """
         Creates dynamodb resource and
         puts an item in the table
     """
     dynamo_client = get_boto_clients(resource_name='dynamodb',
     region_name='us-east-1')
-    #print("Received event: " + json.dumps(event, indent=2))
+
+
+    query_load_table(dynamo_client=dynamo_client,
+    table_name = 'dev-sneakpeek-table')
 
 
     return (respond(err=None, res=
