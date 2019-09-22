@@ -101,7 +101,7 @@ def write_to_s3_output():
     '''
     get_boto_clients(resource_name='s3')
 
-def query_load_table(boto_client, table_name):
+def scan_load_table(boto_client, table_name):
     '''Returns all items in dynamodb db load table
 
         Parameters
@@ -114,15 +114,24 @@ def query_load_table(boto_client, table_name):
 
         Returns
         -------
+        all_items : list
+            List where each element is a dict referring to
+            an item
 
         Raises
         ------
     '''
-    import pdb; pdb.set_trace()
-    all_items = dynamo_client.query(TableName=table_name,
-    Select='ALL_ATTRIBUTES'
+    """
+        Querying all attributes in a the dynamo table
+    """
+    all_items = boto_client.scan(
+        TableName=table_name,
+        Select='ALL_ATTRIBUTES'
     )
-    pass
+    logging.info("DynamoDB load table scan results")
+    logging.info(all_items)
+
+    return(all_items['Items'])
 
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
@@ -146,7 +155,7 @@ def lambda_handler(event, context):
     region_name='us-east-1')
 
 
-    query_load_table(dynamo_client=dynamo_client,
+    scan_load_table(boto_client=dynamo_client,
     table_name = 'dev-sneakpeek-table')
 
 
