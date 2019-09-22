@@ -25,7 +25,7 @@ $(document).ready(function(){
         *
         **********/
         WildRydes.authToken.then(function setAuthToken(token) {
-            console.log(token);
+
             if (token) {
                 authToken = token;
             } else {
@@ -138,7 +138,6 @@ function createPool(){
       var fileName = loadNumber + "_" + file.name;
       //url encodes the bucket name
       var imagePhotoKey = encodeURIComponent(bucketName) + '//';
-      console.log(AWS.config);
 
       var photoKey = imagePhotoKey + fileName;
       //parameters for s3 upload
@@ -280,7 +279,7 @@ function createPool(){
    /**
    *overlay logic: inspired from this codepen:
    *https://codepen.io/rkpasia/pen/LNEQod
-   *records the load id value
+   *Changes from the email image to an upload image
    */
    $('.email').on("change keyup paste",
      function(){
