@@ -48,6 +48,9 @@ def get_boto_clients(resource_name, region_name='us-east-1'):
 
         Returns
         -------
+        boto_client : boto3
+            python 3 boto client for aws resource
+            resource_name in region region_name
 
 
         Raises
@@ -97,6 +100,24 @@ def write_to_s3_output():
         ------
     '''
     get_boto_clients(resource_name='s3')
+
+def query_load_table(boto_client):
+    '''Returns all items in dynamodb db load table
+
+        Parameters
+        ----------
+        boto_client : boto3
+            python 3 boto client for dynamodb
+
+        Returns
+        -------
+
+
+
+        Raises
+        ------
+    '''
+    pass
 
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
