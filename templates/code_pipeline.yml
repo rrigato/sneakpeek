@@ -627,6 +627,7 @@ Resources:
                     - iam:UpdateAssumeRolePolicy
                     - iam:DetachRolePolicy
                     - iam:DeleteRolePolicy
+                    - iam:PutRolePolicy
                   Resource:
                     - "*"
 
