@@ -154,9 +154,10 @@ def lambda_handler(event, context):
     dynamo_client = get_boto_clients(resource_name='dynamodb',
     region_name='us-east-1')
 
-
-    all_itmes = scan_load_table(boto_client=dynamo_client,
-    table_name = 'dev-sneakpeek-table')
+    #to-do figure out how to pass table name
+    #for different environments
+    #all_itmes = scan_load_table(boto_client=dynamo_client,
+    #table_name = 'dev-sneakpeek-table')
 
 
     return (respond(err=None, res=
