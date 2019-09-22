@@ -1,7 +1,7 @@
 import boto3
 import json
 import logging
-print('Loading function')
+import os
 dynamo = boto3.client('dynamodb')
 
 WORKING_DIRECTORY='.'
@@ -84,7 +84,7 @@ def lambda_handler(event, context):
     PUT, or DELETE request respectively, passing in the payload to the
     DynamoDB API as a JSON body.
     '''
-    #get_logger()
+    get_logger()
     """
         Creates dynamodb resource and
         puts an item in the table
@@ -99,3 +99,6 @@ def lambda_handler(event, context):
         "Unicorn":
         {"Name":"Rocinante","Color":"Yellow","Gender":"Female"},"Eta":"30 seconds"
         }))
+
+if __name__ == '__main__':
+    lambda_handler(event="hello",context = "world")
