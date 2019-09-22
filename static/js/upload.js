@@ -241,6 +241,8 @@ function createPool(){
     /**
      * gets the load number input by user
      *Hides any forms used for the upload
+     *Unhides the input form
+     *
      * @param {}
      * @returns {load_number} string Load number
      *input by the user
@@ -250,6 +252,9 @@ function createPool(){
         var load_number = document.getElementById(
             'load-number').value;
 
+        var display_file_upload = document.getElementById(
+            "file-uploader-wrapper");
+
 
         var background_overlay = document.getElementById(
             'input-overlay');
@@ -258,8 +263,10 @@ function createPool(){
 
         //Removing the overlay now that
         //the user has provided the tracking number information
+        //Displays the file uploader
         background_overlay.style.display = "none";
         input_form.style.display = "none";
+        display_file_upload.style.display = "block";
 
         return(load_number);
     }
