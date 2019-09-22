@@ -60,6 +60,22 @@ def get_boto_clients(resource_name, region_name='us-east-1'):
 
 
 def respond(err, res=None):
+    '''Sets http headers returns dict for response
+
+        Parameters
+        ----------
+        err : str
+            Any errors encountered for the lambda call
+
+        Returns
+        -------
+        http_response : dict
+            The http response returned from
+            the lamdba client
+
+        Raises
+        ------
+    '''
     return {
         'statusCode': '400' if err else '201',
         'body': err.message if err else res,
