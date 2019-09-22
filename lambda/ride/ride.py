@@ -2,7 +2,6 @@ import boto3
 import json
 import logging
 import os
-dynamo = boto3.client('dynamodb')
 
 WORKING_DIRECTORY='.'
 def get_logger():
@@ -18,14 +17,20 @@ def get_logger():
         ------
     '''
     """
-        Adds the file name to the logs/ directory without
-        the extension
+        Removes any basic logging configuration
+        that may have been setup by the lambda container
+    """
+    default_lambda_logging = logging.getLogger()
+    if default_lambda_logging.handlers:
+        for handler in default_lambda_logging.handlers:
+            default_lambda_logging.removeHandler(handler)
+
+    """
+        Configures logging formatting
     """
     logging.basicConfig(
-        filename=os.path.join(WORKING_DIRECTORY,
-        os.path.basename(__file__).split('.')[0]),
-        format='%(asctime)s %(message)s',
-         datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG
+        format='%(levelname)s - %(asctime)s %(message)s',
+         datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO
          )
     logging.info('\n')
 
@@ -48,6 +53,9 @@ def get_boto_clients(resource_name, region_name='us-east-1'):
         Raises
         ------
     '''
+    logging.info("Got the following boto client: ")
+    logging.info(resource_name)
+
     return(boto3.client(resource_name, region_name))
 
 
