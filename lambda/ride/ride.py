@@ -165,5 +165,5 @@ def lambda_handler(event, context):
         {"Name":"Rocinante","Color":"Yellow","Gender":"Female"},"Eta":"30 seconds"
         }))
 
-if __name__ == '__main__':
-    lambda_handler(event="hello",context = "world")
+# if __name__ == '__main__':
+#     lambda_handler(event="hello",context = "world")
