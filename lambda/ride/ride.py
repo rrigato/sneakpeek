@@ -155,7 +155,7 @@ def lambda_handler(event, context):
     region_name='us-east-1')
 
 
-    scan_load_table(boto_client=dynamo_client,
+    all_itmes = scan_load_table(boto_client=dynamo_client,
     table_name = 'dev-sneakpeek-table')
 
 
