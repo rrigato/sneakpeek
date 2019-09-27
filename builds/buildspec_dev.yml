@@ -27,7 +27,7 @@ phases:
     commands:
       - echo Entered the install phase...
 
-
+      - BUILD_ENVIRONMENT=dev
       - pip install -r tests/requirements.txt
       - ls -l
     finally:
@@ -43,6 +43,7 @@ phases:
   #static webpage
   build:
     commands:
+      - echo $BUILD_ENVIRONMENT
       - echo Entered the build phase...
       - echo Build started on `date`
 

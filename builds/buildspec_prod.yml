@@ -26,6 +26,8 @@ phases:
        python: 3.7
     commands:
       - echo Entered the install phase...
+
+      - BUILD_ENVIRONMENT=dev
       - pip install -r tests/requirements.txt
       - ls -l
     finally:
@@ -40,6 +42,7 @@ phases:
   #static webpage
   build:
     commands:
+      - echo $BUILD_ENVIRONMENT
       - echo Entered the build phase...
       - echo Build started on `date`
 
@@ -84,7 +87,7 @@ phases:
         --source-commit-specifier dev
         --destination-commit-specifier master
         --repository-name sneakpeek
-        
+
   post_build:
     commands:
       - echo Entered the post_build phase...
