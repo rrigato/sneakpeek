@@ -30,7 +30,7 @@ Resources:
     Type: AWS::SSM::Parameter
     Properties:
       Description: Dev NamePrefix parameter for templates/backend.yml
-      Name: dev/NamePrefix
+      Name: /dev/NamePrefix
       #Tag has to be populated as a json
       #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
       Type: String
@@ -45,7 +45,7 @@ Resources:
     Type: AWS::SSM::Parameter
     Properties:
       Description: Prod NamePrefix parameter for templates/backend.yml
-      Name: prod/NamePrefix
+      Name: /prod/NamePrefix
       #Tag has to be populated as a json
       #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
       Type: String
