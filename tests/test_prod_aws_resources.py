@@ -360,8 +360,43 @@ class WebappLive(unittest.TestCase):
         self.assertNotEqual(
             json_response['backend']['ImageUploadBucket'],
             "")
-            
+
         logging.info("All key config values are populated")
+
+    def test_ssm_parameters(self):
+        '''Tests the ssm parameters store values are not empty
+
+            Paramters to test:
+            
+            Parameters
+            ----------
+
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        """
+            Starting a request session for the
+            user login
+        """
+        logging.info("Started a requests session")
+        with requests.Session() as s:
+            login_homepage = s.get(
+                HOMEPAGE_URL + "register.html"
+                )
+            bsObj = BeautifulSoup(login_homepage.text, "html.parser")
+
+            links =( bsObj.find("div", {"id":"noCognitoMessage"})
+					)
+
+            logging.info("Checking to make sure cognito is found")
+        """
+        Testing that the warning message for no authentication
+        is hidden
+        """
+        self.assertEqual(links['style'], 'display: none;')
 
 if __name__ == '__main__':
     '''
