@@ -98,7 +98,12 @@ def update_ssm(parameter_name, parameter_value):
     logging.info(parameter_name)
     logging.info(parameter_value)
 
-
+    """
+        Gets the boto client for parameter store
+        and tests the value of various parameters
+    """
+    ssm_client = get_boto_clients('ssm')
+    logging.info("Got the boto client")
 
 def iterate_outputs(output_values, output_key, input_dict):
     '''Iterates over every OutputKey for the stack
