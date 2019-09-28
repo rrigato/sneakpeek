@@ -303,7 +303,7 @@ Resources:
               #And it will retrieve it for parameter overrides
               ParameterOverrides: |
                 {
-                   "EnvironmentName" : "dev" 
+                   "EnvironmentName" : "dev"
                 }
               RoleArn: !GetAtt [SsmParameterStoreRole, Arn]
               ################################
@@ -635,13 +635,14 @@ Resources:
                   #
                   #######################################
                   Action:
+                    - ssm:AddTagsToResource
                     - ssm:DeleteParameter
                     - ssm:DeleteParameters
                     - ssm:GetParameter
                     - ssm:GetParameters
                     - ssm:PutParameter
                     - ssm:PutParameters
-                    - ssm:AddTagsToResource
+                    - ssm:RemoveTagsFromResource
                   Resource:
                     - "*"
 
