@@ -9,7 +9,7 @@ Description: Creates a parameter store for environment variables
 Parameters:
   EnvironmentName:
     Type: String
-    Default: dev
+    Default: prod
     Description: String for environment to reference
         ssm parameter store
 
@@ -37,7 +37,7 @@ Resources:
 
   ######################################
   #NamePrefix parameter passed to
-  #backend.yml for the dev stack
+  #backend.yml stack
   #####################################
   BackendNamePrefix:
     Type: AWS::SSM::Parameter
@@ -59,7 +59,7 @@ Resources:
 
   ######################################
   #BucketName parameter passed to
-  #file://templates/static_webpage.yml for the dev stack
+  #file://templates/static_webpage.yml stack
   #####################################
   BucketNameDev:
     Type: AWS::SSM::Parameter
