@@ -398,6 +398,10 @@ class WebappLive(unittest.TestCase):
         """
         for ssm_name in parameter_dict.keys():
 
+            logging.info("Comparing the following parameter: ")
+            logging.info(ssm_name)
+            logging.info(parameter_dict[ssm_name])
+
             """
                 Gets the parameter value
                 And tests to make sure it is not the
@@ -413,6 +417,9 @@ class WebappLive(unittest.TestCase):
                 ssm_value['Parameter']['Value'],
                 parameter_dict[ssm_name]
              )
+             
+             logging.info("To this ssm value: ")
+             logging.info(ssm_value)
 
 if __name__ == '__main__':
     '''
