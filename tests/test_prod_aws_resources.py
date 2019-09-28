@@ -417,9 +417,9 @@ class WebappLive(unittest.TestCase):
                 ssm_value['Parameter']['Value'],
                 parameter_dict[ssm_name]
              )
-             
-             logging.info("To this ssm value: ")
-             logging.info(ssm_value)
+
+            logging.info("To this ssm value: ")
+            logging.info(ssm_value)
 
 if __name__ == '__main__':
     '''
