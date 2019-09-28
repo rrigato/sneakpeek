@@ -5,7 +5,7 @@ import os
 WORKING_DIRECTORY = os.getcwd()
 
 def get_logger():
-    '''Returns a boto cloudformation describe_stacks api call
+    '''Returns a logger
         Parameters
         ----------
         stack_name: str
@@ -13,8 +13,6 @@ def get_logger():
 
         Returns
         -------
-        cf_response : dict
-                Dictionary output of the describe_stacks api call
 
         Raises
         ------
@@ -56,6 +54,27 @@ def describe_stacks_response(stack_name):
 
     return (cf_response)
 
+def get_boto_clients(resource_name, region_name='us-east-1'):
+    '''Returns the boto client for various cloudformation resources
+        Parameters
+        ----------
+        resource_name : str
+            Name of the resource for the client
+
+        region_name : str
+                aws region you are using, defaults to
+                us-east-1
+
+        Returns
+        -------
+
+
+        Raises
+        ------
+    '''
+    return(boto3.client(resource_name, region_name))
+
+
 def update_ssm(parameter_name, parameter_value):
     '''Updates the ssm parameter Value
 
@@ -76,7 +95,7 @@ def update_ssm(parameter_name, parameter_value):
     '''
     logging.info("preparing to write the following parameter:")
     logging.info(parameter_name)
-    logging.info(parameter_value)    
+    logging.info(parameter_value)
 
 def iterate_outputs(output_values, output_key, input_dict):
     '''Iterates over every OutputKey for the stack
