@@ -583,6 +583,7 @@ Resources:
                     - ssm:GetParameters
                     - ssm:PutParameter
                     - ssm:PutParameters
+                    - ssm:AddTagsToResource
                   Resource:
                     - "*"
 
