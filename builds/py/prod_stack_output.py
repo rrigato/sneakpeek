@@ -56,6 +56,30 @@ def describe_stacks_response(stack_name):
 
     return (cf_response)
 
+def update_ssm(parameter_name, parameter_value):
+    '''Updates the ssm parameter Value
+
+        Parameters
+        ----------
+        parameter_name : str
+            Name of the ssm parameter
+
+        parameter_value : str
+            value of the ssm parameter to add
+
+        Returns
+        -------
+
+
+        Raises
+        ------
+    '''
+    logging.info("preparing to write the following parameter:")
+    logging.info(parameter_name)
+    logging.info(parameter_value)    
+
+
+
 def iterate_outputs(output_values, output_key, input_dict):
     '''Iterates over every OutputKey for the stack
 
