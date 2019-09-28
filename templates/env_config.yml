@@ -54,30 +54,30 @@ Resources:
 
   ######################################
   #BucketName parameter passed to
-  #file://templates/static_webpage.yml for the prod stack
+  #file://templates/static_webpage.yml for the dev stack
   #####################################
-  BucketNamePrefixDev:
+  BucketNameDev:
     Type: AWS::SSM::Parameter
     Properties:
-      Description: Prod NamePrefix parameter for templates/backend.yml
-      Name: /prod/NamePrefix
+      Description: Prod BucketName parameter for templates/static_webpage.yml
+      Name: /dev/BucketName
       #Tag has to be populated as a json
       #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
       Type: String
       #This will be overriden by a custom resource
-      Value: prod
+      Value: dev-sneakpeek
 
   ######################################
   #BucketName parameter passed to
   #file://templates/static_webpage.yml for the prod stack
   #####################################
-  BucketNamePrefixProd:
+  BucketNameProd:
     Type: AWS::SSM::Parameter
     Properties:
-      Description: Prod NamePrefix parameter for templates/backend.yml
-      Name: /prod/NamePrefix
+      Description: Prod BucketName parameter for templates/static_webpage.yml
+      Name: /prod/BucketName
       #Tag has to be populated as a json
       #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
       Type: String
       #This will be overriden by a custom resource
-      Value: prod
+      Value: prod-sneakpeek
