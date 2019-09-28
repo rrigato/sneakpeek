@@ -364,13 +364,20 @@ class WebappLive(unittest.TestCase):
         logging.info("All key config values are populated")
 
     #@unittest.skip("Skipping for now")
-    def test_ssm_parameters(self):
+    def test_ssm_parameters(self, parameter_dict={
+        "UserPoolClientId":"Default"
+        }):
         '''Tests the ssm parameters store values are not empty
 
             Paramters to test:
 
             Parameters
             ----------
+            parameter_dict : dict
+                Key value pair where the key is the
+                ssm parameter name and the value is
+                what we expect the ssm parameter to be
+
 
             Returns
             -------
