@@ -21,3 +21,18 @@ Resources:
       Type: String
       #This will be overriden by a custom resource
       Value: Default
+
+  ######################################
+  #NamePrefix parameter passed to
+  #backend.yml for the dev stack
+  #####################################
+  BackendNamePrefixDev:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Description: NamePrefix parameter for templates/backend.yml
+      Name: UserPoolClientId
+      #Tag has to be populated as a json
+      #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
+      Type: String
+      #This will be overriden by a custom resource
+      Value: Default
