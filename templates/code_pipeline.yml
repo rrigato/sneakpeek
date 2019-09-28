@@ -303,7 +303,7 @@ Resources:
               #And it will retrieve it for parameter overrides
               ParameterOverrides: |
                 {
-                   "EnvironmentName" : "FirstTest" 
+                   "EnvironmentName" : "dev" 
                 }
               RoleArn: !GetAtt [SsmParameterStoreRole, Arn]
               ################################
