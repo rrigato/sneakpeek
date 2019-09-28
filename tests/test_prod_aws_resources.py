@@ -393,10 +393,26 @@ class WebappLive(unittest.TestCase):
 
         logging.info("Got the boto client for ssm")
         """
-        Testing that the warning message for no authentication
-        is hidden
+            Iterating over each key/value in the dict
+            to compare parameter store values
         """
-        self.assertEqual(0, 0)
+        for ssm_name in parameter_dict.keys():
+
+            """
+                Gets the parameter value
+                And tests to make sure it is not the
+                same as the Value provided for the test
+                as that is presumably the default value
+
+                That should be overriden at build time
+            """
+            ssm_value = ssm_client.get_parameter(
+                Name=ssm_name
+            )
+            self.assertEqual(
+                ssm_value['Parameter']['Value'],
+                parameter_dict[ssm_name]
+             )
 
 if __name__ == '__main__':
     '''
