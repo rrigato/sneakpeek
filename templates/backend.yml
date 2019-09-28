@@ -16,8 +16,12 @@ Parameters:
 
   NamePrefix:
     Type: String
-    Default: lambda-code-sneakpeek
-    Description: String for prefixing resources to differentiate prod/dev
+    #dynamic reference that resolves to a parameter store
+    #value
+    Default: '{{resolve:ssm:/dev/NamePrefix:1}}'
+    Description:
+        String for prefixing resources to differentiate prod/dev
+        Dynamic reference to parameter store value
 
 
   WebsiteDomainName:
