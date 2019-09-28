@@ -46,7 +46,7 @@ Resources:
               -  !Ref EnvironmentName
               - "/NamePrefix"
       #Tag has to be populated as a json
-      Tags: '[{"Key" : "stack", "Value" : "backend" }, {"Key" : "internetFacing", "Value" : "yes"}]'
+      #Tags: '[{"Key" : "stack", "Value" : "backend" }, {"Key" : "internetFacing", "Value" : "yes"}]'
       Type: String
       #This will be overriden by a custom resource
       Value: !Ref EnvironmentName
