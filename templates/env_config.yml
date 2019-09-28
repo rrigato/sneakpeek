@@ -15,25 +15,7 @@ Parameters:
 
 
 Resources:
-  ######################################
-  #Will be used to store the User Pool Client ID
-  #
-  #####################################
-  UserPoolClientId:
-    Type: AWS::SSM::Parameter
-    Properties:
-      Description: Cognito User Pool Client ID
-      Name:
-        Fn::Join:
-            - ""
-            - - "/"
-              -  !Ref EnvironmentName
-              - "/UserPoolClientId"
-      #Tag has to be populated as a json
-      #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
-      Type: String
-      #This will be overriden by a custom resource
-      Value: Default
+
 
   ######################################
   #NamePrefix parameter passed to
@@ -84,3 +66,25 @@ Resources:
           - -  !Ref EnvironmentName
             - "-"
             - "sneakpeek"
+  ######################################
+  #Will be used to store the User Pool Client ID
+  #
+  #####################################
+  UserPoolClientId:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Description: Cognito User Pool Client ID
+      Name:
+        Fn::Join:
+            - ""
+            - - "/"
+              -  !Ref EnvironmentName
+              - "/UserPoolClientId"
+      #Tag has to be populated as a json
+      #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
+      Type: String
+      #This will be overriden by a custom resource
+      Value: Default
+
+
+#'UserPoolId','IdentityAuthorizedRoleArn', 'IdentityPoolId'
