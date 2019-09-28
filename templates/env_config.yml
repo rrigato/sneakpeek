@@ -83,7 +83,7 @@ Resources:
       #Tag has to be populated as a json
       Tags: |
             {
-                "stack":"cognito"
+                "stack" : "cognito",
                 "internetFacing" : "yes"
             }
       Type: String
