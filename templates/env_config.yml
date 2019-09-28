@@ -6,6 +6,14 @@
 ###############################################
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Creates a parameter store for environment variables
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: dev
+    Description: String for environment to reference
+        ssm parameter store
+
+
 Resources:
   ######################################
   #Will be used to store the User Pool Client ID
@@ -30,12 +38,18 @@ Resources:
     Type: AWS::SSM::Parameter
     Properties:
       Description: Dev NamePrefix parameter for templates/backend.yml
-      Name: /dev/NamePrefix
+      Name:
+        #concatenate value to something like /dev/NamePrefix
+        Fn::Join:
+            - ""
+            - - "/"
+              -  !Ref EnvironmentName
+              - "/NamePrefix"
       #Tag has to be populated as a json
       #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
       Type: String
       #This will be overriden by a custom resource
-      Value: dev
+      Value: !Ref EnvironmentName
 
   ######################################
   #NamePrefix parameter passed to
