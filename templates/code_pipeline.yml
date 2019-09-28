@@ -296,6 +296,15 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
+              #Used to pass parameters to Cloudformation template
+              #referenced in TemplatePath
+              #Fn:GetParam pass it the Artifact name,
+              #json file name and the parameter in that file
+              #And it will retrieve it for parameter overrides
+              ParameterOverrides: |
+                {
+                   "EnvironmentName" : "FirstTest" }
+                }
               RoleArn: !GetAtt [SsmParameterStoreRole, Arn]
               ################################
               #Appends env-config- to the prod stack
