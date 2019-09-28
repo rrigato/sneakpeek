@@ -270,14 +270,14 @@ Resources:
             RunOrder: 1
 
         ############################
-        #Second stage of this pipeline
-        #Creates/updates the templates/cognito.yml
-        #cloudformation template to create a cognito authentication
-        #identity store for the backend
+        #third stage of this pipeline
+        #Creates/updates the templates/env_config.yml
+        #cloudformation template to create a ssm parameter store
+        #for devolpment/testing purposes
         ############################
-        - Name: DeployIdentity
+        - Name: DeployDevSsm
           Actions:
-          - Name: DeployCognito
+          - Name: DeploySsmParameterStore
             ActionTypeId:
               Category: Deploy
               Owner: AWS
@@ -286,7 +286,7 @@ Resources:
             InputArtifacts:
               - Name: sneakpeek
             OutputArtifacts:
-              - Name: CognitoProdCf
+              - Name: DevSsmParamArtifact
             ##########################################
             #configuration properties documentation:
             #https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html
@@ -296,26 +296,23 @@ Resources:
               #it will be created, otherwise the stack will be updated
               #with the template provided in TemplatePath
               ActionMode: CREATE_UPDATE
-              #Allows cognito.yml cloudformation template
-              #to create iam users
-              Capabilities: CAPABILITY_IAM
-              RoleArn: !GetAtt [CognitoRole, Arn]
+              RoleArn: !GetAtt [SsmParameterStoreRole, Arn]
               ################################
-              #Appends cognito- to the prod stack
+              #Appends env-config- to the prod stack
               #name. The fn::join returns a string
               #
               ################################
               StackName: !Join
                           - '-'
                           #The second argument is a list
-                          - - 'cognito'
-                            - !Ref ProdStackName
+                          - - 'env-config'
+                            - !Ref DevBuildName
 
               #TemplatePath: !Ref GitRepoName !Sub "TemplateSource::${ProdStackConfig}"
               #Artifact::template_file_name
               #is what the deploy stage is expecting as input for the
               #cloudformation template location
-              TemplatePath: sneakpeek::templates/cognito.yml
+              TemplatePath: sneakpeek::templates/env_config.yml
             RunOrder: 1
 
 
