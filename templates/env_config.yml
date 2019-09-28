@@ -81,13 +81,8 @@ Resources:
               -  !Ref EnvironmentName
               - "/UserPoolClientId"
       #Tag has to be populated as a json
-      Tags: |
-            [
-            {
-                "Key" : "stack",
-                "Value" : "yes"
-            }
-            ]
+      Tags:
+          "Hello" : "World"
       Type: String
       #This will be overriden by a custom resource
       Value: Default
