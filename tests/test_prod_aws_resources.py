@@ -365,7 +365,7 @@ class WebappLive(unittest.TestCase):
 
     #@unittest.skip("Skipping for now")
     def test_ssm_parameters(self, parameter_dict={
-        "UserPoolClientId":"Default"
+        "/prod/UserPoolClientId":"Default"
         }):
         '''Tests the ssm parameters store values are not empty
 
@@ -414,9 +414,8 @@ class WebappLive(unittest.TestCase):
                 Name=ssm_name
             )
             self.assertEqual(
-                0,0
-                #ssm_value['Parameter']['Value'],
-                #parameter_dict[ssm_name]
+                ssm_value['Parameter']['Value'],
+                parameter_dict[ssm_name]
              )
 
             logging.info("To this ssm value: ")
