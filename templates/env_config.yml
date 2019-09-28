@@ -29,10 +29,25 @@ Resources:
   BackendNamePrefixDev:
     Type: AWS::SSM::Parameter
     Properties:
-      Description: NamePrefix parameter for templates/backend.yml
-      Name: UserPoolClientId
+      Description: Dev NamePrefix parameter for templates/backend.yml
+      Name: dev/NamePrefix
       #Tag has to be populated as a json
       #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
       Type: String
       #This will be overriden by a custom resource
-      Value: Default
+      Value: dev
+
+  ######################################
+  #NamePrefix parameter passed to
+  #backend.yml for the dev stack
+  #####################################
+  BackendNamePrefixProd:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Description: Prod NamePrefix parameter for templates/backend.yml
+      Name: prod/NamePrefix
+      #Tag has to be populated as a json
+      #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
+      Type: String
+      #This will be overriden by a custom resource
+      Value: prod
