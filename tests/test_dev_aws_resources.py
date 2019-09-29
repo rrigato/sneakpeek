@@ -298,11 +298,19 @@ class WebappLive(unittest.TestCase):
         logging.info("All key config values are populated")
 
     def test_ssm_parameters(self, parameter_dict={
-        "/dev/UserPoolClientId":"Default"
+        "/dev/UserPoolClientId":"Default",
+        "/dev/IdentityAuthorizedRoleArn":"Default",
+        "/dev/IdentityPoolId":"Default",
+        "/dev/UserPoolId":"Default"
         }):
-        '''Tests the ssm parameters store values are not empty
+        '''Tests the ssm parameters store values are not Default
 
-            Paramters to test:
+            These parameters are dynamically populated
+            When they are created in the cloudformation script
+            They have a value of Default.
+
+            CodeBuild populates these parameters in
+            the build stage
 
             Parameters
             ----------
