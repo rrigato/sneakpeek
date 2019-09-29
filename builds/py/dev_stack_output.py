@@ -75,11 +75,16 @@ def get_boto_clients(resource_name, region_name='us-east-1'):
     return(boto3.client(resource_name, region_name))
 
 
-def update_ssm(parameter_name, parameter_value):
+def update_ssm(parameter_name, parameter_value,
+    heiarchy_prefix='/dev/'):
     '''Updates the ssm parameter Value
 
         Parameters
         ----------
+        heiarchy_prefix : str
+            Name of heiarchy to append to
+            beggining of parameter_name defaults to /dev/
+
         parameter_name : str
             Name of the ssm parameter
 
@@ -110,7 +115,7 @@ def update_ssm(parameter_name, parameter_value):
         heiarchy
     """
     ssm_update_response = ssm_client.put_parameter(
-        Name = '/dev/' + parameter_name,
+        Name = heiarchy_prefix + parameter_name,
         Value = parameter_value,
         Overwrite = True,
         Type = 'String'
