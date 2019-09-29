@@ -113,6 +113,28 @@ Resources:
       Value: Default
 
   ######################################
+  #Will be used to store the name of the bucket
+  #for uploading user provided images for
+  #####################################
+  ImageUploadBucket:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Description: Cognito User Pool ID
+      Name:
+        Fn::Join:
+            - ""
+            - - "/"
+              -  !Ref EnvironmentName
+              - "/ImageUploadBucket"
+      #Tag has to be populated as a json
+      Tags:
+          "stack" : "cognito"
+          "internetFacing" : "yes"
+      Type: String
+      #This will be overriden by a custom resource
+      Value: Default
+
+  ######################################
   #Will be used to store the User Pool ID
   #
   #####################################
@@ -157,4 +179,4 @@ Resources:
       #This will be overriden by a custom resource
       Value: Default
 
-#'', 'IdentityPoolId'
+#'', ''
