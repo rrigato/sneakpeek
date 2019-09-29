@@ -365,11 +365,19 @@ class WebappLive(unittest.TestCase):
 
     #@unittest.skip("Skipping for now")
     def test_ssm_parameters(self, parameter_dict={
-        "/prod/UserPoolClientId":"Default"
+        "/prod/UserPoolClientId":"Default",
+        "/prod/IdentityAuthorizedRoleArn":"Default",
+        "/prod/IdentityPoolId":"Default",
+        "/prod/UserPoolId":"Default"
         }):
         '''Tests the ssm parameters store values are not empty
 
-            Paramters to test:
+            These parameters are dynamically populated
+            When they are created in the cloudformation script
+            They have a value of Default.
+
+            CodeBuild populates these parameters in
+            the build stage
 
             Parameters
             ----------
