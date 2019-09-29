@@ -362,6 +362,62 @@ class WebappLive(unittest.TestCase):
             logging.info("To this ssm value: ")
             logging.info(ssm_value)
 
+    def test_ssm_static_param(self, parameter_dict={
+        "/dev/BucketName":"dev-sneakpeek",
+        "/dev/NamePrefix":"dev"
+        }):
+        '''Tests the ssm parameters store values that are static
+
+            These parameters are static only populated at
+
+            development time
+
+            Parameters
+            ----------
+            parameter_dict : dict
+                Key value pair where the key is the
+                ssm parameter name and the value is
+                what we expect the ssm parameter to be
+
+
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        """
+            Gets the boto client for parameter store
+            and tests the value of various parameters
+        """
+        ssm_client = get_boto_clients('ssm')
+
+        logging.info("Got the boto client for ssm")
+        """
+            Iterating over each key/value in the dict
+            to compare parameter store values
+        """
+        for ssm_name in parameter_dict.keys():
+
+            logging.info("Comparing the following parameter: ")
+            logging.info(ssm_name)
+            logging.info(parameter_dict[ssm_name])
+
+            """
+                Tests to make sure static parameters are
+                the same
+            """
+            ssm_value = ssm_client.get_parameter(
+                Name=ssm_name
+            )
+            self.assertEqual(
+                ssm_value['Parameter']['Value'],
+                parameter_dict[ssm_name]
+             )
+
+            logging.info("To this ssm value: ")
+            logging.info(ssm_value)
+
 if __name__ == '__main__':
     '''
     parser = argparse.ArgumentParser(description='Process some integers.')

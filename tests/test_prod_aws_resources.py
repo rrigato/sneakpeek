@@ -430,7 +430,7 @@ class WebappLive(unittest.TestCase):
             logging.info(ssm_value)
 
 
-    def test_ssm_param_config(self, parameter_dict={
+    def test_ssm_static_param(self, parameter_dict={
         "/prod/BucketName":"prod-sneakpeek",
         "/prod/NamePrefix":"prod"
         }):
