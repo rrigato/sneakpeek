@@ -413,7 +413,7 @@ class WebappLive(unittest.TestCase):
             ssm_value = ssm_client.get_parameter(
                 Name=ssm_name
             )
-            self.assertEqual(
+            self.assertNotEqual(
                 ssm_value['Parameter']['Value'],
                 parameter_dict[ssm_name]
              )
