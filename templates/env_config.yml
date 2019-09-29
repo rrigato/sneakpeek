@@ -81,7 +81,8 @@ Resources:
               -  !Ref EnvironmentName
               - "/UserPoolClientId"
       #Tag has to be populated as a json
-      Tags: '[{"Hello" : "World","good" : "bye"}]''
+      Tags: >
+          [{"Hello" : "World","good" : "bye"}]
       Type: String
       #This will be overriden by a custom resource
       Value: Default
