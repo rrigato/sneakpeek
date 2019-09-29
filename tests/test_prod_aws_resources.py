@@ -432,9 +432,7 @@ class WebappLive(unittest.TestCase):
 
     def test_ssm_param_config(self, parameter_dict={
         "/prod/BucketName":"prod-sneakpeek",
-        "/prod/IdentityAuthorizedRoleArn":"Default",
-        "/prod/IdentityPoolId":"Default",
-        "/prod/UserPoolId":"Default"
+        "/prod/NamePrefix":"prod"
         }):
         '''Tests the ssm parameters store values that are static
 
