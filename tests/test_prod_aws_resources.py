@@ -431,7 +431,7 @@ class WebappLive(unittest.TestCase):
 
 
     def test_ssm_param_config(self, parameter_dict={
-        "/prod/UserPoolClientId":"Default",
+        "/prod/BucketName":"prod-sneakpeek",
         "/prod/IdentityAuthorizedRoleArn":"Default",
         "/prod/IdentityPoolId":"Default",
         "/prod/UserPoolId":"Default"
@@ -474,17 +474,13 @@ class WebappLive(unittest.TestCase):
             logging.info(parameter_dict[ssm_name])
 
             """
-                Gets the parameter value
-                And tests to make sure it is not the
-                same as the Value provided for the test
-                as that is presumably the default value
-
-                That should be overriden at build time
+                Tests to make sure static parameters are
+                the same
             """
             ssm_value = ssm_client.get_parameter(
                 Name=ssm_name
             )
-            self.assertNotEqual(
+            self.assertEqual(
                 ssm_value['Parameter']['Value'],
                 parameter_dict[ssm_name]
              )
