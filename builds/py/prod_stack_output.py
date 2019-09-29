@@ -76,11 +76,16 @@ def get_boto_clients(resource_name, region_name='us-east-1'):
     return(boto3.client(resource_name, region_name))
 
 
-def update_ssm(parameter_name, parameter_value):
+def update_ssm(parameter_name, parameter_value,
+    heiarchy_prefix='/prod/'):
     '''Updates the ssm parameter Value
 
         Parameters
         ----------
+        heiarchy_prefix : str
+            Name of heiarchy to append to
+            beggining of parameter_name defaults to /prod/
+
         parameter_name : str
             Name of the ssm parameter
 
@@ -104,6 +109,21 @@ def update_ssm(parameter_name, parameter_value):
     """
     ssm_client = get_boto_clients('ssm')
     logging.info("Got the boto client")
+
+    """
+        overwrites the parameter value
+        Updates the parameters under the heiarchy_prefix
+        heiarchy
+    """
+    ssm_update_response = ssm_client.put_parameter(
+        Name = heiarchy_prefix + parameter_name,
+        Value = parameter_value,
+        Overwrite = True,
+        Type = 'String'
+    )
+
+    logging.info("Update ssm parameter response")
+    logging.info(ssm_update_response)
 
 def iterate_outputs(output_values, output_key, input_dict):
     '''Iterates over every OutputKey for the stack

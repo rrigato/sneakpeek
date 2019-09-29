@@ -111,7 +111,7 @@ def update_ssm(parameter_name, parameter_value,
 
     """
         overwrites the parameter value
-        Updates the parameters under the /dev/
+        Updates the parameters under the heiarchy_prefix
         heiarchy
     """
     ssm_update_response = ssm_client.put_parameter(
