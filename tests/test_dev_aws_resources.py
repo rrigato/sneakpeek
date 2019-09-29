@@ -297,6 +297,63 @@ class WebappLive(unittest.TestCase):
 
         logging.info("All key config values are populated")
 
+    def test_ssm_parameters(self, parameter_dict={
+        "/dev/UserPoolClientId":"Default"
+        }):
+        '''Tests the ssm parameters store values are not empty
+
+            Paramters to test:
+
+            Parameters
+            ----------
+            parameter_dict : dict
+                Key value pair where the key is the
+                ssm parameter name and the value is
+                what we expect the ssm parameter to be
+
+
+            Returns
+            -------
+
+            Raises
+            ------
+        '''
+        """
+            Gets the boto client for parameter store
+            and tests the value of various parameters
+        """
+        ssm_client = get_boto_clients('ssm')
+
+        logging.info("Got the boto client for ssm")
+        """
+            Iterating over each key/value in the dict
+            to compare parameter store values
+        """
+        for ssm_name in parameter_dict.keys():
+
+            logging.info("Comparing the following parameter: ")
+            logging.info(ssm_name)
+            logging.info(parameter_dict[ssm_name])
+
+            """
+                Gets the parameter value
+                And tests to make sure it is not the
+                same as the Value provided for the test
+                as that is presumably the default value
+
+                That should be overriden at build time
+            """
+            ssm_value = ssm_client.get_parameter(
+                Name=ssm_name
+            )
+            self.assertNotEqual(
+                ssm_value['Parameter']['Value'],
+                parameter_dict[ssm_name]
+             )
+
+            logging.info("To this ssm value: ")
+            logging.info(ssm_value)
+
 if __name__ == '__main__':
     '''
     parser = argparse.ArgumentParser(description='Process some integers.')
