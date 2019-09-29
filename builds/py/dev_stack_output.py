@@ -104,6 +104,21 @@ def update_ssm(parameter_name, parameter_value):
     ssm_client = get_boto_clients('ssm')
     logging.info("Got the boto client")
 
+    """
+        overwrites the parameter value
+        Updates the parameters under the /dev/
+        heiarchy
+    """
+    ssm_update_response = ssm_client.put_parameter(
+        Name = '/dev/' + parameter_name,
+        Value = parameter_value,
+        Overwrite = True,
+        Type = 'String'
+    )
+
+    logging.info("Update ssm parameter response")
+    logging.info(ssm_update_response)
+
 
 def iterate_outputs(output_values, output_key, input_dict):
     '''Iterates over every OutputKey for the stack
