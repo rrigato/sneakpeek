@@ -43,7 +43,7 @@ Resources:
   #BucketName parameter passed to
   #file://templates/static_webpage.yml stack
   #####################################
-  BucketNameDev:
+  BucketName:
     Type: AWS::SSM::Parameter
     Properties:
       Description: Prod BucketName parameter for templates/static_webpage.yml
