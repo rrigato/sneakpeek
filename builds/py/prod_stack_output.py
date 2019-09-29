@@ -163,6 +163,14 @@ def iterate_outputs(output_values, output_key, input_dict):
     """
     for output in output_values:
         if output['OutputKey'] == output_key:
+            """
+                Makes a call to update parameter store
+                if there is a match
+            """
+            update_ssm(
+                parameter_name = output_key,
+                parameter_value = output['OutputValue']
+             )            
             input_dict[output_key] = output['OutputValue']
 
     logging.info("Description of input key")
