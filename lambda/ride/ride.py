@@ -91,7 +91,7 @@ def respond(err, res=None):
         'headers': {
             'Content-Type': 'application/json',
         },
-        'body': err.message if err else res,
+        'body': err.message if err else json.dumps(res),
     })
 
 def write_to_s3_output():
