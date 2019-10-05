@@ -133,6 +133,27 @@ def scan_load_table(boto_client, table_name):
 
     return(all_items['Items'])
 
+def determine_environment(context):
+    '''Determines whether lambda is in prod or not
+
+        Parameters
+        ----------
+        context : dict
+            Contains metadata involving python call,
+            Full list of environment variables available here:
+            https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
+
+        Returns
+        -------
+        all_items : list
+            List where each element is a dict referring to
+            an item
+
+        Raises
+        ------
+
+    '''
+
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
     access to the request and response payload, including headers and
