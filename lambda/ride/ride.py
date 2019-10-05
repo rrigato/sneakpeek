@@ -145,14 +145,31 @@ def determine_environment(context):
 
         Returns
         -------
-        all_items : list
-            List where each element is a dict referring to
-            an item
+        ENVIRON_NAME : str
+            'prod' or 'dev' depending on the environment
 
         Raises
         ------
+        ValueError
+            Raises a value error if prod or dev
+            are not included
 
     '''
+    """
+        Raises an assertion error if it is
+        unable to find the correct environment
+    """
+    ENVIRON_NAME = None
+    if 'dev' in context.function_name:
+        logging.info("dev function")
+        ENVIRON_NAME = 'dev'
+    if 'prod' in context.function_name:
+        logging.info("prod function")
+        ENVIRON_NAME = 'prod'
+    if ENVIRON_NAME is None
+        raise( ValueError("Unable to determine environment"))
+
+    return(ENVIRON_NAME)
 
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
