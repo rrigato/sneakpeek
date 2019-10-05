@@ -249,7 +249,7 @@ def lambda_handler(event, context):
     #for different environments
 
     all_items = scan_load_table(boto_client=dynamo_client,
-    table_name = environ-name + '-sneakpeek-table')
+    table_name = ENVIRON_NAME + '-sneakpeek-table')
 
 
     return (respond(err=None, res=
@@ -258,11 +258,11 @@ def lambda_handler(event, context):
         {"Name":"Rocinante","Color":"Yellow","Gender":"Female"},"Eta":"30 seconds"
         }))
 
-if __name__ == '__main__':
-    """Local testing
-    """
-    class Context(object):
-        pass
-    context = Context()
-    context.function_name = 'dev'
-    lambda_handler(event="hello",context = context)
+# if __name__ == '__main__':
+#     """Local testing
+#     """
+#     class Context(object):
+#         pass
+#     context = Context()
+#     context.function_name = 'dev'
+#     lambda_handler(event="hello",context = context)
