@@ -253,6 +253,7 @@ Outputs:
   LambdaRoleArn:
     Value: !GetAtt LambdaRuntimeRole.Arn
   TableName:
+    Value:
       Fn::Join:
           - ""
           - - !Ref NamePrefix
