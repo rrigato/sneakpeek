@@ -237,8 +237,10 @@ class WebappLive(unittest.TestCase):
         logging.info("Lambda function response")
         logging.info(ride_response)
 
+        ride_json_body = json.loads(ride_payload['body'])
+
         self.assertEqual(
-            ride_payload['body']['Unicorn']['Name'],
+            ride_json_body['Unicorn']['Name'],
             "Rocinante"
         )
 
