@@ -166,7 +166,7 @@ def determine_environment(context):
     if 'prod' in context.function_name:
         logging.info("prod function")
         ENVIRON_NAME = 'prod'
-    if ENVIRON_NAME is None
+    if ENVIRON_NAME is None:
         raise( ValueError("Unable to determine environment"))
 
     return(ENVIRON_NAME)
@@ -185,6 +185,8 @@ def lambda_handler(event, context):
 
     logging.info("Received event: " + json.dumps(event, indent=2))
 
+
+    ENVIRON_NAME = determine_environment(context)
     """
         Creates dynamodb resource and
         puts an item in the table
@@ -205,4 +207,10 @@ def lambda_handler(event, context):
         }))
 
 # if __name__ == '__main__':
-#     lambda_handler(event="hello",context = "world")
+#     """Local testing
+#     """
+#     class Context(object):
+#         pass
+#     context = Context()
+#     context.function_name = 'dev'
+#     lambda_handler(event="hello",context = context)
