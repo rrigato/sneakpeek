@@ -252,5 +252,10 @@ Outputs:
     Value: !Ref AuthenticationLambda
   LambdaRoleArn:
     Value: !GetAtt LambdaRuntimeRole.Arn
+  TableName:
+      Fn::Join:
+          - ""
+          - - !Ref NamePrefix
+            - "-sneakpeek-table"
   TableArn:
     Value: !GetAtt DynamoDBTable.Arn
