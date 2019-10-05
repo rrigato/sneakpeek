@@ -113,6 +113,7 @@ Resources:
                 Action:
                   - dynamodb:PutItem
                   - dynamodb:Scan
+                  - ssm:GetParameter
                 Resource:
                   - !GetAtt DynamoDBTable.Arn
 
