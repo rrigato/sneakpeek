@@ -189,16 +189,20 @@ def get_table_name(context):
 
         Returns
         -------
-
+        ddb_table_name : str
+            Name of the dynamo db table that
+            contains image output results
 
         Raises
         ------
-        ValueError
-            Raises a value error if prod or dev
-            are not included
+
 
     '''
-    pass
+    ssm_client = get_boto_clients('ssm')
+
+    logging.info("Got ssm client")
+
+
 
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
