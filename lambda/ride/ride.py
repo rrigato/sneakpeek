@@ -179,7 +179,7 @@ def determine_environment(context):
     return(ENVIRON_NAME)
 
 
-def get_table_name(context):
+def get_table_name(environ_name):
     '''Gets the table name from the ssm parameter store
 
         Parameters
@@ -198,7 +198,7 @@ def get_table_name(context):
 
 
     '''
-    ssm_client = get_boto_clients('ssm')
+    ssm_client = get_boto_clients(resource_name='ssm')
 
     logging.info("Got ssm client")
 
@@ -212,10 +212,10 @@ def get_table_name(context):
     ddb_table_name = ssm_client.get_parameter(
         Name = "/" + environ_name + "/BucketName")
 
-    logging.info("Dynamo Db table name: ")
+    logging.info("Dynamo Db table name ssm parameter response: ")
     logging.info(ddb_table_name)
 
-    return(ddb_table_name)
+    return(ddb_table_name['Parameter']['Value'])
 
 
 
@@ -242,6 +242,9 @@ def lambda_handler(event, context):
     dynamo_client = get_boto_clients(resource_name='dynamodb',
     region_name='us-east-1')
 
+
+    ddb_table_name = get_table_name(
+        environ_name=ENVIRON_NAME)
     #to-do figure out how to pass table name
     #for different environments
     #all_itmes = scan_load_table(boto_client=dynamo_client,
