@@ -113,9 +113,21 @@ Resources:
                 Action:
                   - dynamodb:PutItem
                   - dynamodb:Scan
-                  - ssm:GetParameter
+
                 Resource:
                   - !GetAtt DynamoDBTable.Arn
+              - Sid: SneakPeekSsmLambda
+                Effect: Allow
+                #######################################
+                #Allowing lambda to get the name of the dynamo
+                #db table
+                #######################################
+                Action:
+                  - ssm:GetParameter
+                Resource:
+                  - "*"
+
+
 
 ########################################
 #Lambda function that will be called
