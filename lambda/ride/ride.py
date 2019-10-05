@@ -178,6 +178,28 @@ def determine_environment(context):
 
     return(ENVIRON_NAME)
 
+
+def get_table_name(context):
+    '''Gets the table name from the ssm parameter store
+
+        Parameters
+        ----------
+        environ_name : str
+            'prod' or 'dev' depending on the environment
+
+        Returns
+        -------
+
+
+        Raises
+        ------
+        ValueError
+            Raises a value error if prod or dev
+            are not included
+
+    '''
+    pass
+
 def lambda_handler(event, context):
     '''Demonstrates a simple HTTP endpoint using API Gateway. You have full
     access to the request and response payload, including headers and
@@ -213,11 +235,11 @@ def lambda_handler(event, context):
         {"Name":"Rocinante","Color":"Yellow","Gender":"Female"},"Eta":"30 seconds"
         }))
 
-# if __name__ == '__main__':
-#     """Local testing
-#     """
-#     class Context(object):
-#         pass
-#     context = Context()
-#     context.function_name = 'dev'
-#     lambda_handler(event="hello",context = context)
+if __name__ == '__main__':
+    """Local testing
+    """
+    class Context(object):
+        pass
+    context = Context()
+    context.function_name = 'dev'
+    lambda_handler(event="hello",context = context)
