@@ -65,6 +65,12 @@ def get_boto_clients(resource_name, region_name='us-east-1'):
 def respond(err, res=None):
     '''Sets http headers returns dict for response
 
+        Note the required fields needed for a lambda
+        proxy integration here:
+
+        Must be in order
+        https://aws.amazon.com/premiumsupport/knowledge-center/malformed-502-api-gateway/
+
         Parameters
         ----------
         err : str
@@ -79,13 +85,14 @@ def respond(err, res=None):
         Raises
         ------
     '''
-    return {
+    return ({
+        'isBase64Encoded': False,
         'statusCode': '400' if err else '201',
-        'body': err.message if err else res,
         'headers': {
             'Content-Type': 'application/json',
         },
-    }
+        'body': err.message if err else res,
+    })
 
 def write_to_s3_output():
     '''writes output csv to s3 bucket
