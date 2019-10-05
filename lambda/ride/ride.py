@@ -247,8 +247,10 @@ def lambda_handler(event, context):
         environ_name=ENVIRON_NAME)
     #to-do figure out how to pass table name
     #for different environments
-    #all_itmes = scan_load_table(boto_client=dynamo_client,
-    #table_name = 'dev-sneakpeek-table')
+    ddb_table_name = 'prod-sneakpeek-table'
+
+    all_items = scan_load_table(boto_client=dynamo_client,
+    table_name = ddb_table_name)
 
 
     return (respond(err=None, res=
