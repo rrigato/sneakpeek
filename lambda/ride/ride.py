@@ -202,6 +202,21 @@ def get_table_name(context):
 
     logging.info("Got ssm client")
 
+    """
+        Forms the fully qualified path to
+        the name of the parameter.
+
+        Example:
+        /dev/DynamoTableName
+    """
+    ddb_table_name = ssm_client.get_parameter(
+        Name = "/" + environ_name + "/BucketName")
+
+    logging.info("Dynamo Db table name: ")
+    logging.info(ddb_table_name)
+
+    return(ddb_table_name)
+
 
 
 def lambda_handler(event, context):
