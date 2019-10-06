@@ -58,7 +58,9 @@ Resources:
               - "/BucketName"
 
       #Tag has to be populated as a json
-      #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
+      Tags:
+          "stack" : "static_webpage"
+          "internetFacing" : "yes"
       Type: String
       #This will be overriden by a custom resource
       Value:
