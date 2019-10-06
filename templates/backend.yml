@@ -240,7 +240,12 @@ Outputs:
 #the above link provides all of the resources that
 #can be used from a sam event source
 ##################################
-
+  ClassificationTable:
+    Value:
+      Fn::Join:
+          - ""
+          - - !Ref NamePrefix
+            - "-sneakpeek-table"
   ImageUploadBucket:
     Description: Provides Bucket name for image repo
     Value: !Ref UploadBucket
@@ -252,11 +257,6 @@ Outputs:
     Value: !Ref AuthenticationLambda
   LambdaRoleArn:
     Value: !GetAtt LambdaRuntimeRole.Arn
-  ClassificationTable:
-    Value:
-      Fn::Join:
-          - ""
-          - - !Ref NamePrefix
-            - "-sneakpeek-table"
+
   TableArn:
     Value: !GetAtt DynamoDBTable.Arn

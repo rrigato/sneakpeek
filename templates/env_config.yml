@@ -33,7 +33,9 @@ Resources:
               -  !Ref EnvironmentName
               - "/NamePrefix"
       #Tag has to be populated as a json
-      #Tags: '[{"Key" : "stack", "Value" : "backend" }, {"Key" : "internetFacing", "Value" : "yes"}]'
+      Tags:
+          "stack" : "backend"
+          "internetFacing" : "no"
       Type: String
       #This will be overriden by a custom resource
       Value: !Ref EnvironmentName
@@ -74,9 +76,9 @@ Resources:
   ClassificationTable:
     Type: AWS::SSM::Parameter
     Properties:
-      Description: Classification table from dynamo
+      Description: Classification table from dynamodb
       Name:
-        #concatenate value to something like /dev/NamePrefix
+        #concatenate value to something like /dev/ClassificationTable
         Fn::Join:
             - ""
             - - "/"
@@ -88,12 +90,11 @@ Resources:
       Type: String
       #This will be overriden by a custom resource
       Value:
-       #concatenate value to something like /dev/NamePrefix
+       #concatenate value to something like /dev/-sneakpeek-table
         Fn::Join:
           - ""
           - -  !Ref EnvironmentName
-            - "-"
-            - "sneakpeek"
+            - "-sneakpeek-table"
 
 
 
