@@ -249,7 +249,10 @@ def lambda_handler(event, context):
     #for different environments
 
     all_items = scan_load_table(boto_client=dynamo_client,
-    table_name = ENVIRON_NAME + ddb_table_name)
+        table_name = (
+            "/"  + ENVIRON_NAME + "/" + ddb_table_name
+            )
+    )
 
 
     return (respond(err=None, res=
