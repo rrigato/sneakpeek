@@ -86,7 +86,9 @@ Resources:
               - "/ClassificationTable"
 
       #Tag has to be populated as a json
-      #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
+      Tags:
+          "stack" : "backend"
+          "internetFacing" : "no"
       Type: String
       #This will be overriden by a custom resource
       Value:
