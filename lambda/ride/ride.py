@@ -249,17 +249,16 @@ def lambda_handler(event, context):
     #for different environments
 
     all_items = scan_load_table(boto_client=dynamo_client,
-        table_name = (
-            "/"  + ENVIRON_NAME + "/" + ddb_table_name
-            )
+        table_name = ddb_table_name
     )
 
-
-    return (respond(err=None, res=
-        {"RideId": "SvLnijIAtg6inAFUBRT+Fg==",
-        "Unicorn":
-        {"Name":"Rocinante","Color":"Yellow","Gender":"Female"},"Eta":"30 seconds"
-        }))
+    """
+        Returns all_items which is a list with
+        every item in the dynamodb classification table
+    """
+    return (respond(err=None,
+            res=dict({'Items': all_items})
+        ))
 
 # if __name__ == '__main__':
 #     """Local testing
