@@ -239,9 +239,8 @@ class WebappLive(unittest.TestCase):
 
         ride_json_body = json.loads(ride_payload['body'])
 
-        self.assertEqual(
-            ride_json_body['Unicorn']['Name'],
-            "Rocinante"
+        self.assertIsNotNone(
+            ride_json_body['Items']
         )
 
 
