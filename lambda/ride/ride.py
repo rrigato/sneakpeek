@@ -210,7 +210,7 @@ def get_table_name(environ_name):
         /dev/DynamoTableName
     """
     ddb_table_name = ssm_client.get_parameter(
-        Name = "/" + environ_name + "/BucketName")
+        Name = "/" + environ_name + "/ClassificationTable")
 
     logging.info("Dynamo Db table name ssm parameter response: ")
     logging.info(ddb_table_name)
@@ -249,7 +249,7 @@ def lambda_handler(event, context):
     #for different environments
 
     all_items = scan_load_table(boto_client=dynamo_client,
-    table_name = ENVIRON_NAME + '-sneakpeek-table')
+    table_name = ENVIRON_NAME + ddb_table_name)
 
 
     return (respond(err=None, res=
