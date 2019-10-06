@@ -252,7 +252,7 @@ Outputs:
     Value: !Ref AuthenticationLambda
   LambdaRoleArn:
     Value: !GetAtt LambdaRuntimeRole.Arn
-  TableName:
+  ClassificationTable:
     Value:
       Fn::Join:
           - ""

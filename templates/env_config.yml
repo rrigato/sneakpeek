@@ -67,6 +67,36 @@ Resources:
             - "-"
             - "sneakpeek"
 
+  ######################################
+  #ClassificationTable dynamo table name
+  #from the templates/backend.yml script
+  #####################################
+  ClassificationTable:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Description: Classification table from dynamo
+      Name:
+        #concatenate value to something like /dev/NamePrefix
+        Fn::Join:
+            - ""
+            - - "/"
+              -  !Ref EnvironmentName
+              - "/ClassificationTable"
+
+      #Tag has to be populated as a json
+      #Tags: '[{"Key" : "source", "Value" : "python" }, {"Key" : "confidential", "Value" : "yes"}]'
+      Type: String
+      #This will be overriden by a custom resource
+      Value:
+       #concatenate value to something like /dev/NamePrefix
+        Fn::Join:
+          - ""
+          - -  !Ref EnvironmentName
+            - "-"
+            - "sneakpeek"
+
+
+
 
   ######################################
   #Will be used to store the arn for
