@@ -163,6 +163,12 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
 
 - code_pipeline_iam.yml = nested stack for code_pipeline.yml contains iam resources that are used by code_pipeline.yml
 
+- cognito.yml  = Defines the user pool, identity pool and associated iam roles that users can assume
+
+- env_config.yml = ssm paramters used to store configuration
+
+- static_webpage.yml = static s3 bucket for web hosting
+
 Make sure to run the following command before creating a stack with code_pipeline.yml
 
 ```
