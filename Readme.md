@@ -1,4 +1,4 @@
-![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZnR3cHhDRFhrcWYyMGNrRGoyeXkzZDFjbm05MVlIcDBPZktxV01Fc2RtTFJ2V1N6aHQ5Q1cwUlF6Nlp2ZkNzODEwY3RzUkxSSEpVRjYydnJkQzJDcHMwPSIsIml2UGFyYW1ldGVyU3BlYyI6Ikd6dDNtRmp3T21iSmZTdkIiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=dev) ![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)]
+![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZnR3cHhDRFhrcWYyMGNrRGoyeXkzZDFjbm05MVlIcDBPZktxV01Fc2RtTFJ2V1N6aHQ5Q1cwUlF6Nlp2ZkNzODEwY3RzUkxSSEpVRjYydnJkQzJDcHMwPSIsIml2UGFyYW1ldGVyU3BlYyI6Ikd6dDNtRmp3T21iSmZTdkIiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=dev) ![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)
 
 Serverless project used to build a web application to
 detect trailer utilization from an uploaded image
