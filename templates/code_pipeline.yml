@@ -95,7 +95,7 @@ Resources:
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Type: LINUX_CONTAINER
-        Image: aws/codebuild/standard:2.0
+        Image: aws/codebuild/standard:latest
       Name: !Ref DevBuildName
       ServiceRole: arn:aws:iam::350255258796:role/DevSneakPeekCodeBuild
       #CodeCommit Git repo used for CodeBuild
@@ -136,7 +136,7 @@ Resources:
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Type: LINUX_CONTAINER
-        Image: aws/codebuild/standard:2.0
+        Image: aws/codebuild/standard:latest
       Name: !Ref ProdBuildName
       ServiceRole:
         Fn::Join:
