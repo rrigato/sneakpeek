@@ -164,6 +164,10 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
 - code_pipeline_iam.yml = nested stack for code_pipeline.yml contains iam resources that are used by code_pipeline.yml
 
 - cognito.yml  = Defines the user pool, identity pool and associated iam roles that users can assume
+  - User Pool = Authentication, how the user signs in
+  - Identity Pool = Federated Authorization with User Pool, client can assume seperate roles based on whether the user is authenticated or not
+
+The best practice for restricting what services can use federated IAM roles is to add a condtion to the trust policy (service allowed to use the role) restricting to one Application ID provided when you register the client with the federation provider
 
 - env_config.yml = ssm paramters used to store configuration
 
