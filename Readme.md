@@ -161,7 +161,7 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
 - code_pipeline.yml = Creates CodeBuild/Code Pipeline resources
     necessary for Dev/Prod
 
-- code_pipeline_iam.yml = nested stack for code_pipeline.yml contains iam resources that are used by code_pipeline.yml
+
 
 - cognito.yml  = Defines the user pool, identity pool and associated iam roles that users can assume
   - User Pool = Authentication, how the user signs in
@@ -171,23 +171,16 @@ The best practice for restricting what services can use federated IAM roles is t
 
 This project restricts to the app id of the cognito identity pool created in cloudformation. Below is a list of iam conditions to use based on provider types from the amazon docs:
 
-  - Creating a role for federation through Login with Amazon, type the application ID in the iam trust policy condition.
-  - Creating a role for federation through Facebook, type the application ID in the iam trust policy condition.
-  - Creating a role for federation through Google, type the audience name in the iam trust policy condition.
-  - Creating a role for federation through Amazon Cognito, type the ID of the identity pool that you have created for your Amazon Cognito applications in the iam trust policy condition.
+    - Creating a role for federation through Login with Amazon, type the application ID in the iam trust policy condition.
+    - Creating a role for federation through Facebook, type the application ID in the iam trust policy condition.
+    - Creating a role for federation through Google, type the audience name in the iam trust policy condition.
+    - Creating a role for federation through Amazon Cognito, type the ID of the identity pool that you have created for your Amazon Cognito applications in the iam trust policy condition.
 
 
 - env_config.yml = ssm paramters used to store configuration
 
 - static_webpage.yml = static s3 bucket for web hosting
 
-Make sure to run the following command before creating a stack with code_pipeline.yml
-
-```
-aws s3 cp ./templates s3://sneakpeek-nested-stack --recursive     --exclude "demo*"
-```
-
-The reason being that a nested stack has to be in an s3 bucket to be used by the parent
 
 - cognito.yml = user pool and client id to be used for authentication in the webpage
 
