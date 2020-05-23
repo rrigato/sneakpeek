@@ -167,7 +167,15 @@ For example I have had issues in the past with installing pandas on ubuntu, bund
   - User Pool = Authentication, how the user signs in
   - Identity Pool = Federated Authorization with User Pool, client can assume seperate roles based on whether the user is authenticated or not
 
-The best practice for restricting what services can use federated IAM roles is to add a condtion to the trust policy (service allowed to use the role) restricting to one Application ID provided when you register the client with the federation provider
+The best practice for restricting what services can use federated IAM roles is to add a condtion to the trust policy (service allowed to use the role) restricting to one Application ID provided when you register the client with the federation provider.
+
+This project restricts to the app id of the cognito identity pool created in cloudformation. Below is a list of iam conditions to use based on provider types from the amazon docs:
+
+  - Creating a role for federation through Login with Amazon, type the application ID in the iam trust policy condition.
+  - Creating a role for federation through Facebook, type the application ID in the iam trust policy condition.
+  - Creating a role for federation through Google, type the audience name in the iam trust policy condition.
+  - Creating a role for federation through Amazon Cognito, type the ID of the identity pool that you have created for your Amazon Cognito applications in the iam trust policy condition.
+
 
 - env_config.yml = ssm paramters used to store configuration
 
